@@ -14,6 +14,7 @@ public class Client extends JFrame implements ActionListener{
 	private Verkauf verkauf3 = new Verkauf();
 	private Verkauf verkauf4 = new Verkauf();
 	private JPanel pVerkauf = new JPanel(new GridLayout(2,2));
+	private JScrollPane scrollpane = new JScrollPane(pVerkauf);
 
 	public Client (){
 		super("Sender");
@@ -41,7 +42,7 @@ public class Client extends JFrame implements ActionListener{
 
 		c.add(btSubmit, BorderLayout.SOUTH);
 		c.add(taInput, BorderLayout.NORTH);
-		c.add(pVerkauf, BorderLayout.CENTER);
+		c.add(scrollpane, BorderLayout.CENTER);
 	}//JSender
 
 	public void actionPerformed(ActionEvent e){
