@@ -14,7 +14,7 @@ public class JKaufen extends JPanel implements ActionListener {
     private JLabel lblPreis= new JLabel("Preis: " + preis);
 
     public JKaufen (){
-        setPreferredSize(new Dimension(130,90));
+        setPreferredSize(new Dimension(140,90));
         setToolTipText("Kauffenster");
         setLayout(new GridLayout(4,1));
         add(lblWare);

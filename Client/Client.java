@@ -7,17 +7,19 @@ import javax.swing.*;
 public class Client extends JFrame implements ActionListener{
 
 
-    private JButton btSubmit = new JButton("Submit");
-    private JTextArea taInput = new JTextArea();
+    private JButton btBereit = new JButton("Bereit");
+
+    private JLabel lblSpieler = new JLabel("Spieler in Sitzung: ");
 
     private int anzWaren=10;
-    private int anzAngebote=3;
+    private int anzAngebote=10;
 
     private JVerkauf verkauf[] = new JVerkauf[anzWaren];
     private JKaufen kauf[] = new JKaufen[anzAngebote];
 
     private JPanel pVerkauf = new JPanel(new GridBagLayout());
     private JPanel pKauf = new JPanel(new GridBagLayout());
+    private JPanel pSOUTH = new JPanel();
 
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
     private JScrollPane scKauf = new JScrollPane(pKauf);
@@ -34,15 +36,14 @@ public class Client extends JFrame implements ActionListener{
 
         addWindowListener (new WindowAdapter(){
             public void windowClosing(WindowEvent e1){
-                btSubmit.setEnabled(false);
-                taInput.setEnabled(false);
+                btBereit.setEnabled(false);
                 dispose();
             }//windowClosing
         });//WindowListener
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        btSubmit.addActionListener(this);
+        btBereit.addActionListener(this);
 
         GridBagConstraints gc1 = new GridBagConstraints();
         gc1.fill = GridBagConstraints.BOTH;
@@ -72,16 +73,16 @@ public class Client extends JFrame implements ActionListener{
             pKauf.add(kauf[i], gc2);
         }//for
 
-
-        c.add(btSubmit, BorderLayout.SOUTH);
-        c.add(taInput, BorderLayout.NORTH);
+        pSOUTH.add(lblSpieler);
+        pSOUTH.add(btBereit);
         c.add(scVerkauf, BorderLayout.CENTER);
         c.add(scKauf, BorderLayout.EAST);
+        c.add(pSOUTH, BorderLayout.SOUTH);
     }//JSender
 
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == btSubmit)
-            taInput.setText("funkt");
+        if(e.getSource() == btBereit)
+            btBereit.setText("funkt");
     }//actionPerformed
 
     public static void main(String[] args){
