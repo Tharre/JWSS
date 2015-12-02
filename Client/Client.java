@@ -4,12 +4,17 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class Client extends JFrame implements ActionListener{
 
 
     private JButton btBereit = new JButton("Bereit");
 
     private JLabel lblSpieler = new JLabel("Spieler in Sitzung: ");
+    private JLabel lblVermögen= new JLabel("Vermögen: ");
+    private JLabel lblRang = new JLabel("Rang: ");
+    private JLabel lblRunde = new JLabel("Runde: ");
+    private JUhr   lblZeit = new JUhr();
 
     private int anzWaren=10;
     private int anzAngebote=10;
@@ -19,7 +24,8 @@ public class Client extends JFrame implements ActionListener{
 
     private JPanel pVerkauf = new JPanel(new GridBagLayout());
     private JPanel pKauf = new JPanel(new GridBagLayout());
-    private JPanel pSOUTH = new JPanel();
+    private JPanel pSOUTH = new JPanel(new GridLayout(1,2));
+    private JPanel pNORTH = new JPanel(new GridLayout(1,4));
 
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
     private JScrollPane scKauf = new JScrollPane(pKauf);
@@ -30,13 +36,13 @@ public class Client extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,400);
         setLocationRelativeTo (null);
-
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
 
         addWindowListener (new WindowAdapter(){
             public void windowClosing(WindowEvent e1){
                 btBereit.setEnabled(false);
+                lblZeit.stop();
                 dispose();
             }//windowClosing
         });//WindowListener
@@ -75,14 +81,20 @@ public class Client extends JFrame implements ActionListener{
 
         pSOUTH.add(lblSpieler);
         pSOUTH.add(btBereit);
+        pNORTH.add(lblVermögen);
+        pNORTH.add(lblRang);
+        pNORTH.add(lblRunde);
+        pNORTH.add(lblZeit);
+        c.add(pNORTH, BorderLayout.NORTH);
         c.add(scVerkauf, BorderLayout.CENTER);
         c.add(scKauf, BorderLayout.EAST);
         c.add(pSOUTH, BorderLayout.SOUTH);
-    }//JSender
+    }//Client
+
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == btBereit)
-            btBereit.setText("funkt");
+            lblZeit.start();
     }//actionPerformed
 
     public static void main(String[] args){
@@ -90,4 +102,4 @@ public class Client extends JFrame implements ActionListener{
         f.setVisible(true);
     }//main
 
-}//classJSender
+}//class Client
