@@ -8,7 +8,7 @@ public class JKaufen extends JPanel implements ActionListener {
 
 
 
-    private JLabel lblWare = new JLabel("Name von Ware");
+    private JLabel lblWare = new JLabel("Name");
     private JLabel lblGewMenge= new JLabel("gew. Menge: ");
     private JLabel lblMaxPreis= new JLabel("max. Preis: ");
     private JLabel lblBlank = new JLabel("");
@@ -17,7 +17,7 @@ public class JKaufen extends JPanel implements ActionListener {
     private JTextField tfMaxPreis= new JTextField("");
 
     public JKaufen (){
-        setPreferredSize(new Dimension(120,90));
+        setPreferredSize(new Dimension(150,90));
 
         setToolTipText("Kauffenster");
         setLayout(new GridLayout(4,2));

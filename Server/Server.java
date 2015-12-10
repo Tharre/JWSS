@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.awt.event.*;
@@ -6,9 +7,13 @@ import javax.swing.*;
 
 public class Server extends JFrame implements ActionListener{
 
-
+    private JPanel pSpieler = new JPanel(new GridBagLayout());
+    private int anzSpieler = 10;
     private JButton btBereit = new JButton("Bereit");
     private JStatistik statistik = new JStatistik();
+    private JScrollPane scSpieler = new JScrollPane(pSpieler,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    private JSpieler spielerAr[] = new JSpieler[anzSpieler];
 
     public Server (){
         super("Client JWSS");
@@ -34,14 +39,27 @@ public class Server extends JFrame implements ActionListener{
 
         getContentPane().add(jtp);
         JPanel jp1 = new JPanel();
-        JPanel jp2 = new JPanel();
         JPanel jp3 = new JPanel();
-        JPanel jp4 = new JPanel();
         jp1.add(btBereit);
         jtp.addTab("Waren", jp1);
-        jtp.addTab("Spieler", jp2);
+        jtp.addTab("Spieler", scSpieler);
         jtp.addTab("Log", jp3);
         jtp.addTab("Statistik", statistik);
+
+        btBereit.addActionListener(this);
+        btBereit.setFocusable(false);
+
+        GridBagConstraints gc1 = new GridBagConstraints();
+        gc1.fill = GridBagConstraints.BOTH;
+        gc1.insets = new Insets(5, 5, 5, 5);
+
+        for(int i=0; i<spielerAr.length; i++){
+            gc1.gridx = 0;
+            gc1.gridy = i;
+            spielerAr[i] = new JSpieler();
+            pSpieler.add(spielerAr[i], gc1);
+        }//for
+
 
     }//Server
 

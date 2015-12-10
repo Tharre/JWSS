@@ -6,9 +6,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class JStart extends JFrame implements ActionListener{
+
     private JLabel name= new JLabel("Name:");
     private JTextField tfName= new JTextField("");
-            JButton btStart = new JButton("Start");
+    private JButton btStart = new JButton("Start");
 
     public JStart(){
         super("Start JWSS");
