@@ -7,7 +7,6 @@ import javax.swing.*;
 
 public class Client extends JFrame implements ActionListener{
 
-
     private JButton btBereit = new JButton("Bereit");
 
     private JLabel lblSpieler = new JLabel("Spieler in Sitzung: ");
@@ -15,6 +14,8 @@ public class Client extends JFrame implements ActionListener{
     private JLabel lblRang = new JLabel("Rang: ");
     private JLabel lblRunde = new JLabel("Runde: ");
     private JUhr   lblZeit = new JUhr();
+
+    private String name;
 
     private int anzWaren=10;
     private int anzAngebote=10;
@@ -30,8 +31,10 @@ public class Client extends JFrame implements ActionListener{
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
     private JScrollPane scKauf = new JScrollPane(pKauf);
 
-    public Client (){
+    public Client (String name){
         super("Client JWSS");
+
+        this.name = name;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,400);
@@ -50,6 +53,7 @@ public class Client extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         btBereit.addActionListener(this);
+        btBereit.setFocusable(false);
 
         GridBagConstraints gc1 = new GridBagConstraints();
         gc1.fill = GridBagConstraints.BOTH;
@@ -91,15 +95,17 @@ public class Client extends JFrame implements ActionListener{
         c.add(pSOUTH, BorderLayout.SOUTH);
     }//Client
 
-
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == btBereit)
+        if(e.getSource() == btBereit) {
             lblZeit.start();
+            btBereit.setText("Spielername: "+name);
+        }//if
     }//actionPerformed
 
-    public static void main(String[] args){
+  /* public static void main(String[] args){
         Client f = new Client();
         f.setVisible(true);
-    }//main
+    }//main*/
+
 
 }//class Client
