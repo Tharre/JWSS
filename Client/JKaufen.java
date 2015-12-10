@@ -6,21 +6,25 @@ public class JKaufen extends JPanel implements ActionListener {
 
     private JButton btKauf = new JButton("Kaufen");
 
-    private int menge;
-    private int preis;
+
 
     private JLabel lblWare = new JLabel("Name von Ware");
-    private JLabel lblMenge= new JLabel("Menge: " + menge);
-    private JLabel lblPreis= new JLabel("Preis: " + preis);
+    private JLabel lblGewMenge= new JLabel("gew. Menge: ");
+    private JLabel lblMaxPreis= new JLabel("max. Preis: ");
+    private JLabel lblBlank = new JLabel("");
+
+    private JTextField tfGewMenge= new JTextField("");
+    private JTextField tfMaxPreis= new JTextField("");
 
     public JKaufen (){
         setPreferredSize(new Dimension(120,90));
 
         setToolTipText("Kauffenster");
-        setLayout(new GridLayout(4,1));
-        add(lblWare);
-        add(lblMenge);
-        add(lblPreis);
+        setLayout(new GridLayout(4,2));
+        add(lblWare); add(lblBlank);
+
+        add(lblGewMenge); add(tfGewMenge);
+        add(lblMaxPreis); add(tfMaxPreis);
         add(btKauf);
 
         btKauf.addActionListener(this);

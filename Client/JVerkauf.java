@@ -11,7 +11,7 @@ public class JVerkauf extends JPanel implements ActionListener {
     private JLabel lblBlank = new JLabel("");
     private JLabel lblBlank1 = new JLabel("");
     private JLabel lblMenge= new JLabel("Menge: ");
-    private JLabel lblPreis= new JLabel("Preis: ");
+    private JLabel lblMinPreis= new JLabel("Minimum Preis: ");
 
     private JTextField tfMenge= new JTextField("");
     private JTextField tfPreis= new JTextField("");
@@ -25,7 +25,7 @@ public class JVerkauf extends JPanel implements ActionListener {
         add(lblBlank1);
         add(lblMenge);
         add(tfMenge);
-        add(lblPreis);
+        add(lblMinPreis);
         add(tfPreis);
         add(btVerk);
         btVerk.addActionListener(this);

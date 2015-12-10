@@ -29,7 +29,8 @@ public class Client extends JFrame implements ActionListener{
     private JPanel pNORTH = new JPanel(new GridLayout(1,4));
 
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
-    private JScrollPane scKauf = new JScrollPane(pKauf);
+    private JScrollPane scKauf = new JScrollPane(pKauf,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     public Client (String name){
         super("Client JWSS");
