@@ -19,4 +19,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies { }
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.0-rc1'
+}
