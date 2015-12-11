@@ -10,7 +10,7 @@ public class Client extends JFrame implements ActionListener{
     private JButton btBereit = new JButton("Bereit");
 
     private JLabel lblSpieler = new JLabel("Spieler in Sitzung: ");
-    private JLabel lblVermögen= new JLabel("Vermögen: ");
+    private JLabel lblVermoegen= new JLabel("Vermögen: ");
     private JLabel lblRang = new JLabel("Rang: ");
     private JLabel lblRunde = new JLabel("Runde: ");
     private JUhr   lblZeit = new JUhr();
@@ -86,7 +86,7 @@ public class Client extends JFrame implements ActionListener{
 
         pSOUTH.add(lblSpieler);
         pSOUTH.add(btBereit);
-        pNORTH.add(lblVermögen);
+        pNORTH.add(lblVermoegen);
         pNORTH.add(lblRang);
         pNORTH.add(lblRunde);
         pNORTH.add(lblZeit);
