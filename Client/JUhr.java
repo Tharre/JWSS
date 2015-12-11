@@ -42,7 +42,7 @@ public class JUhr extends JLabel implements Runnable{
             sek=dauer.get(Calendar.SECOND);
             ms=dauer.get(Calendar.MILLISECOND);
 
-            if (min <= 2) {
+            if (min < 2) {
                 ausgabe.append("0"+min+":");
             } else {
                 ausgabe.append(min+":");

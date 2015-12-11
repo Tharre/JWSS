@@ -10,7 +10,7 @@ public class Client extends JFrame implements ActionListener{
     private JButton btBereit = new JButton("Bereit");
 
     private JLabel lblSpieler = new JLabel("Spieler in Sitzung: ");
-    private JLabel lblVermoegen= new JLabel("Vermögen: ");
+    private JLabel lblVermoegen= new JLabel("Vermoegen: ");
     private JLabel lblRang = new JLabel("Rang: ");
     private JLabel lblRunde = new JLabel("Runde: ");
     private JUhr   lblZeit = new JUhr();
@@ -66,7 +66,7 @@ public class Client extends JFrame implements ActionListener{
                 gc1.gridy = 0;
             }//if
             else {
-                gc1.gridx = i;
+                gc1.gridx = i-1;
                 gc1.gridy = 1;
             }//else
                 verkauf[i] = new JVerkauf();
@@ -102,11 +102,5 @@ public class Client extends JFrame implements ActionListener{
             btBereit.setText("Spielername: "+name);
         }//if
     }//actionPerformed
-
-  /* public static void main(String[] args){
-        Client f = new Client();
-        f.setVisible(true);
-    }//main*/
-
 
 }//class Client

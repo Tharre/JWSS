@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Server extends JFrame implements ActionListener{
 
     private JPanel pSpieler = new JPanel(new GridBagLayout());
-    private int anzSpieler = 10;
+    private int anzSpieler = 8;
     private JButton btBereit = new JButton("Bereit");
     private JStatistik statistik = new JStatistik();
     private JScrollPane scSpieler = new JScrollPane(pSpieler,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -54,12 +54,17 @@ public class Server extends JFrame implements ActionListener{
         gc1.insets = new Insets(5, 5, 5, 5);
 
         for(int i=0; i<spielerAr.length; i++){
+			if(i%2 == 0){
             gc1.gridx = 0;
             gc1.gridy = i;
+            }else{
+            gc1.gridx = 1;
+            gc1.gridy = i-1;
+		    }//else
+
             spielerAr[i] = new JSpieler();
             pSpieler.add(spielerAr[i], gc1);
         }//for
-
 
     }//Server
 
