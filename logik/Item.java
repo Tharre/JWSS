@@ -1,4 +1,4 @@
-public class Good{
+public class Item{
 
   private int nr;
   private String name;
@@ -6,7 +6,7 @@ public class Good{
   private int maxAmount;
   private int circAmount;
 
-  public Good(int nr, String name, double curPrice, int maxAmount, int circAmount){
+  public Item(int nr, String name, double curPrice, int maxAmount, int circAmount){
     this.nr=nr;
     this.name=name;
     this.curPrice=curPrice;
