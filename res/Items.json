@@ -1,0 +1,402 @@
+[
+    {
+        "id": 1,
+        "maxAmount": 2000,
+        "name": "Diamanten"
+    },
+    {
+        "id": 2,
+        "maxAmount": 8000,
+        "name": "Gold"
+    },
+    {
+        "id": 3,
+        "maxAmount": 10000,
+        "name": "Silber"
+    },
+    {
+        "id": 4,
+        "maxAmount": 15000,
+        "name": "Kupfer"
+    },
+    {
+        "id": 5,
+        "maxAmount": 4000000,
+        "name": "Schweinehälften"
+    },
+    {
+        "id": 6,
+        "maxAmount": 4000000,
+        "name": "Parmesan"
+    },
+    {
+        "id": 7,
+        "maxAmount": 5000000,
+        "name": "Diesel"
+    },
+    {
+        "id": 8,
+        "maxAmount": 16000000,
+        "name": "Aluminium"
+    },
+    {
+        "id": 9,
+        "maxAmount": 4000000,
+        "name": "Kakaobohnen"
+    },
+    {
+        "id": 10,
+        "maxAmount": 4000000,
+        "name": "Kaffee"
+    },
+    {
+        "id": 11,
+        "maxAmount": 1300000,
+        "name": "Uran"
+    },
+    {
+        "id": 12,
+        "maxAmount": 5000000,
+        "name": "Reis"
+    },
+    {
+        "id": 13,
+        "maxAmount": 80000000,
+        "name": "Holz"
+    },
+    {
+        "id": 14,
+        "maxAmount": 1700000,
+        "name": "Mamor"
+    },
+    {
+        "id": 15,
+        "maxAmount": 75000000,
+        "name": "Strom"
+    },
+    {
+        "id": 16,
+        "maxAmount": 5000000,
+        "name": "Silizium"
+    },
+    {
+        "id": 17,
+        "maxAmount": 100000000,
+        "name": "Wasser"
+    },
+    {
+        "id": 18,
+        "maxAmount": 40000000,
+        "name": "Seide"
+    },
+    {
+        "id": 19,
+        "maxAmount": 50000000,
+        "name": "Baumwolle"
+    },
+    {
+        "id": 20,
+        "maxAmount": 75000000,
+        "name": "Kohle"
+    },
+    {
+        "id": 21,
+        "maxAmount": 90000000,
+        "name": "Gas"
+    },
+    {
+        "id": 22,
+        "maxAmount": 6500000,
+        "name": "Zigaretten"
+    },
+    {
+        "id": 23,
+        "maxAmount": 5000000,
+        "name": "Rhodium"
+    },
+    {
+        "id": 24,
+        "maxAmount": 500000,
+        "name": "Granit"
+    },
+    {
+        "id": 25,
+        "maxAmount": 11000000,
+        "name": "Heuballen"
+    },
+    {
+        "id": 26,
+        "maxAmount": 11000000,
+        "name": "Strohballen"
+    },
+    {
+        "id": 27,
+        "maxAmount": 80000000,
+        "name": "Mais"
+    },
+    {
+        "id": 28,
+        "maxAmount": 80000000,
+        "name": "Weizen"
+    },
+    {
+        "id": 29,
+        "maxAmount": 80000000,
+        "name": "Hafer"
+    },
+    {
+        "id": 30,
+        "maxAmount": 80000000,
+        "name": "Raps"
+    },
+    {
+        "id": 31,
+        "maxAmount": 80000000,
+        "name": "Palmöl"
+    },
+    {
+        "id": 32,
+        "maxAmount": 80000000,
+        "name": "Sojabohnen"
+    },
+    {
+        "id": 33,
+        "maxAmount": 50000000,
+        "name": "Blei"
+    },
+    {
+        "id": 34,
+        "maxAmount": 50000000,
+        "name": "Eisenerz"
+    },
+    {
+        "id": 35,
+        "maxAmount": 50000000,
+        "name": "Nickel"
+    },
+    {
+        "id": 36,
+        "maxAmount": 50000000,
+        "name": "Zinn"
+    },
+    {
+        "id": 37,
+        "maxAmount": 50000000,
+        "name": "Zink"
+    },
+    {
+        "id": 38,
+        "maxAmount": 75000000,
+        "name": "Ethanol"
+    },
+    {
+        "id": 39,
+        "maxAmount": 5000000,
+        "name": "Platin"
+    },
+    {
+        "id": 40,
+        "maxAmount": 5000000,
+        "name": "Palladium"
+    },
+    {
+        "id": 41,
+        "maxAmount": 80000000,
+        "name": "Hühnereier"
+    },
+    {
+        "id": 42,
+        "maxAmount": 80000000,
+        "name": "Milch"
+    },
+    {
+        "id": 43,
+        "maxAmount": 80000000,
+        "name": "Äpfel"
+    },
+    {
+        "id": 44,
+        "maxAmount": 80000000,
+        "name": "Birnen"
+    },
+    {
+        "id": 45,
+        "maxAmount": 80000000,
+        "name": "Bananen"
+    },
+    {
+        "id": 46,
+        "maxAmount": 80000000,
+        "name": "Orangensaft"
+    },
+    {
+        "id": 47,
+        "maxAmount": 32000,
+        "name": "Rubine"
+    },
+    {
+        "id": 48,
+        "maxAmount": 33000,
+        "name": "Saphire"
+    },
+    {
+        "id": 49,
+        "maxAmount": 30000,
+        "name": "Smaragte"
+    },
+    {
+        "id": 50,
+        "maxAmount": 80000000,
+        "name": "Roggen"
+    },
+    {
+        "id": 51,
+        "maxAmount": 80000000,
+        "name": "Kartoffeln"
+    },
+    {
+        "id": 52,
+        "maxAmount": 80000000,
+        "name": "Zuckerrüben"
+    },
+    {
+        "id": 53,
+        "maxAmount": 80000000,
+        "name": "Gerste"
+    },
+    {
+        "id": 54,
+        "maxAmount": 80000000,
+        "name": "Hopfen"
+    },
+    {
+        "id": 55,
+        "maxAmount": 80000000,
+        "name": "Malz"
+    },
+    {
+        "id": 56,
+        "maxAmount": 80000000,
+        "name": "Zucker"
+    },
+    {
+        "id": 57,
+        "maxAmount": 60000000,
+        "name": "Salz"
+    },
+    {
+        "id": 58,
+        "maxAmount": 60000000,
+        "name": "Pfeffer"
+    },
+    {
+        "id": 59,
+        "maxAmount": 5000000,
+        "name": "Benzin"
+    },
+    {
+        "id": 60,
+        "maxAmount": 10000000,
+        "name": "Öl"
+    },
+    {
+        "id": 61,
+        "maxAmount": 90000000,
+        "name": "Rind"
+    },
+    {
+        "id": 62,
+        "maxAmount": 70000000,
+        "name": "Ton"
+    },
+    {
+        "id": 63,
+        "maxAmount": 70000000,
+        "name": "Lehm"
+    },
+    {
+        "id": 64,
+        "maxAmount": 70000000,
+        "name": "Quarz"
+    },
+    {
+        "id": 65,
+        "maxAmount": 5000000,
+        "name": "Argon"
+    },
+    {
+        "id": 66,
+        "maxAmount": 5000000,
+        "name": "Helium"
+    },
+    {
+        "id": 67,
+        "maxAmount": 5000000,
+        "name": "Neon"
+    },
+    {
+        "id": 68,
+        "maxAmount": 5000000,
+        "name": "Xenon"
+    },
+    {
+        "id": 69,
+        "maxAmount": 5000000,
+        "name": "Krypton"
+    },
+    {
+        "id": 70,
+        "maxAmount": 5000000,
+        "name": "Radon"
+    },
+    {
+        "id": 71,
+        "maxAmount": 9000000,
+        "name": "Schwarzpulver"
+    },
+    {
+        "id": 72,
+        "maxAmount": 9000000,
+        "name": "Chrom"
+    },
+    {
+        "id": 73,
+        "maxAmount": 9000000,
+        "name": "Wolfram"
+    },
+    {
+        "id": 74,
+        "maxAmount": 9000000,
+        "name": "Titan"
+    },
+    {
+        "id": 75,
+        "maxAmount": 9000000,
+        "name": "Kautschuk"
+    },
+    {
+        "id": 76,
+        "maxAmount": 9000000,
+        "name": "Quecksilber"
+    },
+    {
+        "id": 77,
+        "maxAmount": 9000000,
+        "name": "Lithium"
+    },
+    {
+        "id": 78,
+        "maxAmount": 9000000,
+        "name": "Magnesium"
+    },
+    {
+        "id": 79,
+        "maxAmount": 9000000,
+        "name": "Calcium"
+    },
+    {
+        "id": 80,
+        "maxAmount": 9000000,
+        "name": "Kalium"
+    }
+]
