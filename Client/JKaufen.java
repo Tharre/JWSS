@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class JKaufen extends JPanel implements ActionListener {
 
-    private JButton btKauf = new JButton("Kaufen");
+    private JButton btKauf = new JButton("Bestellen");
 
 
 
