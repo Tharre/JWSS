@@ -20,6 +20,8 @@ public class JStatistik extends JPanel {
 
     protected void paintComponent(Graphics g) {
 
+		super.paintComponent(g);
+
         int w = getWidth();
         int h = getHeight();
         int breite=(w-60)/x.length;
