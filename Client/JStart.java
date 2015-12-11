@@ -42,7 +42,7 @@ public class JStart extends JFrame implements ActionListener{
         Client f = new Client(tfName.getText());
         if(e.getSource() == btStart) {
             f.setVisible(true);
-            setVisible(false);
+            dispose();
         }//if
     }//actionPerformed
 
