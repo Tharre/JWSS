@@ -71,6 +71,7 @@ public class Client extends JFrame implements ActionListener{
             }//else
                 verkauf[i] = new JVerkauf();
                 pVerkauf.add(verkauf[i], gc1);
+                verkauf[i].btVerk.addActionListener(this);
         }//for
 
         GridBagConstraints gc2 = new GridBagConstraints();
@@ -82,6 +83,7 @@ public class Client extends JFrame implements ActionListener{
                 gc2.gridy = i;
             kauf[i] = new JKaufen();
             pKauf.add(kauf[i], gc2);
+      		kauf[i].btKauf.addActionListener(this);
         }//for
 
         pSOUTH.add(lblSpieler);
@@ -101,6 +103,18 @@ public class Client extends JFrame implements ActionListener{
             lblZeit.start();
             btBereit.setText("Spielername: "+name);
         }//if
+
+        for(int i=0; i<kauf.length; i++){
+			if(e.getSource() == kauf[i].btKauf)
+				kauf[i].lblWare.setText("yes");
+        }//for
+
+        for(int i=0; i<verkauf.length; i++){
+			if(e.getSource() == verkauf[i].btVerk)
+				verkauf[i].tfPreis.setText("yes");
+        }//for
+
+
     }//actionPerformed
 
 }//class Client

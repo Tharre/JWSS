@@ -4,11 +4,11 @@ import java.awt.event.*;
 
 public class JKaufen extends JPanel implements ActionListener {
 
-    private JButton btKauf = new JButton("Bestellen");
+     JButton btKauf = new JButton("Bestellen");
 
 
 
-    private JLabel lblWare = new JLabel("Name");
+    JLabel lblWare = new JLabel("Name");
     private JLabel lblGewMenge= new JLabel("gew. Menge: ");
     private JLabel lblMaxPreis= new JLabel("max. Preis: ");
     private JLabel lblBlank = new JLabel("");

@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class JVerkauf extends JPanel implements ActionListener {
 
-    private JButton btVerk = new JButton("Verkaufen");
+    JButton btVerk = new JButton("Verkaufen");
 
     private JLabel lblWare = new JLabel("Name von Ware");
     private JLabel lblVMenge = new JLabel("Vorhandene Menge");
@@ -14,7 +14,7 @@ public class JVerkauf extends JPanel implements ActionListener {
     private JLabel lblMinPreis= new JLabel("Minimum Preis: ");
 
     private JTextField tfMenge= new JTextField("");
-    private JTextField tfPreis= new JTextField("");
+    	    JTextField tfPreis= new JTextField("");
 
     public JVerkauf (){
         setToolTipText("Verkaufsfenster");
