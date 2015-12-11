@@ -20,7 +20,7 @@ public class Item{
     this.curPrice=curPrice;
   }
 
-  public void updateCircAmount(Item[][] item, int uItem, int amount){
+  public void updateCircAmount(Item item, int uItem, int amount){
     circAmount=amount;
   }
 
