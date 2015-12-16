@@ -1,7 +1,7 @@
 # Communication protocol
 
 ## List all articles:
-(id, itemname)
+(id, item_name)
 
     GET /items
 
@@ -15,6 +15,7 @@
     GET /orders
 
 ## Add new order:
+(returns orderID)
 
     POST /orders
 
@@ -33,3 +34,20 @@
 ## Get item from order:
 
     GET /orders/<id>/item
+
+## Register new player:
+(takes name; returns playerID)
+
+	POST /players
+
+## Show all players:
+
+	GET /players
+
+## Show specific player:
+
+	GET /players/<id>
+
+sendHttpRequest("/items")
+
+host + '/api' + url

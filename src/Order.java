@@ -9,17 +9,19 @@ public class Order {
 
 	private int id;
 	private Item item;
+	private Player player;
 	private boolean isBuy;
 	private double limit;
 	private int quantity;
 
 	public Order() {
-		this(0, new Item(), false, 0.0, 0);
+		this(0, new Item(), new Player(), false, 0.0, 0);
 	}
 
-	public Order(int id, Item item, boolean isBuy, double limit, int quantity) {
+	public Order(int id, Item item, Player player, boolean isBuy, double limit, int quantity) {
 		this.id = id;
 		this.item = item;
+		this.player = player;
 		this.isBuy = isBuy;
 		this.limit = limit;
 		this.quantity = quantity;
