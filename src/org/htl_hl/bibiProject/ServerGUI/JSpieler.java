@@ -1,3 +1,4 @@
+package org.htl_hl.bibiProject.ServerGUI;
 
 import java.awt.*;
 import javax.swing.*;

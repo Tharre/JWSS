@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Common;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -40,10 +42,10 @@ public class Item {
 	public static Map<Integer, Item> loadItems(File file) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<Integer, Item> m = new HashMap<>();
-		
+
 		for (Item item : mapper.readValue(file, Item[].class))
 			m.put(item.getId(), item);
-		
+
 		return m;
 	}
 
