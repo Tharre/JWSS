@@ -1,4 +1,4 @@
-package org.htl_hl.bibiProject.Server;
+package org.htl_hl.bibiProject.Common;
 
 import java.io.File;
 import java.io.IOException;
