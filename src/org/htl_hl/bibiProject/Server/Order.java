@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Server;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -58,16 +60,16 @@ public class Order {
 	public static Map<Integer, Order> loadOrders(File file) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<Integer, Order> m = new HashMap<>();
-		
+
 		for (Order order : mapper.readValue(file, Order[].class))
 			m.put(order.getId(), order);
-		
+
 		return m;
 	}
 
 	public static void main(String[] args) throws IOException {
 		Map<Integer, Order> m = Order.loadOrders(new File("res/Orders.json"));
-		
+
 		System.out.println(m.get(23));
 	}
 }

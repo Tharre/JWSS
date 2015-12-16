@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Server;
+
 public class Player {
 
     private int id;

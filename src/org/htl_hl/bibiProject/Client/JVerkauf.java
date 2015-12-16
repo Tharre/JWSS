@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Client;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;

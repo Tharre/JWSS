@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Server;
+
 import java.util.List;
 
 public class Game {

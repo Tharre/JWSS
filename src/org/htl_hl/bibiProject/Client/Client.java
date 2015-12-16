@@ -1,3 +1,5 @@
+package org.htl_hl.bibiProject.Client;
+
 import java.net.*;
 import java.io.*;
 import java.awt.*;
