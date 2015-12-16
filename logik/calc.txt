@@ -1,0 +1,40 @@
+
+    public void calculate(Order[] orders){
+      int amount=orders.length;
+      int highestQuantBuy;
+      int indBestPrice=-1;
+      double price;
+      int[] quantityBuys=new int[amount];
+      int[] quantitySells=new int[amount];
+      for(int i=0; i<=amount ; i++){
+        price=orders[i].getLimit();
+          for(int j=i; j<=amount; j++){
+            if(orders[i].getIsBuy()){
+              quantityBuys[i]=orders[i].getQuantity();
+              if(price >= orders[j].getLimit()){
+                quantityBuys[i]=quantityBuys[i]+orders[j].getQuantity();
+              }
+            }
+            if(!orders[i].getIsBuy()){
+              quantitySells[i]=orders[i].getQuantity();
+              if(price <= orders[j].getLimit()){
+                quantitySells[i]=quantitySells[i]+orders[j].getQuantity();
+              }
+            }
+          }
+      }
+      highestQuantBuy=quantityBuys[0];
+      for(int k=0; k<=amount; k++){
+        if(quantityBuys[k]==0)
+          continue;
+        else{
+          if(quantityBuys[k]>highestQuantBuy){
+            highestQuantBuy=quantityBuys[k];
+            indBestPrice=k;
+          }
+        }
+      }
+      //Irgendwo bei irgendwas den Preis ändern
+      System.out.println(indBestPrice);
+  }
+
