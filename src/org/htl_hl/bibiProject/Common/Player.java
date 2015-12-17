@@ -38,13 +38,6 @@ public class Player {
 
     public void updateStock(int index, int quantity) {
         stocks.get(index).setQuantity(quantity);
-<<<<<<< HEAD
-    }
-    public void updateItems(Item item){
-        if(this.items.contains(item))
-           items.set(items.indexOf(item),items.get(items.indexOf(item)).)
-=======
->>>>>>> b6df13ebea7c5f460e02fd8a47497d569990f5a1
     }
 
     public void setMoney(double money) {
