@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Item {
 
-	private int id;
-	private String name;
+	private final int id;
+	private final String name;
 	private final int maxAmount;
 
 	public Item() {
