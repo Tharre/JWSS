@@ -33,6 +33,7 @@ public class JKaufen extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource()== btKauf ) {
+            // TODO(Tharre): Order an Server schicken
             btKauf.setText("gekauft");
         }//if
     }//actionPerformed

@@ -31,11 +31,13 @@ public class JVerkauf extends JPanel implements ActionListener {
         add(tfPreis);
         add(btVerk);
         btVerk.addActionListener(this);
+        // TODO(Tharre): Items die der Spieler hat
     }//JVerkauf
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource()== btVerk )
             tfMenge.setText("verkauft");
+        // TODO(Tharre): Schickt Order an Server
     }//actionPerformed
 
 }//class JVerkauf

@@ -115,9 +115,16 @@ public class Server {
 
 				if (m != null) {
 					int index = players.size();
-					players.add(new Player(index, m.get("name"))); // TODO(Tharre): check if "name" exists
+					List<Item> playerItems = new LinkedList<>();
+					playerItems.add(items.get((int) (Math.random()*items.size())));
+					playerItems.add(items.get((int) (Math.random()*items.size())));
+					playerItems.add(items.get((int) (Math.random()*items.size())));
+					playerItems.add(items.get((int) (Math.random()*items.size())));
+					Player p = new Player(index, m.get("name"), playerItems, 500.0);
+					players.add(p); // TODO(Tharre): check if "name" exists
 
-					sendString(t, 200, "{ \"id\": " + index + " }\n");
+					sendJSON(t, p);
+					//sendString(t, 200, "{ \"id\": " + index + " }\n");
 				}
                 break;
             default:

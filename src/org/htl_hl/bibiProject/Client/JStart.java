@@ -1,11 +1,15 @@
 package org.htl_hl.bibiProject.Client;
 
+import org.htl_hl.bibiProject.Common.HttpUtil;
+import org.htl_hl.bibiProject.Common.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class JStart extends JFrame implements ActionListener{
 
@@ -39,14 +43,17 @@ public class JStart extends JFrame implements ActionListener{
         c.add(btStart);
     }//JStart
 
-
-
     public void actionPerformed(ActionEvent e){
-        Client f = new Client(tfName.getText());
-        if(e.getSource() == btStart) {
-            f.setVisible(true);
-            dispose();
-        }//if
+        Player p = null;
+        try {
+            p = HttpUtil.sendPost("players/", "name=" + tfName.getText(), Player.class);
+        } catch (IOException e1) {
+            // TODO(Tharre): exception handling
+            e1.printStackTrace();
+        }
+        Client f = new Client(p);
+        f.setVisible(true);
+        dispose();
     }//actionPerformed
 
     public static void main(String[] args){
