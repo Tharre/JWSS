@@ -29,6 +29,10 @@ public class Player {
         return items;
     }
 
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
     public String toString() {
         return "ID: " + id + ", name: " + name;
     }
