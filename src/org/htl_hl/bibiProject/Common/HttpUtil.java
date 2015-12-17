@@ -34,6 +34,23 @@ public class HttpUtil {
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
+    public static <T> T sendGet(String res, String parameters, Class<T> typeClass) throws Exception {
+        String url = "http://127.0.0.1:8000/api/" + res + "/" + parameters;
+        URL obj = new URL(url);
+        ObjectMapper mapper = new ObjectMapper();
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        int responseCode = con.getResponseCode();
+        if (responseCode != 200)
+            System.out.println("Error handling ... or something like that"); // TODO(Tharre): error handling
+
+        return mapper.readValue(con.getInputStream(), typeClass);
+    }
+
     public static void main(String []args) throws IOException {
         Player p1 = HttpUtil.sendPost("players/", "name=JKartoffel", Player.class);
         Player p2 = HttpUtil.sendPost("players/", "name=JHamster", Player.class);
