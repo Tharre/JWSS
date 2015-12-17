@@ -115,12 +115,12 @@ public class Server {
 
 				if (m != null) {
 					int index = players.size();
-					List<Item> playerItems = new LinkedList<>();
-					playerItems.add(items.get((int) (Math.random()*items.size())));
-					playerItems.add(items.get((int) (Math.random()*items.size())));
-					playerItems.add(items.get((int) (Math.random()*items.size())));
-					playerItems.add(items.get((int) (Math.random()*items.size())));
-					Player p = new Player(index, m.get("name"), playerItems, 500.0);
+					List<Stock> playerStocks = new LinkedList<>();
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
+					Player p = new Player(index, m.get("name"), playerStocks, 500.0);
 					players.add(p); // TODO(Tharre): check if "name" exists
 
 					sendJSON(t, p);
