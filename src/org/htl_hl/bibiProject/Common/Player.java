@@ -7,6 +7,7 @@ public class Player {
     private int id;
     private String name;
     private List<Item> items;
+    private double money;
 
     public Player() {
         this(0, "");
@@ -27,6 +28,18 @@ public class Player {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public String toString() {
