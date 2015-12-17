@@ -17,9 +17,8 @@ public class JKaufen extends JPanel implements ActionListener {
 
     private JTextField tfGewMenge= new JTextField("");
     private JTextField tfMaxPreis= new JTextField("");
-
     public JKaufen (){
-        setPreferredSize(new Dimension(150,90));
+        setPreferredSize(new Dimension(200,90));
 
         setToolTipText("Kauffenster");
         setLayout(new GridLayout(4,2));
@@ -33,8 +32,9 @@ public class JKaufen extends JPanel implements ActionListener {
     }//JKaufen
 
     public void actionPerformed(ActionEvent e){
-        if (e.getSource()== btKauf )
+        if (e.getSource()== btKauf ) {
             btKauf.setText("gekauft");
+        }//if
     }//actionPerformed
 
 }//class JKaufen

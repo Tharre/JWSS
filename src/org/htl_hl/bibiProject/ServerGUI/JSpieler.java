@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class JSpieler extends JPanel {
     private JLabel lblName = new JLabel("Name:");
-    private JLabel lblVermoegen = new JLabel("Vermögen:");
+    private JLabel lblVermoegen = new JLabel("VermÃ¶gen:");
 
     public JSpieler() {
         setPreferredSize(new Dimension(120,90));

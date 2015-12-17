@@ -104,6 +104,7 @@ public class Client extends JFrame implements ActionListener{
         if(e.getSource() == btBereit) {
             lblZeit.start();
             btBereit.setText("Spielername: "+name);
+            System.out.println();
         }//if
 
         for(int i=0; i<kauf.length; i++){

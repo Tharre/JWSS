@@ -18,9 +18,10 @@ public class JStart extends JFrame implements ActionListener{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300,200);
+        tfName.setPreferredSize(new Dimension(70,25));
         setLocationRelativeTo (null);
         Container c = getContentPane();
-        c.setLayout(new GridLayout(2,2));
+        c.setLayout(new FlowLayout());
 
         addWindowListener (new WindowAdapter(){
             public void windowClosing(WindowEvent e1){
