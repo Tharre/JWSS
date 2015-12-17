@@ -24,7 +24,7 @@ public class JUhr extends JLabel implements Runnable{
 
     public void stop() {
         uhrAktiv = false;
-    }//stop
+    }//sto
 
     public void run() {
         StringBuffer ausgabe;
