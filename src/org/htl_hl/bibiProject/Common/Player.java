@@ -37,6 +37,10 @@ public class Player {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+    public void updateItems(Item item){
+        if(this.items.contains(item))
+           items.set(items.indexOf(item),items.get(items.indexOf(item)).)
+    }
 
     public void setMoney(double money) {
         this.money = money;

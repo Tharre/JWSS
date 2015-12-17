@@ -3,6 +3,7 @@ package org.htl_hl.bibiProject.Common;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,8 +30,22 @@ public class Order {
 		this.quantity = quantity;
 	}
 
+	public void exchange(List<Order> orders){
+		for(int i=0;i<orders.size();i++){
+			if(orders.get(i).getIsBuy()){
+				orders.get(i).getPlayer().setItems(orders.get(i).getItem());
+			}else {
+
+			}
+		}
+	}
+
 	public int getId() {
 		return id;
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 	public Item getItem() {
