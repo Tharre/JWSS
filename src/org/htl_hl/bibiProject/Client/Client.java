@@ -1,5 +1,7 @@
 package org.htl_hl.bibiProject.Client;
 
+import org.htl_hl.bibiProject.Common.Player;
+
 import java.net.*;
 import java.io.*;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class Client extends JFrame implements ActionListener{
     private JLabel lblRunde = new JLabel("Runde: ");
     private JUhr   lblZeit = new JUhr();
 
-    private String name;
+    private Player player;
 
     private int anzWaren=10;
     private int anzAngebote=10;
@@ -34,11 +36,11 @@ public class Client extends JFrame implements ActionListener{
     private JScrollPane scKauf = new JScrollPane(pKauf,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-    public Client (String name){
+    public Client(Player player){
         super("Client JWSS");
 
-        this.name = name;
-        // TODO(Tharre): Spieleranzahl (fix), Geld (fix), Rang (fix), Runde vom Server holen
+        this.player = player;
+        // TODO(Tharre): Spieleranzahl (fix), Rang (fix), Runde vom Server holen
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,400);
@@ -89,6 +91,8 @@ public class Client extends JFrame implements ActionListener{
       		kauf[i].btKauf.addActionListener(this);
         }//for
 
+        lblVermoegen.setText("Vermoegen: " + player.getMoney());
+
         pSOUTH.add(lblSpieler);
         pSOUTH.add(btBereit);
         pNORTH.add(lblVermoegen);
@@ -104,7 +108,7 @@ public class Client extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == btBereit) {
             lblZeit.start();
-            btBereit.setText("Spielername: "+name);
+            btBereit.setText("Spielername: "+ player.getName());
             System.out.println();
         }//if
 
