@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Player {
 
-    private int id;
-    private String name;
-    private List<Item> items;
+    private final int id;
+    private final String name;
+    private final List<Stock> stocks;
     private double money;
 
     public Player() {
         this(0, "", null, 0.0);
     }
 
-    public Player(int id, String name, List<Item> items, double money) {
+    public Player(int id, String name, List<Stock> stocks, double money) {
         this.id = id;
         this.name = name;
-        this.items = items;
+        this.stocks = stocks;
         this.money = money;
     }
 
@@ -28,16 +28,16 @@ public class Player {
         return name;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Stock> getStocks() {
+        return stocks;
     }
 
     public double getMoney() {
         return money;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void updateStock(int index, int quantity) {
+        stocks.get(index).setQuantity(quantity);
     }
 
     public void setMoney(double money) {
