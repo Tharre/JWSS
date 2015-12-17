@@ -1,9 +1,12 @@
 package org.htl_hl.bibiProject.Common;
 
+import java.util.List;
+
 public class Player {
 
     private int id;
     private String name;
+    private List<Item> items;
 
     public Player() {
         this(0, "");
@@ -20,6 +23,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     public String toString() {
