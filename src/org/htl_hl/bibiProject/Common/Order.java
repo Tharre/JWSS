@@ -32,10 +32,15 @@ public class Order {
 
 	public void exchange(List<Order> orders){
 		for(int i=0;i<orders.size();i++){
+			Player player= orders.get(i).getPlayer();
+			int itemId = orders.get(i).getItemID();
+			int quantity = orders.get(i).getQuantity();
 			if(orders.get(i).getIsBuy()){
-				orders.get(i).getPlayer().setItems(orders.get(i).getItem());
+				player.getStockByItemId(itemId).setQuantity(quantity);
+				player.setMoney(player.getMoney()-orders.get(i).getLimit());
 			}else {
-
+				player.getStockByItemId(itemId).setQuantity(quantity);
+				player.setMoney(player.getMoney()+orders.get(i).getLimit());
 			}
 		}
 	}

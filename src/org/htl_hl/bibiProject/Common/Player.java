@@ -41,7 +41,6 @@ public class Player {
             if (stock.getItem().getId() == itemId)
                 return stock;
         }
-
         return null;
     }
 
