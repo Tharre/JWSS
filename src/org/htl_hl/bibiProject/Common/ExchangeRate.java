@@ -21,7 +21,7 @@ public class ExchangeRate {
         return exchangeRate;
     }
 
-    public void setExchangeRate(double exchRate){
-        exchangeRate=exchRate;
+    public void setExchangeRate(double exchangeRate){
+        this.exchangeRate=exchangeRate;
     }
 }
