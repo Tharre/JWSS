@@ -38,6 +38,7 @@ public class Client extends JFrame implements ActionListener{
         super("Client JWSS");
 
         this.name = name;
+        // TODO(Tharre): Spieleranzahl (fix), Geld (fix), Rang (fix), Runde vom Server holen
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600,400);

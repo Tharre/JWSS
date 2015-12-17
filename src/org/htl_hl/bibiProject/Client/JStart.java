@@ -44,6 +44,8 @@ public class JStart extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
         Client f = new Client(tfName.getText());
         if(e.getSource() == btStart) {
+            // TODO(Tharre): register player at server
+
             f.setVisible(true);
             dispose();
         }//if
