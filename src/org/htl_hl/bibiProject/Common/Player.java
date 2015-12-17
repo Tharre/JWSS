@@ -36,6 +36,15 @@ public class Player {
         return money;
     }
 
+    public Stock getStockByItemId(int itemId) {
+        for (Stock stock : stocks) {
+            if (stock.getItem().getId() == itemId)
+                return stock;
+        }
+
+        return null;
+    }
+
     public void updateStock(int index, int quantity) {
         stocks.get(index).setQuantity(quantity);
     }
