@@ -9,17 +9,17 @@ import java.net.URL;
 
 public class HttpUtil {
 
-    private static final String USER_AGENT = "Mozilla/5.0";
+    private static final String USER_AGENT = "JWSS Client/1.0";
+    private static final String SERVER_URL = "https://127.0.0.1:8000/api/";
 
     public static <T> T sendPost(String res, String parameters, Class<T> typeClass) throws IOException {
-        String url = "http://127.0.0.1:8000/api/" + res;
+        String url = SERVER_URL + res;
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -27,25 +27,22 @@ public class HttpUtil {
         wr.flush();
         wr.close();
 
-        int responseCode = con.getResponseCode();
-        if (responseCode != 200)
+        if (con.getResponseCode() != 200)
             System.out.println("Error handling ... or something like that"); // TODO(Tharre): error handling
 
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
     public static <T> T sendGet(String res, String parameters, Class<T> typeClass) throws Exception {
-        String url = "http://127.0.0.1:8000/api/" + res + "/" + parameters;
+        String url = SERVER_URL + res + "/" + parameters;
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-        int responseCode = con.getResponseCode();
-        if (responseCode != 200)
+        if (con.getResponseCode() != 200)
             System.out.println("Error handling ... or something like that"); // TODO(Tharre): error handling
 
         return mapper.readValue(con.getInputStream(), typeClass);
