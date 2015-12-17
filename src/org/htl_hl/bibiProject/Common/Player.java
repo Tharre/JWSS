@@ -10,12 +10,14 @@ public class Player {
     private double money;
 
     public Player() {
-        this(0, "");
+        this(0, "", null, 0.0);
     }
 
-    public Player(int id, String name) {
+    public Player(int id, String name, List<Item> items, double money) {
         this.id = id;
         this.name = name;
+        this.items = items;
+        this.money = money;
     }
 
     public int getId() {
