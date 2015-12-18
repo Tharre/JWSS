@@ -4,10 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class JVerkauf extends JPanel implements ActionListener {
+public class JVerkauf extends JPanel {
 
-    JButton btVerk = new JButton("Verkaufen");
-
+    public JButton btVerk = new JButton("Verkaufen");
     private JLabel lblWare = new JLabel("Name von Ware");
     private JLabel lblVMenge = new JLabel("Vorhandene Menge");
     private JLabel lblBlank = new JLabel("");
@@ -30,14 +29,13 @@ public class JVerkauf extends JPanel implements ActionListener {
         add(lblMinPreis);
         add(tfPreis);
         add(btVerk);
-        btVerk.addActionListener(this);
         // TODO(Tharre): Items die der Spieler hat
     }//JVerkauf
 
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource()== btVerk )
-            tfMenge.setText("verkauft");
-        // TODO(Tharre): Schickt Order an Server
-    }//actionPerformed
-
+    public void setLblWare(String s){
+        lblWare.setText("Name von Ware : "+s);
+    }
+    public void setLblVMenge(int s){
+        lblVMenge.setText("Vorhandene Menge : "+s);
+    }
 }//class JVerkauf
