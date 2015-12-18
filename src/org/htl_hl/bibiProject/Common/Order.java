@@ -35,11 +35,17 @@ public class Order {
             Player player = order.getPlayer();
             int itemId = order.getId();
             int quantity = order.getQuantity();
-            player.getStockByItemId(itemId).setQuantity(quantity);
             if (order.getIsBuy()) {
                 player.setMoney(player.getMoney() - order.getLimit());
+                if(order.getItem().getId()==itemId) {
+                    player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() + quantity);
+                }else {
+                    player.getStocks().add(order.getItem(),quantity);
+                }
+
             } else {
                 player.setMoney(player.getMoney() + order.getLimit());
+                player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() - quantity);
             }
         }
     }
