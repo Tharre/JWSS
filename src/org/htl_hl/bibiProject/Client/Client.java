@@ -1,6 +1,7 @@
 package org.htl_hl.bibiProject.Client;
 
 import org.htl_hl.bibiProject.Common.Player;
+import org.htl_hl.bibiProject.Common.Stock;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Client extends JFrame implements ActionListener {
 
@@ -22,11 +25,8 @@ public class Client extends JFrame implements ActionListener {
 
     private Player player;
 
-    private int anzWaren = 10;
-    private int anzAngebote = 10;
-
-    private JVerkauf verkauf[] = new JVerkauf[anzWaren];
-    private JKaufen kauf[] = new JKaufen[anzAngebote];
+    private List<JVerkauf> verkauf = new LinkedList<>();
+    private List<JKaufen> kauf = new LinkedList<>();
 
     private JPanel pVerkauf = new JPanel(new GridBagLayout());
     private JPanel pKauf = new JPanel(new GridBagLayout());
@@ -42,8 +42,6 @@ public class Client extends JFrame implements ActionListener {
 
         this.player = player;
         // TODO(Tharre): Spieleranzahl (fix), Rang (fix), Runde vom Server holen
-        JVerkauf verkauf[] = new JVerkauf[player.getStocks().size()];
-
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -73,7 +71,7 @@ public class Client extends JFrame implements ActionListener {
         gc1.fill = GridBagConstraints.BOTH;
         gc1.insets = new Insets(5, 5, 5, 5);
 
-        for (int i = 0; i < verkauf.length; i++) {
+        for (int i = 0; i < 4; i++) {
             if (i % 2 == 0) {
                 gc1.gridx = i;
                 gc1.gridy = 0;
@@ -82,23 +80,23 @@ public class Client extends JFrame implements ActionListener {
                 gc1.gridx = i - 1;
                 gc1.gridy = 1;
             }//else
-            verkauf[i] = new JVerkauf();
-            verkauf[i].setLblWare(player.getStocks().get(i).getItem().getName());
-            verkauf[i].setLblVMenge(player.getStocks().get(i).getQuantity());
-            pVerkauf.add(verkauf[i], gc1);
-            verkauf[i].btVerk.addActionListener(this);
+            verkauf.add(i, new JVerkauf());
+            verkauf.get(i).setLblWare(player.getStocks().get(i).getItem().getName());
+            verkauf.get(i).setLblVMenge(player.getStocks().get(i).getQuantity());
+            pVerkauf.add(verkauf.get(i), gc1);
+            verkauf.get(i).btVerk.addActionListener(this);
         }//for
 
         GridBagConstraints gc2 = new GridBagConstraints();
         gc2.fill = GridBagConstraints.BOTH;
         gc2.insets = new Insets(5, 5, 5, 5);
 
-        for (int i = 0; i < kauf.length; i++) {
+        for (int i = 0; i < 4; i++) {
             gc2.gridx = 0;
             gc2.gridy = i;
-            kauf[i] = new JKaufen();
-            pKauf.add(kauf[i], gc2);
-            kauf[i].btKauf.addActionListener(this);
+            kauf.add(i, new JKaufen());
+            pKauf.add(kauf.get(i), gc2);
+            kauf.get(i).btKauf.addActionListener(this);
         }//for
 
         pSOUTH.add(lblSpieler);
@@ -120,16 +118,14 @@ public class Client extends JFrame implements ActionListener {
             System.out.println();
         }//if
 
-        for (int i = 0; i < kauf.length; i++) {
-            if (e.getSource() == kauf[i].btKauf)
-                kauf[i].lblWare.setText("yes");
+        for (int i = 0; i < 4; i++) {
+            if (e.getSource() == kauf.get(i).btKauf)
+                kauf.get(i).lblWare.setText("yes");
         }//for
 
-        for (int i = 0; i < verkauf.length; i++) {
-            System.out.println(verkauf[i]);
-            System.out.println(i);
-            if (e.getSource() == verkauf[i].btVerk)
-                verkauf[i].tfPreis.setText("yes");
+        for (int i = 0; i < 4; i++) {
+            if (e.getSource() == verkauf.get(i).btVerk)
+                verkauf.get(i).tfPreis.setText("yes");
         }//for
 
 
