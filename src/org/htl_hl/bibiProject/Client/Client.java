@@ -42,6 +42,8 @@ public class Client extends JFrame implements ActionListener {
 
         this.player = player;
         // TODO(Tharre): Spieleranzahl (fix), Rang (fix), Runde vom Server holen
+        JVerkauf verkauf[] = new JVerkauf[player.getStocks().size()];
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -81,6 +83,8 @@ public class Client extends JFrame implements ActionListener {
                 gc1.gridy = 1;
             }//else
             verkauf[i] = new JVerkauf();
+            verkauf[i].setLblWare(player.getStocks().get(i).getItem().getName());
+            verkauf[i].setLblVMenge(player.getStocks().get(i).getQuantity());
             pVerkauf.add(verkauf[i], gc1);
             verkauf[i].btVerk.addActionListener(this);
         }//for
@@ -122,6 +126,8 @@ public class Client extends JFrame implements ActionListener {
         }//for
 
         for (int i = 0; i < verkauf.length; i++) {
+            System.out.println(verkauf[i]);
+            System.out.println(i);
             if (e.getSource() == verkauf[i].btVerk)
                 verkauf[i].tfPreis.setText("yes");
         }//for
