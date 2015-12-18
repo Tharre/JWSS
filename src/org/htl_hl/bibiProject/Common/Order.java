@@ -40,7 +40,7 @@ public class Order {
                 if(order.getItem().getId()==itemId) {
                     player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() + quantity);
                 }else {
-                    player.getStocks().add(order.getItem(),quantity);
+                    player.getStocks().add(new Stock(order.getItem(),quantity));
                 }
 
             } else {
