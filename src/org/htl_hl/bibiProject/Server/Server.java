@@ -13,6 +13,7 @@ public class Server {
 	private static Map<Integer, Item> items;
 	private static ObjectMapper mapper = new ObjectMapper();
 	private static List<Player> players = new ArrayList<>();
+	private static List<Order> orders = new LinkedList<>();
 
 	public static void main(String[] args) throws Exception {
 		items = Item.loadItems(new File("res/Items.json"));
@@ -69,9 +70,9 @@ public class Server {
 					sendJSON(t, items);
 					break;
 				}
-				int itemID = Integer.parseInt(c[1]);
-				if (items.containsKey(itemID))
-					sendJSON(t, items.get(itemID));
+				int itemId = Integer.parseInt(c[1]);
+				if (items.containsKey(itemId))
+					sendJSON(t, items.get(itemId));
 				else
 					sendString(t, 404, "<h1>404 Not Found</h1>");
 				break;
@@ -83,13 +84,31 @@ public class Server {
 		public void handleOrders(String[] c, HttpExchange t) throws IOException {
 			switch (t.getRequestMethod().toUpperCase()) {
             case "GET":
-				// TODO(Tharre): implement
+				if (c.length < 2 || c[1].equals("")) {
+					sendJSON(t, orders);
+					break;
+				}
+				int orderId = Integer.parseInt(c[1]);
+				if (orderId < orders.size())
+					sendJSON(t, orders.get(orderId));
+				else
+					sendString(t, 404, "<h1>404 Not Found</h1>");
                 break;
             case "POST":
 				Map<String, String> m = getPostParameters(t);
 
 				if (m != null) {
-					// TODO(Tharre): implement
+					int index = orders.size();
+
+					Order o = new Order(index,items.get(Integer.parseInt(m.get("itemId"))),
+							players.get(Integer.parseInt(m.get("playerId"))),
+							Boolean.parseBoolean(m.get("isBuy")),
+							Double.parseDouble(m.get("limit")),
+							Integer.parseInt(m.get("quantity")));
+
+					orders.add(o);
+
+					sendJSON(t, o);
 				}
                 break;
             default:
@@ -104,9 +123,9 @@ public class Server {
 					sendJSON(t, players);
 					break;
 				}
-				int playerID = Integer.parseInt(c[1]);
-				if (playerID < players.size())
-					sendJSON(t, players.get(playerID));
+				int playerId = Integer.parseInt(c[1]);
+				if (playerId < players.size())
+					sendJSON(t, players.get(playerId));
 				else
 					sendString(t, 404, "<h1>404 Not Found</h1>");
                 break;

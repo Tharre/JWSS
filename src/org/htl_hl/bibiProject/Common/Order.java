@@ -33,7 +33,7 @@ public class Order {
     public void exchange(List<Order> orders) {
         for (Order order : orders) {
             Player player = order.getPlayer();
-            int itemId = order.getItemID();
+            int itemId = order.getId();
             int quantity = order.getQuantity();
             player.getStockByItemId(itemId).setQuantity(quantity);
             if (order.getIsBuy()) {
@@ -54,10 +54,6 @@ public class Order {
 
     public Item getItem() {
         return item;
-    }
-
-    public int getItemID() {
-        return item.getId();
     }
 
     public boolean getIsBuy() {
