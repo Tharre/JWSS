@@ -10,7 +10,7 @@ import java.net.URL;
 public class HttpUtil {
 
     private static final String USER_AGENT = "JWSS Client/1.0";
-    private static final String SERVER_URL = "https://127.0.0.1:8000/api/";
+    private static final String SERVER_URL = "http://127.0.0.1:8000/api/";
 
     public static <T> T sendPost(String res, String parameters, Class<T> typeClass) throws IOException {
         String url = SERVER_URL + res;
