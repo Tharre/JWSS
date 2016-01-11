@@ -33,7 +33,7 @@ public class HttpUtil {
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
-    public static <T> T sendGet(String res, String parameters, Class<T> typeClass) throws Exception {
+    public static <T> T sendGet(String res, String parameters, Class<T> typeClass) throws IOException {
         String url = SERVER_URL + res + "/" + parameters;
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
