@@ -132,7 +132,7 @@ public class Server {
             case "POST":
 				Map<String, String> m = getPostParameters(t);
 
-				if (m != null) {
+				if (m != null && m.containsKey("name")) {
 					int index = players.size();
 					List<Stock> playerStocks = new LinkedList<>();
 					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
@@ -143,7 +143,8 @@ public class Server {
 					players.add(p); // TODO(Tharre): check if "name" exists
 
 					sendJSON(t, p);
-					//sendString(t, 200, "{ \"id\": " + index + " }\n");
+				} else {
+					sendString(t, 400, "<h1>400 Bad Request</h1>name parameter missing");
 				}
                 break;
             default:
