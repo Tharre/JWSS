@@ -45,16 +45,15 @@ public class JStart extends JFrame implements ActionListener{
     }//JStart
 
     public void actionPerformed(ActionEvent e){
-        Player p = null;
         try {
-            p = HttpUtil.sendPost("players/", "name=" + tfName.getText(), Player.class);
+            Player p = HttpUtil.sendPost("players/", "name=" + tfName.getText(), Player.class);
+            Client f = new Client(p);
+            f.setVisible(true);
+            dispose();
         } catch (IOException e1) {
             // TODO(Tharre): exception handling
             e1.printStackTrace();
         }
-        Client f = new Client(p);
-        f.setVisible(true);
-        dispose();
     }//actionPerformed
 
     public static void main(String[] args){
