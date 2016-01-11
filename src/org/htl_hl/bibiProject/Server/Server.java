@@ -97,7 +97,8 @@ public class Server {
             case "POST":
 				Map<String, String> m = getPostParameters(t);
 
-				if (m != null) {
+				if (m != null && m.containsKey("itemId") && m.containsKey("playerId") && m.containsKey("isBuy")
+						&& m.containsKey("limit") && m.containsKey("quantity")) {
 					int index = orders.size();
 
 					Order o = new Order(index,items.get(Integer.parseInt(m.get("itemId"))),
@@ -109,6 +110,8 @@ public class Server {
 					orders.add(o);
 
 					sendJSON(t, o);
+				} else {
+					sendString(t, 400, "<h1>400 Bad Request</h1>One or more parameter(s) missing");
 				}
                 break;
             default:
