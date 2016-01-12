@@ -1,19 +1,23 @@
 package org.htl_hl.bibiProject.Server;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.*;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 import org.htl_hl.bibiProject.Common.*;
+
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.URLDecoder;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.*;
 
 public class Server {
 
 	private static Map<Integer, Item> items;
 	private static ObjectMapper mapper = new ObjectMapper();
-	private static List<Player> players = new ArrayList<>();
-	private static List<Order> orders = new LinkedList<>();
+	private static List<Game> games = new LinkedList<>();
 
 	public static void main(String[] args) throws Exception {
 		items = Item.loadItems(new File("res/Items.json"));
@@ -41,14 +45,14 @@ public class Server {
 		}
 
 		public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
-			Map<String, String> query_pairs = new LinkedHashMap<>();
+			Map<String, String> queryPairs = new LinkedHashMap<>();
 			String[] pairs = query.split("&");
 			for (String pair : pairs) {
 				int idx = pair.indexOf("=");
-				query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
+				queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
 						URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
 			}
-			return query_pairs;
+			return queryPairs;
 		}
 
 		public Map<String, String> getPostParameters(HttpExchange t) throws IOException {
@@ -63,45 +67,84 @@ public class Server {
 			return splitQuery(query);
 		}
 
-		public void handleItems(String[] c, HttpExchange t) throws IOException {
+		public void handleItems(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
+			if (comps.size() != 1) {
+				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+				return;
+			}
+
 			switch (t.getRequestMethod().toUpperCase()) {
 			case "GET":
-				if (c.length < 2 || c[1].equals("")) {
+				if (comps.get(0).getValue() == null) {
 					sendJSON(t, items);
-					break;
+					return;
 				}
-				int itemId = Integer.parseInt(c[1]);
+
+				int itemId = Integer.parseInt(comps.get(0).getValue());
 				if (items.containsKey(itemId))
 					sendJSON(t, items.get(itemId));
 				else
 					sendString(t, 404, "<h1>404 Not Found</h1>");
-				break;
+				return;
 			default:
 				sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
 			}
 		}
 
-		public void handleOrders(String[] c, HttpExchange t) throws IOException {
+		public void handleOrders(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
+			if (comps.size() != 3 || !comps.get(0).getKey().equals("games") || !comps.get(1).getKey().equals("rounds")){
+				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+				return;
+			}
+
+			int gameId = Integer.parseInt(comps.get(0).getValue());
+			Game game;
+			try {
+				game = games.get(gameId);
+			} catch (IndexOutOfBoundsException e) {
+				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
+				return;
+			}
+
+			int roundId = Integer.parseInt(comps.get(1).getValue());
+			Round round;
+			try {
+				round = game.getRounds().get(roundId);
+			} catch (IndexOutOfBoundsException e) {
+				sendString(t, 400, "<h1>404 Not Found</h1>Round not found");
+				return;
+			}
+
+			List<Player> players = game.getPlayers();
+			List<Order> orders = round.getOrders();
+
 			switch (t.getRequestMethod().toUpperCase()) {
             case "GET":
-				if (c.length < 2 || c[1].equals("")) {
+				if (comps.get(2).getValue() == null) {
 					sendJSON(t, orders);
-					break;
+					return;
 				}
-				int orderId = Integer.parseInt(c[1]);
-				if (orderId < orders.size())
+
+				int orderId = Integer.parseInt(comps.get(2).getValue());
+				try {
 					sendJSON(t, orders.get(orderId));
-				else
+				} catch (IndexOutOfBoundsException e) {
 					sendString(t, 404, "<h1>404 Not Found</h1>");
-                break;
+				}
+				return;
             case "POST":
+				if (comps.get(2).getValue() != null) {
+					sendString(t, 400, "<h1>400 Bad Request</h1>Superfluous argument");
+					return;
+				}
+
 				Map<String, String> m = getPostParameters(t);
 
 				if (m != null && m.containsKey("itemId") && m.containsKey("playerId") && m.containsKey("isBuy")
 						&& m.containsKey("limit") && m.containsKey("quantity")) {
 					int index = orders.size();
 
-					Order o = new Order(index,items.get(Integer.parseInt(m.get("itemId"))),
+					Order o = new Order(index, items.get(Integer.parseInt(m.get("itemId"))),
 							players.get(Integer.parseInt(m.get("playerId"))),
 							Boolean.parseBoolean(m.get("isBuy")),
 							Double.parseDouble(m.get("limit")),
@@ -113,26 +156,49 @@ public class Server {
 				} else {
 					sendString(t, 400, "<h1>400 Bad Request</h1>One or more parameter(s) missing");
 				}
-                break;
+				return;
             default:
 				sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
 			}
 		}
 
-		public void handlePlayers(String[] c, HttpExchange t) throws IOException {
+		public void handlePlayers(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
+			if (comps.size() != 2 || !comps.get(0).getKey().equals("games")) {
+				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+				return;
+			}
+
+			int gameId = Integer.parseInt(comps.get(0).getValue());
+			Game game;
+			try {
+				game = games.get(gameId);
+			} catch (IndexOutOfBoundsException e) {
+				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
+				return;
+			}
+
+			List<Player> players = game.getPlayers();
+
 			switch (t.getRequestMethod().toUpperCase()) {
             case "GET":
-				if (c.length < 2 || c[1].equals("")) {
+				if (comps.get(1).getValue() == null) {
 					sendJSON(t, players);
-					break;
+					return;
 				}
-				int playerId = Integer.parseInt(c[1]);
-				if (playerId < players.size())
+
+				int playerId = Integer.parseInt(comps.get(1).getValue());
+				try {
 					sendJSON(t, players.get(playerId));
-				else
+				} catch (IndexOutOfBoundsException e) {
 					sendString(t, 404, "<h1>404 Not Found</h1>");
-                break;
+				}
+				return;
             case "POST":
+				if (comps.get(1).getValue() != null) {
+					sendString(t, 400, "<h1>400 Bad Request</h1>Superfluous argument");
+					return;
+				}
+
 				Map<String, String> m = getPostParameters(t);
 
 				if (m != null && m.containsKey("name")) {
@@ -149,31 +215,139 @@ public class Server {
 				} else {
 					sendString(t, 400, "<h1>400 Bad Request</h1>name parameter missing");
 				}
-                break;
+				return;
             default:
 				sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
 			}
 		}
 
+		public void handleGames(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
+			if (comps.size() != 1) {
+				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+				return;
+			}
+
+			switch (t.getRequestMethod().toUpperCase()) {
+            case "GET":
+				if (comps.get(0).getValue() == null) {
+					sendJSON(t, games);
+					return;
+				}
+
+				int gameId = Integer.parseInt(comps.get(0).getValue());
+				for (Game game : games)
+					if (game.getId() == gameId) {
+						sendJSON(t, game);
+						return;
+					}
+
+				sendString(t, 404, "<h1>404 Not Found</h1>");
+				return;
+			case "POST":
+				if (comps.get(0).getValue() != null) {
+					sendString(t, 400, "<h1>400 Bad Request</h1>Superfluous argument");
+					return;
+				}
+
+				Map<String, String> m = getPostParameters(t);
+
+				if (m != null && m.containsKey("name")) {
+					int index = games.size();
+					List<Round> rounds = new LinkedList<>();
+					List<Order> orders = new LinkedList<>();
+					rounds.add(new Round(0, orders));
+					List<Player> players = new LinkedList<>();
+					Game game = new Game(index, m.get("name"), rounds, players);
+					games.add(game); // TODO(Tharre): check if "name" exists
+
+					sendJSON(t, game);
+				} else {
+					sendString(t, 400, "<h1>400 Bad Request</h1>name parameter missing");
+				}
+				return;
+			default:
+				sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
+			}
+		}
+
+		private void handleRounds(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
+			if (comps.size() != 2 || !comps.get(0).getKey().equals("games")) {
+				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+				return;
+			}
+
+			int gameId = Integer.parseInt(comps.get(0).getValue());
+			Game game;
+			try {
+				game = games.get(gameId);
+			} catch (IndexOutOfBoundsException e) {
+				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
+				return;
+			}
+
+			List<Round> rounds = game.getRounds();
+
+			switch (t.getRequestMethod().toUpperCase()) {
+				case "GET":
+					if (comps.get(1).getValue() == null) {
+						sendJSON(t, game.getActiveRound());
+						return;
+					}
+
+					int roundId = Integer.parseInt(comps.get(1).getValue());
+					try {
+						sendJSON(t, rounds.get(roundId));
+	 				} catch (IndexOutOfBoundsException e) {
+						sendString(t, 404, "<h1>404 Not Found</h1>");
+					}
+					return;
+				default:
+					sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
+			}
+		}
+
+		public static List<SimpleEntry<String, String>> parseURL(String s) {
+			String[] comps = s.split("/");
+			List<SimpleEntry<String, String>> list = new LinkedList<>();
+
+			for (int i = 0; i < comps.length; i+=2) {
+				if (i == comps.length-1)
+					list.add(new SimpleEntry<>(comps[i], null));
+				else
+					list.add(new SimpleEntry<>(comps[i], comps[i+1]));
+			}
+
+			return list;
+		}
+
 		@Override
 		public void handle(HttpExchange t) throws IOException {
 			// /api/items/23
+			// /api/games/23/players
 			URI sub = URI.create("/api").relativize(t.getRequestURI());
 
 			System.out.println(sub);
-			String[] c = sub.getPath().split("/", 3);
-			switch (c[0]) {
-			case "items":
-				handleItems(c, t);
+
+			List<SimpleEntry<String, String>> comps = parseURL(sub.getPath());
+			SimpleEntry<String, String> last = comps.get(comps.size()-1);
+			switch (last.getKey()) {
+            case "games":
+                handleGames(comps, t);
+                break;
+            case "items":
+				handleItems(comps, t);
+                break;
+            case "orders":
+				handleOrders(comps, t);
+                break;
+            case "players":
+				handlePlayers(comps, t);
+                break;
+            case "rounds":
+				handleRounds(comps, t);
 				break;
-			case "orders":
-				handleOrders(c, t);
-				break;
-			case "players":
-				handlePlayers(c, t);
-				break;
-			default:
-				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+            default:
+                sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
 			}
 		}
 	}
