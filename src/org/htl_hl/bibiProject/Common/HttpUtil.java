@@ -10,10 +10,9 @@ import java.net.URL;
 public class HttpUtil {
 
     private static final String USER_AGENT = "JWSS Client/1.0";
-    private static final String SERVER_URL = "http://127.0.0.1:8000/api/";
 
-    public static <T> T sendPost(String res, String parameters, Class<T> typeClass) throws IOException {
-        String url = SERVER_URL + res;
+    public static <T> T sendPost(String ip, String res, String parameters, Class<T> typeClass) throws IOException {
+        String url = ip + "/api/" + res;
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -33,8 +32,8 @@ public class HttpUtil {
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
-    public static <T> T sendGet(String res, String parameters, Class<T> typeClass) throws IOException {
-        String url = SERVER_URL + res + "/" + parameters;
+    public static <T> T sendGet(String ip, String res, String parameters, Class<T> typeClass) throws IOException {
+        String url = ip + "/api/" + res + "/" + parameters;
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -49,10 +48,10 @@ public class HttpUtil {
     }
 
     public static void main(String []args) throws IOException {
-        Player p1 = HttpUtil.sendPost("players/", "name=JKartoffel", Player.class);
-        Player p2 = HttpUtil.sendPost("players/", "name=JHamster", Player.class);
-        Player p3 = HttpUtil.sendPost("players/", "name=JEmily", Player.class);
-        Player p4 = HttpUtil.sendPost("players/", "name=JGatto", Player.class);
+        Player p1 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JKartoffel", Player.class);
+        Player p2 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JHamster", Player.class);
+        Player p3 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JEmily", Player.class);
+        Player p4 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JGatto", Player.class);
 
         System.out.println(p1);
         System.out.println(p2);

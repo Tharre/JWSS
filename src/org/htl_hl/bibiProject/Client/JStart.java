@@ -46,7 +46,7 @@ public class JStart extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         try {
-            Player p = HttpUtil.sendPost("players/", "name=" + tfName.getText(), Player.class);
+            Player p = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=" + tfName.getText(), Player.class);
             Client f = new Client(p);
             f.setVisible(true);
             dispose();
