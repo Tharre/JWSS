@@ -12,6 +12,18 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.LinkedList;
 
+/**
+ * <p>Title: Client</p>
+ * <p>Description:</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
+ */
+
 public class Client extends JFrame implements ActionListener {
 
     private JButton btBereit = new JButton("Bereit");
@@ -37,6 +49,10 @@ public class Client extends JFrame implements ActionListener {
     private JScrollPane scKauf = new JScrollPane(pKauf, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+    /**
+     * Erzeugen eines Clients auf Basis eines JFrames
+     * @param player
+     */
     public Client(Player player) {
         super("Client JWSS");
 
@@ -111,6 +127,10 @@ public class Client extends JFrame implements ActionListener {
         c.add(pSOUTH, BorderLayout.SOUTH);
     }//Client
 
+    /**
+     * Bearbeitung der Events der Buttons
+     * @param e Das Actionevent der Buttons
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btBereit) {
             lblZeit.start();
