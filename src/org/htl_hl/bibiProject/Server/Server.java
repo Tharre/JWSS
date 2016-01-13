@@ -109,6 +109,7 @@ public class Server {
 			int roundId = Integer.parseInt(comps.get(1).getValue());
 			Round round;
 			try {
+				game.updateRounds();
 				round = game.getRounds().get(roundId);
 			} catch (IndexOutOfBoundsException e) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Round not found");
@@ -253,11 +254,9 @@ public class Server {
 
 				if (m != null && m.containsKey("name")) {
 					int index = games.size();
-					List<Round> rounds = new LinkedList<>();
-					List<Order> orders = new LinkedList<>();
-					rounds.add(new Round(0, orders));
 					List<Player> players = new LinkedList<>();
-					Game game = new Game(index, m.get("name"), rounds, players);
+					Game game = new Game(index, m.get("name"), players);
+					game.start();
 					games.add(game); // TODO(Tharre): check if "name" exists
 
 					sendJSON(t, game);
@@ -285,6 +284,7 @@ public class Server {
 				return;
 			}
 
+			game.updateRounds();
 			List<Round> rounds = game.getRounds();
 
 			switch (t.getRequestMethod().toUpperCase()) {
