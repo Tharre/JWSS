@@ -62,7 +62,7 @@ public class ExchangeRate {
             }
         }
 
-        // and now set the surviving, best rate
+        // and select the best surviving rate
         rate = bestRate;
     }
 }

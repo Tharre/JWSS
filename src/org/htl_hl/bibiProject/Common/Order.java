@@ -30,7 +30,7 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public void exchange(List<Order> orders) {
+    public static void exchange(List<Order> orders) {
         for (Order order : orders) {
             Player player = order.getPlayer();
             int itemId = order.getId();
