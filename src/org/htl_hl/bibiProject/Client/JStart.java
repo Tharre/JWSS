@@ -15,6 +15,8 @@ import java.io.IOException;
 public class JStart extends JFrame implements ActionListener{
 
     private JLabel name= new JLabel("Name:");
+    private JLabel ipaddr= new JLabel("IP Adresse Server:");
+    private JTextField tfIpaddr= new JTextField("");
     private JTextField tfName= new JTextField("");
     private JButton btStart = new JButton("Start");
 
@@ -41,6 +43,8 @@ public class JStart extends JFrame implements ActionListener{
 
         c.add(name);
         c.add(tfName);
+        c.add(ipaddr);
+        c.add(tfIpaddr);
         c.add(btStart);
     }//JStart
 
