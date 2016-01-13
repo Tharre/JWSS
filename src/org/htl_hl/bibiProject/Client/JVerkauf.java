@@ -35,7 +35,7 @@ public class JVerkauf extends JPanel {
     public void setLblWare(String s){
         lblWare.setText("Name von Ware : "+s);
     }
-    public void setLblVMenge(int s){
+    public void setLblVMenge(long s){
         lblVMenge.setText("Vorhandene Menge : "+s);
     }
 }//class JVerkauf

@@ -1,11 +1,11 @@
 package org.htl_hl.bibiProject.Common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Order {
@@ -15,39 +15,21 @@ public class Order {
     private Player player;
     private boolean isBuy;
     private double limit;
-    private int quantity;
+    private long quantity;
+    private long fulfilled;
 
     public Order() {
         this(0, new Item(), new Player(), false, 0.0, 0);
     }
 
-    public Order(int id, Item item, Player player, boolean isBuy, double limit, int quantity) {
+    public Order(int id, Item item, Player player, boolean isBuy, double limit, long quantity) {
         this.id = id;
         this.item = item;
         this.player = player;
         this.isBuy = isBuy;
         this.limit = limit;
         this.quantity = quantity;
-    }
-
-    public static void exchange(List<Order> orders) {
-        for (Order order : orders) {
-            Player player = order.getPlayer();
-            int itemId = order.getId();
-            int quantity = order.getQuantity();
-            if (order.getIsBuy()) {
-                player.setMoney(player.getMoney() - order.getLimit());
-                if(order.getItem().getId()==itemId) {
-                    player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() + quantity);
-                }else {
-                    player.getStocks().add(new Stock(order.getItem(),quantity));
-                }
-
-            } else {
-                player.setMoney(player.getMoney() + order.getLimit());
-                player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() - quantity);
-            }
-        }
+        this.fulfilled = 0;
     }
 
     public int getId() {
@@ -70,8 +52,21 @@ public class Order {
         return limit;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
+    }
+
+    public long getFulfilled() {
+        return fulfilled;
+    }
+
+    @JsonIgnore
+    public long getRemaining() {
+        return quantity - fulfilled;
+    }
+
+    public void setFulfilled(long fulfilled) {
+        this.fulfilled = fulfilled;
     }
 
     public String toString() {

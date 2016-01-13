@@ -173,6 +173,7 @@ public class Server {
 			Game game;
 			try {
 				game = games.get(gameId);
+				game.updateRounds();
 			} catch (IndexOutOfBoundsException e) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
 				return;
@@ -209,7 +210,7 @@ public class Server {
 					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
 					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
 					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
-					Player p = new Player(index, m.get("name"), playerStocks, 500.0);
+					Player p = new Player(index, m.get("name"), playerStocks, 1000000.0);
 					players.add(p); // TODO(Tharre): check if "name" exists
 
 					sendJSON(t, p);

@@ -46,16 +46,4 @@ public class HttpUtil {
 
         return mapper.readValue(con.getInputStream(), typeClass);
     }
-
-    public static void main(String []args) throws IOException {
-        Player p1 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JKartoffel", Player.class);
-        Player p2 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JHamster", Player.class);
-        Player p3 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JEmily", Player.class);
-        Player p4 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JGatto", Player.class);
-
-        System.out.println(p1);
-        System.out.println(p2);
-        System.out.println(p3);
-        System.out.println(p4);
-    }
 }
