@@ -32,8 +32,8 @@ public class HttpUtil {
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
-    public static <T> T sendGet(String ip, String res, String parameters, Class<T> typeClass) throws IOException {
-        String url = ip + "/api/" + res + "/" + parameters;
+    public static <T> T sendGet(String ip, String res, Class<T> typeClass) throws IOException {
+        String url = ip + "/api/" + res + "/";
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
