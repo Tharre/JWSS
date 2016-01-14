@@ -124,7 +124,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
         for (int i = 0; i < round.getOrders().size(); i++) {
             gc2.gridx = 0;
             gc2.gridy = i;
-            kauf.add(i, new JKaufen());
+            kauf.add(i, new JKaufen(server, game, player));
             pKauf.add(kauf.get(i), gc2);
             kauf.get(i).btKauf.addActionListener(this);
         }//for
