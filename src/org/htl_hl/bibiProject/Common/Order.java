@@ -9,38 +9,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Objekt vom Typ Order.
- * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Order.
+/**
+ * <p>Title: Order</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Order.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
  */
 public class Order {
-    /** id - Private Eigenschaft der Klasse Order vom Typ int.
+    /** id - Private Eigenschaft der Klasse Order vom Typ int.<br>
      * Jede Order hat eine eindeutige ID.
      */
     private int id;
-    /** item - Private Eigenschaft der Klasse Order vom Typ Item.
+    /** item - Private Eigenschaft der Klasse Order vom Typ Item.<br>
      * Jede Order beinhaltet ein Item.
      */
     private Item item;
-    /** player - Private Eigenschaft der Klasse Order vom Typ Player.
+    /** player - Private Eigenschaft der Klasse Order vom Typ Player.<br>
      * Jede Order wird von einem Player aufgegeben.
      */
     private Player player;
-    /** isBuy - Private Eigenschaft der Klasse Order vom Typ boolean.
+    /** isBuy - Private Eigenschaft der Klasse Order vom Typ boolean.<br>
      * true = Verkauf ; false = Kauf.
      * Jede Order ist ein Kauf oder Verkauf.
      */
     private boolean isBuy;
-    /** limit - Private Eigenschaft der Klasse Order vom Typ double.
+    /** limit - Private Eigenschaft der Klasse Order vom Typ double.<br>
      * Jede Order hat einen maximal/mindest Preis zu dem ge-/verkauft wird.
      */
     private double limit;
 
-    /** quantity - Private Eigenschaft der Klasse Order vom Typ long.
-     * Jedes Item in der Order hat eine Stückzahl die angeboten/benötigt wird.
+    /** quantity - Private Eigenschaft der Klasse Order vom Typ long.<br>
+     * Jedes Item in der Order hat eine St&uuml;ckzahl die angeboten/ben&ouml;tigt wird.
      */
     private long quantity;
-    /** fulfilled - Private Eigenschaft der Klasse Order vom Typ long.
-     * Da die Anzahl der zum Kauf und Verkauf angebotenen Stück gleich sein muss wird in dieser Variable gespeichert wieviele gekauft/verkauft werden konnten.
+    /** fulfilled - Private Eigenschaft der Klasse Order vom Typ long.<br>
+     * Da die Anzahl der zum Kauf und Verkauf angebotenen St&uuml;ck gleich sein muss wird in dieser Variable gespeichert wieviele gekauft/verkauft werden konnten.
      */
     private long fulfilled;
 
@@ -97,38 +105,37 @@ public class Order {
     }
 
 
-    /** Methode zum Abrufen der Stückzahl der zum Kauf/Verkauf angebotenen Ware.
-     * @return quantity Stückzahl der zum Kauf/Verkauf angebotenen Ware
+    /** Methode zum Abrufen der St&uuml;ckzahl der zum Kauf/Verkauf angebotenen Ware.
+     * @return quantity St&uuml;ckzahl der zum Kauf/Verkauf angebotenen Ware
      */
     public long getQuantity() {
         return quantity;
     }
 
-    /** Methode zum Abrufen aller privaten Eigenschaften (Order-ID,Item-ID,isBuy,limit,quantity), welche als String zurückgegeben werden.
+    /** Methode zum Abrufen aller privaten Eigenschaften (Order-ID,Item-ID,isBuy,limit,quantity), welche als String zur&uuml;ckgegeben werden.
      * @return String
      */
     public String toString() {
         return "Order: " + id + ", itemID: " + item.getId() + ", isBuy: " + isBuy + ", limit: " + limit + ", quantity: " + quantity;
     }
 
-    /** Methode zum Abfragen der erfolgreich verkauften Stück der Order.
-     * @return fulfilled Anzahl der erfolgreich verkauften/gekauften Stück der Order
+    /** Methode zum Abfragen der erfolgreich verkauften St&uuml;ck der Order.
+     * @return fulfilled Anzahl der erfolgreich verkauften/gekauften St&uuml;ck der Order
      */
     public long getFulfilled() {
         return fulfilled;
     }
 
     @JsonIgnore
-    /** Methode zum Abfragen der Stückzahl die nicht verkauft/gekauft werden konnten.
-     * @return quantity-fulfilled Anzahl der Stück die nicht verkauft/gekauft werden konnten
+    /** Methode zum Abfragen der St&uuml;ckzahl die nicht verkauft/gekauft werden konnten.
+     * @return quantity-fulfilled Anzahl der St&uuml;ck die nicht verkauft/gekauft werden konnten
      */
     public long getRemaining() {
         return quantity - fulfilled;
     }
 
-    /** Methode zum Setzen der verkauften/gekauften Stückzahl.
-     * @param fulfilled long Anzal der verkauften/gekauften Stück
-     * @return void
+    /** Methode zum Setzen der verkauften/gekauften St&uuml;ckzahl.
+     * @param fulfilled long Anzal der verkauften/gekauften St&uuml;ck
      */
     public void setFulfilled(long fulfilled) {
         this.fulfilled = fulfilled;
@@ -136,7 +143,7 @@ public class Order {
 
     /** Methode zum Auslesen der Orders aus einer Datei.
      * @param file File Datei aus der die Orders gelesen werden.
-     * @return m Eine Map die die Order mit der zugehörigen ID verknüpft
+     * @return m Eine Map die die Order mit der zugeh&ouml;rigen ID verkn&uuml;pft
      * @throws IOException
      */
     public static Map<Integer, Order> loadOrders(File file) throws IOException {

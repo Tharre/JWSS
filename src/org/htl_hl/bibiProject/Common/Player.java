@@ -1,21 +1,29 @@
 package org.htl_hl.bibiProject.Common;
 
 import java.util.List;
-/** Objekt vom Typ Player.
- * In dieser Klasse befinden sich alle notwendigen Methoden für den einzelnen Spieler und dessen spezifische Eigenschaften.
+/**
+ * <p>Title: Player</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Player.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
  */
 public class Player {
-    /** id - private Eigenschaft von Player vom Typ int.
+    /** id - private Eigenschaft von Player vom Typ int.<br>
      * Jeder Spieler hat eine eindeutige ID */
     private final int id;
-    /** name - private Eigenschaft von Player vom Typ String.
+    /** name - private Eigenschaft von Player vom Typ String.<br>
      * Jeder Spieler hat einen Namen */
     private final String name;
-    /** stocks - private Eigenschaft von Player vom Typ List<Stock>.
+    /** stocks - private Eigenschaft von Player vom Typ List<Stock>.<br>
      * Jeder Spieler hat die gleiche Anzahl an Waren, in dieser Liste wird jede Ware die der Spieler besitzt gespeichert. */
     private final List<Stock> stocks;
-    /** money - private Eigenschaft von Player vom Typ double.
-     * Jeder Spieler hat einen gewissen Geldbetrag, welcher zu Beginn des Spiels bei jedem Spieler XXX Euro beträgt. */
+    /** money - private Eigenschaft von Player vom Typ double.<br>
+     * Jeder Spieler hat einen gewissen Geldbetrag, welcher zu Beginn des Spiels bei jedem Spieler XXX Euro betr&auml;gt. */
     private double money;
 
     public Player() {
@@ -66,15 +74,13 @@ public class Player {
     }
     /** Methode zum Bearbeiten der Waren im Besitz des Spielers.
      * @param index int Index der zu bearbeitenden Ware in der Liste
-     * @param quantity int Neue Stückzahl der zu bearbeitenden Ware
-     * @return void
+     * @param quantity int Neue St&uuml;ckzahl der zu bearbeitenden Ware
      */
     public void updateStock(int index, int quantity) {
         stocks.get(index).setQuantity(quantity);
     }
     /** Methode zum Bearbeiten des Geldbetrages des Spielers.
      * @param money double Aktueller Geldbetrag
-     * @return void
      */
     public void setMoney(double money) {
         this.money = money;

@@ -6,21 +6,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-/** Objekt vom Typ Item.
- * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Item.
+/**
+ * <p>Title: Item</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Item.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
  */
+
 public class Item {
-	/** id - Private Eigenschaft der Klasse Item vom Typ int.
+	/** id - Private Eigenschaft der Klasse Item vom Typ int.<br>
 	 * Jedes Item hat eine eindeutige ID.
 	 */
 	private final int id;
-	/** name - Private Eigenschaft der Klasse Item vom Typ String.
+	/** name - Private Eigenschaft der Klasse Item vom Typ String.<br>
 	 * Jedes Item hat einen eindeutigen Namen.
 	 */
 	private final String name;
-	/** maxAmount - Private Eigenschaft der Klasse vom Typ int.
-	 * Jedes Item hat eine maximal verfügbare Stückzahl.
+	/** maxAmount - Private Eigenschaft der Klasse vom Typ int.<br>
+	 * Jedes Item hat eine maximal verf&uuml;gbare St&uuml;ckzahl.
 	 */
 	private final int maxAmount;
 
@@ -48,14 +56,14 @@ public class Item {
 		return name;
 	}
 
-	/** Methode zum Abrufen der maximal verfügbaren Stückzahl der Ware.
-	 * @return maxAmount Maximal verfügbare Stückzahl der Ware
+	/** Methode zum Abrufen der maximal verf&uuml;gbaren St&uuml;ckzahl der Ware.
+	 * @return maxAmount Maximal verf&uuml;gbare St&uuml;ckzahl der Ware
      */
 	public int getMaxAmount() {
 		return maxAmount;
 	}
 
-	/** Methode zum Abrufen aller privaten Eigenschaften (id,name,maxAmount), welche als String zurückgegeben werden.
+	/** Methode zum Abrufen aller privaten Eigenschaften (id,name,maxAmount), welche als String zur&uuml;ckgegeben werden.
 	 * @return String
      */
 	public String toString() {
@@ -64,7 +72,7 @@ public class Item {
 
 	/** Methode zum Auslesen und Laden der Waren aus einer Datei.
 	 * @param file File Datei aus der die Waren geladen werden
-	 * @return m Eine Map die die Ware mit der zugehörigen ID verbindet
+	 * @return m Eine Map die die Ware mit der zugeh&ouml;rigen ID verbindet
 	 * @throws IOException
      */
 	public static Map<Integer, Item> loadItems(File file) throws IOException {

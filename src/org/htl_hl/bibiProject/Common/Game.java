@@ -7,33 +7,41 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/** Objekt vom Typ Game.
- * In dieser Klasse befinden sich alle notwendigen Methoden und Klassen von Game.
+/**
+ * <p>Title: Game</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Game.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
  */
 public class Game {
-    /** ROUNDTIME - Private, Finale Eigenschaft der Klasse Game vom Typ long.
+    /** ROUNDTIME - Private, Finale Eigenschaft der Klasse Game vom Typ long.<br>
      * Jede Round hat eine Rundenzeit.
      */
     private static final long ROUNDTIME = 5000;
-    /** id - Private Eigenschaft der Klasse Game vom Typ int.
-     * Da mehrere Games gleichzeitig laufen können hat jedes Game eine eindeutige ID.
+    /** id - Private Eigenschaft der Klasse Game vom Typ int.<br>
+     * Da mehrere Games gleichzeitig laufen k&ouml;nnen hat jedes Game eine eindeutige ID.
      */
     private int id;
-    /** rounds - Private, Finale Eigenschaft der Klasse Game vom Typ List<Round>.
+    /** rounds - Private, Finale Eigenschaft der Klasse Game vom Typ List<Round>.<br>
      * Jedes Game besteht aus einer bestimmten Anzahl von Rounds.
      * In dieser Liste sind die Rounds eingetragen.
      */
     private final List<Round> rounds;
-    /** players - Private, Finale Eigenschaft der Klasse Game vom Typ List<Player>.
+    /** players - Private, Finale Eigenschaft der Klasse Game vom Typ List<Player>.<br>
      * An jedem Game nehmen n-Spieler teil.
      * In dieser Liste sind die Player eingetragen.
      */
     private final List<Player> players;
-    /** name - Private, Finale Eigenschaft der Klasse Game vom Typ String.
+    /** name - Private, Finale Eigenschaft der Klasse Game vom Typ String.<br>
      * Jedes Game hat einen Namen.
      */
     private final String name;
-    /** activeRound - Private Eigenschaft der Klasse Game vom Typ Round.
+    /** activeRound - Private Eigenschaft der Klasse Game vom Typ Round.<br>
      * Jedes Game hat eine aktive Runde.
      */
     private Round activeRound;
@@ -86,7 +94,6 @@ public class Game {
 
     /** Methode zum Setzen der aktiven Runde.
      * @param activeRound Round Runde die aktiv gesetzt werden soll
-     * @return void
      */
     public void setActiveRound(Round activeRound) {
         this.activeRound = activeRound;
@@ -94,7 +101,6 @@ public class Game {
 
     /** Methode zum Setzen der aktiven Runde mit Hilfe der Runden-ID.
      * @param activeRoundId int ID der Runde die aktiv gesetzt werden soll
-     * @return void
      */
     private void setActiveRoundById(int activeRoundId) {
         if (activeRoundId < 0 || activeRoundId > rounds.size())
@@ -103,10 +109,9 @@ public class Game {
             this.activeRound = rounds.get(activeRoundId);
     }
 
-    /** Methoden zum Abwickeln der Verkäufe.
-     * Orders werden in Items getrennt; ExchangeRates werden berechnet; Verkäufe/Käufe werden augeteilt.
+    /** Methoden zum Abwickeln der Verk&auml;ufe.
+     * Orders werden in Items getrennt; ExchangeRates werden berechnet; Verk&auml;ufe/K&auml;ufe werden augeteilt.
      * @param orders List<Order> Liste an Orders
-     * @return void
      */
     private void exchange(List<Order> orders) {
         List<Item> items = new LinkedList<>();
@@ -201,9 +206,8 @@ public class Game {
         }
     }
 
-    /** Methode zum wechseln in die nächste Runde.
+    /** Methode zum wechseln in die n&auml;chste Runde.
      * @param endsAt Date Datum mit Uhrzeit an welcher die Runde endet
-     * @return void
      */
     private void nextRound(Date endsAt) {
         List<Order> orders = new LinkedList<>();
@@ -225,7 +229,6 @@ public class Game {
     }
 
     /** Methode zum Abschließen einer Runde.
-     * @return void
      */
     public void updateRounds() {
         if (rounds.size() == 0)
@@ -261,7 +264,6 @@ public class Game {
     }
 
     /** Methode zum Starten einer Round.
-     * @return void
      */
     public void start() {
         nextRound(new Date(System.currentTimeMillis() + ROUNDTIME));

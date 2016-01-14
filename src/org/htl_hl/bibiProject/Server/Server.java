@@ -13,10 +13,29 @@ import java.net.URLDecoder;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.*;
 
+/**
+ * <p>Title: Server</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Server.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
+ */
 public class Server {
-
+	/** items - Private Eigenschaft der Klasse Server vom Typ Map<Interger, Item>.<br>
+	 * Alle Items mit dazugeh&ouml;riger ID verkn&uuml;pft.
+	 */
 	private static Map<Integer, Item> items;
+	/** mapper - Private Eigenschaft der Klasse Server vom Typ ObjectMapper.<br>
+	 * ObjectMapper ist ein externes Package - n&auml;here Informationen dar&uuml;ber finden Sie <a href="https://fasterxml.github.io/jackson-databind/javadoc/2.5/com/fasterxml/jackson/databind/ObjectMapper.html">hier</a>.
+	 */
 	private static ObjectMapper mapper = new ObjectMapper();
+	/** games - Private Eigenschaft der Klasse Server vom Typ List<Game>.<br>
+	 * Auf einem Server k&ouml;nnen n-Games laufen - in dieser Liste sind alle laufenden Games eingetragen.
+	 */
 	private static List<Game> games = new LinkedList<>();
 
 	public static void main(String[] args) throws Exception {
@@ -28,8 +47,17 @@ public class Server {
 		server.start();
 	}
 
+	/**
+	 *
+	 */
 	static class APIHandler implements HttpHandler {
-
+		/**
+		 *
+		 * @param t HttpExchange
+		 * @param httpCode
+		 * @param s
+         * @throws IOException
+         */
 		static void sendString(HttpExchange t, int httpCode, String s) throws IOException {
 			t.sendResponseHeaders(httpCode, s.length());
 			OutputStream os = t.getResponseBody();
@@ -37,6 +65,12 @@ public class Server {
 			os.close();
 		}
 
+		/**
+		 *
+		 * @param t
+		 * @param o
+         * @throws IOException
+         */
 		static void sendJSON(HttpExchange t, Object o) throws IOException {
 			t.sendResponseHeaders(200, 0);
 			OutputStream os = t.getResponseBody();
@@ -44,6 +78,12 @@ public class Server {
 			os.close();
 		}
 
+		/**
+		 *
+		 * @param query
+		 * @return
+		 * @throws UnsupportedEncodingException
+         */
 		public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
 			Map<String, String> queryPairs = new LinkedHashMap<>();
 			String[] pairs = query.split("&");
@@ -55,6 +95,12 @@ public class Server {
 			return queryPairs;
 		}
 
+		/**
+		 *
+		 * @param t HttpExchange
+		 * @return
+         * @throws IOException
+         */
 		public Map<String, String> getPostParameters(HttpExchange t) throws IOException {
 			if (!t.getRequestHeaders().getFirst("Content-Type").equals("application/x-www-form-urlencoded")) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>Bad Content-Type"); // TODO(Tharre): HTTP code?
@@ -67,6 +113,12 @@ public class Server {
 			return splitQuery(query);
 		}
 
+		/**
+		 *
+		 * @param comps List<SimpleEntry<String, String>>
+		 * @param t HttpExchange
+         * @throws IOException
+         */
 		public void handleItems(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 1) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
@@ -91,6 +143,12 @@ public class Server {
 			}
 		}
 
+		/**
+		 *
+		 * @param comps List<SimpleEntry<String, String>>
+		 * @param t HttpExchange
+         * @throws IOException
+         */
 		public void handleOrders(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 3 || !comps.get(0).getKey().equals("games") || !comps.get(1).getKey().equals("rounds")){
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
@@ -162,6 +220,12 @@ public class Server {
 			}
 		}
 
+		/**
+		 *
+		 * @param comps List<SimpleEntry<String, String>>
+		 * @param t HttpExchange
+         * @throws IOException
+         */
 		public void handlePlayers(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 2 || !comps.get(0).getKey().equals("games")) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
@@ -222,6 +286,12 @@ public class Server {
 			}
 		}
 
+		/**
+		 *
+		 * @param comps List<SimpleEntry<String, String>>
+		 * @param t HttpExchange
+         * @throws IOException
+         */
 		public void handleGames(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 1) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
@@ -269,6 +339,12 @@ public class Server {
 			}
 		}
 
+		/**
+		 *
+		 * @param comps List<SimpleEntry<String, String>>
+		 * @param t HttpExchange
+         * @throws IOException
+         */
 		private void handleRounds(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 2 || !comps.get(0).getKey().equals("games")) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
@@ -305,6 +381,11 @@ public class Server {
 			}
 		}
 
+		/**
+		 *
+		 * @param s String
+         * @return
+         */
 		public static List<SimpleEntry<String, String>> parseURL(String s) {
 			String[] comps = s.split("/");
 			List<SimpleEntry<String, String>> list = new LinkedList<>();
@@ -319,6 +400,11 @@ public class Server {
 			return list;
 		}
 
+		/**
+		 *
+		 * @param t HttpExchange
+		 * @throws IOException
+         */
 		@Override
 		public void handle(HttpExchange t) throws IOException {
 			// /api/items/23

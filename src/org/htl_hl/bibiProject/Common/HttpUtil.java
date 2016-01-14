@@ -7,12 +7,20 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/** Objekt vom Typ HttpUtil.
- * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften von HttpUtil.
+/**
+ * <p>Title: HttpUtil</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse HttpUtil.</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
  */
 public class HttpUtil {
-    /** USER-AGENT - Private, Finale Eigenschaft der Klasse HttpUtil vom Typ String.
-     * Wird HTTP benötigt (HTTP-USER_AGENT).
+    /** USER-AGENT - Private, Finale Eigenschaft der Klasse HttpUtil vom Typ String.<br>
+     * Wird HTTP ben&ouml;tigt (HTTP-USER_AGENT).
      */
     private static final String USER_AGENT = "JWSS Client/1.0";
 
@@ -21,7 +29,7 @@ public class HttpUtil {
      * @param res String Angeforderte Daten
      * @param parameters String POST-Parameter
      * @param typeClass Class<T> Hilfsvariable
-     * @return <T> Gibt angefordertes Objekt zurück
+     * @return <T> Gibt angefordertes Objekt zur&uuml;ck
      * @throws IOException
      */
     public static <T> T sendPost(String ip, String res, String parameters, Class<T> typeClass) throws IOException {
@@ -52,7 +60,7 @@ public class HttpUtil {
      * @param ip String IP von Server
      * @param res String Angeforderte Daten
      * @param typeClass Class<T> Hilfsvariable
-     * @return <T> Gibt angefordertes Objekt zurück
+     * @return <T> Gibt angefordertes Objekt zur&uuml;ck
      * @throws IOException
      */
     public static <T> T sendGet(String ip, String res, Class<T> typeClass) throws IOException {
