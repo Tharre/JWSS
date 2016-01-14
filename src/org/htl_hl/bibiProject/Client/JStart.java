@@ -83,7 +83,7 @@ public class JStart extends JFrame implements ActionListener{
             JOptionPane.showMessageDialog(null, "Unbekannter Hostname", "Fehler", JOptionPane.ERROR_MESSAGE);
         } catch (MalformedURLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Keine g&uuml;ltige IP oder Hostname", "Fehler", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Keine gültige IP oder Hostname", "Fehler", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Verbindung zum Server fehlgeschlagen", "Fehler",
