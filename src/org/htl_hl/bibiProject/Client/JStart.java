@@ -2,16 +2,16 @@ package org.htl_hl.bibiProject.Client;
 
 import org.htl_hl.bibiProject.Common.Game;
 import org.htl_hl.bibiProject.Common.HttpUtil;
-import org.htl_hl.bibiProject.Common.Order;
 import org.htl_hl.bibiProject.Common.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+
 /**
  * <p>Title: Start</p>
  * <p>Description:</p>
@@ -25,73 +25,78 @@ import java.io.IOException;
  */
 public class JStart extends JFrame implements ActionListener{
 
-    private JLabel name= new JLabel("Name:");
-    private JLabel ipaddr= new JLabel("IP Adresse Server:");
-    private JTextField tfIpaddr= new JTextField("");
-    private JTextField tfName= new JTextField("");
+    private JLabel name = new JLabel("Name:");
+    private JLabel server = new JLabel("Server:");
+    private JTextField tfServer = new JTextField();
+    private JTextField tfName = new JTextField();
     private JButton btStart = new JButton("Start");
+
     /**
      * Erzeugen eines Startfensters auf Basis eines JFrames
      */
-    public JStart(){
+    public JStart() {
         super("Start JWSS");
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(300,200);
         tfName.setPreferredSize(new Dimension(70,25));
-        setLocationRelativeTo (null);
+        setLocationRelativeTo(null);
         Container c = getContentPane();
         c.setLayout(new GridLayout(3,2));
-
-        addWindowListener (new WindowAdapter(){
-            public void windowClosing(WindowEvent e1){
-                btStart.setEnabled(false);
-                dispose();
-            }//windowClosing
-        });//WindowListener
-
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         btStart.addActionListener(this);
 
         c.add(name);
         c.add(tfName);
-        c.add(ipaddr);
-        c.add(tfIpaddr);
+        c.add(server);
+        c.add(tfServer);
         c.add(btStart);
-    }//JStart
+    }
 
     /**
      *Erzeugt einen neuen Client
      * @param e
      */
     public void actionPerformed(ActionEvent e){
-        try {
-            Game[] games = HttpUtil.sendGet(tfIpaddr.getText(), "/games", Game[].class);
-            Game g;
-            if (games.length == 0)
-                g = HttpUtil.sendPost(tfIpaddr.getText(), "/games", "name=JGame", Game.class);
-            else
-                g = HttpUtil.sendGet(tfIpaddr.getText(), "/games/0/", Game.class);
+        if (tfName.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Bitte Spielernamen eingeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            Player p = HttpUtil.sendPost(tfIpaddr.getText(), "/games/" + g.getId() + "/players/",
+        String serverUrl = "http://" + tfServer.getText() + ":8000";
+        try {
+            Game[] games = HttpUtil.sendGet(serverUrl, "/games", Game[].class);
+            Game g;
+            // TODO(Tharre): race condition
+            if (games.length == 0)
+                g = HttpUtil.sendPost(serverUrl, "/games", "name=" + tfName.getText(), Game.class);
+            else
+                g = HttpUtil.sendGet(serverUrl, "/games/0/", Game.class);
+
+            Player p = HttpUtil.sendPost(serverUrl, "/games/" + g.getId() + "/players/",
                     "name=" + tfName.getText(), Player.class);
-            Client f = new Client(p, tfIpaddr.getText());
+            Client f = new Client(p, g, serverUrl);
             f.setVisible(true);
             dispose();
-        } catch (IOException e1) {
-            // TODO(Tharre): exception handling
-            e1.printStackTrace();
+        } catch (UnknownHostException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Unbekannter Hostname", "Fehler", JOptionPane.ERROR_MESSAGE);
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Keine gültige IP oder Hostname", "Fehler", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Verbindung zum Server fehlgeschlagen", "Fehler",
+                    JOptionPane.ERROR_MESSAGE);
         }
-    }//actionPerformed
+    }
 
     /**
      * Erzeugen eines JFrame-Fensters
      * @param args nicht verwendet
      */
-
     public static void main(String[] args){
         JStart s = new JStart();
         s.setVisible(true);
-    }//main
-}//class JStart
+    }
+}

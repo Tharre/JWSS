@@ -29,11 +29,14 @@ public class HttpUtil {
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
 
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
 
         con.setDoOutput(true);
+        con.connect();
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(parameters);
         wr.flush();
@@ -57,6 +60,8 @@ public class HttpUtil {
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
 
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);

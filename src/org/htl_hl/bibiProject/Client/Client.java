@@ -57,10 +57,11 @@ public class Client extends JFrame implements ActionListener, Runnable {
      * Erzeugen eines Clients auf Basis eines JFrames
      * @param player
      */
-    public Client(Player player, String server) {
+    public Client(Player player, Game game, String server) {
         super("Client JWSS");
 
         this.player = player;
+        this.game = game;
         this.server = server;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,12 +72,11 @@ public class Client extends JFrame implements ActionListener, Runnable {
 
         Round round = null;
         try {
-            this.game = HttpUtil.sendGet(server, "games/0/", Game.class);
             Player[] players = HttpUtil.sendGet(server, "games/" + game.getId() + "/players", Player[].class);
             lblSpieler = new JLabel("Spieler in Sitzung: " + players.length);
 
             round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
-           lblRunde = new JLabel("Runde: " + round.getId());
+            lblRunde = new JLabel("Runde: " + round.getId());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
