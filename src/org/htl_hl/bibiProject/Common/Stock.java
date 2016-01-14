@@ -5,11 +5,11 @@ package org.htl_hl.bibiProject.Common;
  */
 
 public class Stock {
-    /** item - Private Eigenschaft von Stock.
+    /** item - Private Eigenschaft von Stock vom Typ Item.
      * Jeder Spieler hat für jede Ware ein "Lager" - item stellt diese Ware dar.
      */
     private final Item item;
-    /** quantity - Private Eigenschaft von Stock.
+    /** quantity - Private Eigenschaft von Stock vom Typ long.
      * Jeder Spieler hat eine bestimmte Stückzahl von der Ware - quantity stellt diese Stückzahl dar.
      */
     private long quantity;

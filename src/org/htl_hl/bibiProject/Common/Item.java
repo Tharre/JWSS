@@ -11,15 +11,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Item.
  */
 public class Item {
-	/** id - Private Eigenschaft der Klasse Item.
+	/** id - Private Eigenschaft der Klasse Item vom Typ int.
 	 * Jedes Item hat eine eindeutige ID.
 	 */
 	private final int id;
-	/** name - Private Eigenschaft der Klasse Item.
+	/** name - Private Eigenschaft der Klasse Item vom Typ String.
 	 * Jedes Item hat einen eindeutigen Namen.
 	 */
 	private final String name;
-	/** maxAmount - Private Eigenschaft der Klasse.
+	/** maxAmount - Private Eigenschaft der Klasse vom Typ int.
 	 * Jedes Item hat eine maximal verfügbare Stückzahl.
 	 */
 	private final int maxAmount;
