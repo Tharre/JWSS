@@ -27,36 +27,72 @@ import java.util.LinkedList;
 public class Client extends JFrame implements ActionListener, Runnable {
 
     private JButton btBereit = new JButton("Bereit");
-
+    /** lblSpieler - Private Eigenschaft der Klasse Client vom Typ JLabel.<br>
+     */
     private JLabel lblSpieler;
+    /** lblVermoegen - Private Eigenschaft der Klasse Client vom Typ JLabel.<br>
+     */
     private JLabel lblVermoegen;
+    /** lblRang - Private Eigenschaft der Klasse Client vom Typ JLabel.<br>
+     */
     private JLabel lblRang;
+    /** lblRunde - Private Eigenschaft der Klasse Client vom Typ JLabel.<br>
+     */
     private JLabel lblRunde;
-
+    /** lblZeit - Private Eigenschaft der Klasse Client vom Typ JUhr.<br>
+     * Zeigt die Rundenzeit an.
+     */
     private JUhr lblZeit = new JUhr();
-
+    /** runner - Private Eigenschaft der Klasse Client vom Typ Runner.<br>
+     * Thread f&uuml;r Sitzung.
+     */
     private Thread runner = new Thread(this);
-
+    /** player - Private Eigenschaft der Klasse Client vom Typ Player.<br>
+     * Referenz auf Player.
+     */
     private Player player;
+    /** game - Private Eigenschaft der Klasse Client vom Typ Game.<br>
+     * Referenz auf Game.
+      */
     private Game game;
+    /** server - Private Eigenschaft der Klasse Client vom Typ String.<br>
+     * Adresse des Servers.
+     */
     private String server;
-
+    /** verkauf - Private Eigenschaft der Klasse Client vom Typ List<JVerkauf>.<br>
+     * Liste der Verk&auml;ufe des Clients.
+     */
     private List<JVerkauf> verkauf = new LinkedList<>();
+    /** kauf - Private Eigenschaft der Klasse Client vom Typ List<JKaufen>.<br>
+     * Liste der K&auml;ufe des Clients.
+     */
     private List<JKaufen> kauf = new LinkedList<>();
-
+    /** pVerkauf - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Panel f&uuml;r die Verk&auml;ufe.
+     */
     private JPanel pVerkauf = new JPanel(new GridBagLayout());
+    /** pKauf - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Panel f&uuml;r die Kk&auml;ufe.
+     */
     private JPanel pKauf = new JPanel(new GridBagLayout());
+    /** pSOTUTH - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Hilfspanel im S&uuml;den.
+     */
     private JPanel pSOUTH = new JPanel(new GridLayout(1, 2));
+    /** pNORTH - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Hilfspanel Norden.
+     */
     private JPanel pNORTH = new JPanel(new GridLayout(1, 4));
-
+    /** scVerkauf - Private Eigenschaft der Klasse Client vom Typ JScrollPane.<br>
+     * Scrollpane f&uuml;r die Verk&auml;ufe.
+     */
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
+    /** scKauf - Private Eigenschaft der Klasse Client vom Typ JScrollPane.<br>
+     * Scrollpane f&uuml;r die K&auml;ufe.
+     */
     private JScrollPane scKauf = new JScrollPane(pKauf, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-    /**
-     * Erzeugen eines Clients auf Basis eines JFrames
-     * @param player
-     */
+    
     public Client(Player player, Game game, String server) {
         super("Client JWSS");
 
