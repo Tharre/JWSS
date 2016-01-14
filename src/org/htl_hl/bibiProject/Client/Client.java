@@ -198,9 +198,9 @@ public class Client extends JFrame implements ActionListener, Runnable {
             while(ich == runner){
                 try{
                     System.out.println("Sleeping for " + (round.getEndsAt().getTime()-System.currentTimeMillis()));
-                    Thread.sleep(round.getEndsAt().getTime()-System.currentTimeMillis());
-                    System.out.println("Update ...");
+                    Thread.sleep(/*round.getEndsAt().getTime()-System.currentTimeMillis()*/5000);
                     update();
+                    System.out.println("Update ...");
                 }catch(InterruptedException e){}
             }//while
         } catch (IOException e) {
