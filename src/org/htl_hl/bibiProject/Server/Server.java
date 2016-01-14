@@ -98,23 +98,21 @@ public class Server {
 			}
 
 			int gameId = Integer.parseInt(comps.get(0).getValue());
-			Game game;
-			try {
-				game = games.get(gameId);
-			} catch (IndexOutOfBoundsException e) {
+			if (gameId < 0 || gameId > games.size()) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
 				return;
 			}
 
+			Game game = games.get(gameId);
+
 			int roundId = Integer.parseInt(comps.get(1).getValue());
-			Round round;
-			try {
-				game.updateRounds();
-				round = game.getRounds().get(roundId);
-			} catch (IndexOutOfBoundsException e) {
+			if (roundId < 0 || roundId > game.getRounds().size()) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Round not found");
 				return;
 			}
+
+			game.updateRounds();
+			Round round = game.getRounds().get(roundId);
 
 			List<Player> players = game.getPlayers();
 			List<Order> orders = round.getOrders();
@@ -127,11 +125,12 @@ public class Server {
 				}
 
 				int orderId = Integer.parseInt(comps.get(2).getValue());
-				try {
-					sendJSON(t, orders.get(orderId));
-				} catch (IndexOutOfBoundsException e) {
+				if (orderId < 0 || orderId > orders.size()) {
 					sendString(t, 404, "<h1>404 Not Found</h1>");
+					return;
 				}
+
+				sendJSON(t, orders.get(orderId));
 				return;
             case "POST":
 				if (comps.get(2).getValue() != null) {
@@ -170,15 +169,14 @@ public class Server {
 			}
 
 			int gameId = Integer.parseInt(comps.get(0).getValue());
-			Game game;
-			try {
-				game = games.get(gameId);
-				game.updateRounds();
-			} catch (IndexOutOfBoundsException e) {
+			if (gameId < 0 || gameId > games.size()) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
 				return;
 			}
 
+			Game game = games.get(gameId);
+
+			game.updateRounds();
 			List<Player> players = game.getPlayers();
 
 			switch (t.getRequestMethod().toUpperCase()) {
@@ -189,11 +187,12 @@ public class Server {
 				}
 
 				int playerId = Integer.parseInt(comps.get(1).getValue());
-				try {
-					sendJSON(t, players.get(playerId));
-				} catch (IndexOutOfBoundsException e) {
+				if (playerId < 0 || playerId > players.size()) {
 					sendString(t, 404, "<h1>404 Not Found</h1>");
+					return;
 				}
+
+				sendJSON(t, players.get(playerId));
 				return;
             case "POST":
 				if (comps.get(1).getValue() != null) {
@@ -277,14 +276,12 @@ public class Server {
 			}
 
 			int gameId = Integer.parseInt(comps.get(0).getValue());
-			Game game;
-			try {
-				game = games.get(gameId);
-			} catch (IndexOutOfBoundsException e) {
+			if (gameId < 0 || gameId > games.size()) {
 				sendString(t, 400, "<h1>404 Not Found</h1>Game not found");
 				return;
 			}
 
+			Game game = games.get(gameId);
 			game.updateRounds();
 			List<Round> rounds = game.getRounds();
 
@@ -296,11 +293,12 @@ public class Server {
 					}
 
 					int roundId = Integer.parseInt(comps.get(1).getValue());
-					try {
-						sendJSON(t, rounds.get(roundId));
-	 				} catch (IndexOutOfBoundsException e) {
+					if (roundId < 0 || roundId > rounds.size()) {
 						sendString(t, 404, "<h1>404 Not Found</h1>");
+						return;
 					}
+
+					sendJSON(t, rounds.get(roundId));
 					return;
 				default:
 					sendString(t, 405, "<h1>405 Method Not Allowed</h1>");
