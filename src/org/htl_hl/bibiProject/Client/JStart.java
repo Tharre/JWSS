@@ -67,7 +67,13 @@ public class JStart extends JFrame implements ActionListener{
      */
     public void actionPerformed(ActionEvent e){
         try {
-            Game g = HttpUtil.sendPost(tfIpaddr.getText(), "/games", "name=JGame", Game.class);
+            Game[] games = HttpUtil.sendGet(tfIpaddr.getText(), "/games", Game[].class);
+            Game g;
+            if (games.length == 0)
+                g = HttpUtil.sendPost(tfIpaddr.getText(), "/games", "name=JGame", Game.class);
+            else
+                g = HttpUtil.sendGet(tfIpaddr.getText(), "/games/0/", Game.class);
+
             Player p = HttpUtil.sendPost(tfIpaddr.getText(), "/games/" + g.getId() + "/players/",
                     "name=" + tfName.getText(), Player.class);
             Client f = new Client(p, tfIpaddr.getText());
