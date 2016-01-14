@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 /**
  * <p>Title: Client</p>
- * <p>Description:</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Client.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
@@ -25,7 +25,9 @@ import java.util.LinkedList;
  */
 
 public class Client extends JFrame implements ActionListener, Runnable {
-
+    /** btBereit - Private Eigenschaft der Klasse Client vom Typ JButton.<br>
+     * Button mit dem Text "Bereit".
+     */
     private JButton btBereit = new JButton("Bereit");
     /** lblSpieler - Private Eigenschaft der Klasse Client vom Typ JLabel.<br>
      */
@@ -92,7 +94,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
      */
     private JScrollPane scKauf = new JScrollPane(pKauf, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    
+
     public Client(Player player, Game game, String server) {
         super("Client JWSS");
 
@@ -178,9 +180,8 @@ public class Client extends JFrame implements ActionListener, Runnable {
         c.add(pSOUTH, BorderLayout.SOUTH);
     }//Client
 
-    /**
-     * Bearbeitung der Events der Buttons
-     * @param e Das Actionevent der Buttons
+    /** Methode zum Abarbeiten der Klick-Events von btBereit, btKauf und btVerkauf.
+     * @param e ActionEvent - Klick-Event der Buttons
      */
     public void actionPerformed(ActionEvent e) {
         Round round = null;
@@ -216,6 +217,9 @@ public class Client extends JFrame implements ActionListener, Runnable {
 
     }//actionPerformed
 
+    /** Methode zum regelm&äuml;&amp;igen Updaten der GUI.<br>
+     * Upgedaten wird: Anzahl der Spieler ; die Rundenzahl und das Verm&ouml;gen.
+     */
     public void update(){
         Round round = null;
         try {
@@ -232,6 +236,9 @@ public class Client extends JFrame implements ActionListener, Runnable {
         lblVermoegen.setText("Vermögen: " + player.getMoney());
         lblRang.setText("Rang: ");
     }//update
+
+    /** Methode zum regelm&äuml;&amp;igen Aufrufen der Methode update.
+     */
     public void run(){
         Round round = null;
         try {
@@ -250,6 +257,8 @@ public class Client extends JFrame implements ActionListener, Runnable {
         }
     }//run
 
+    /** Methode zum Stoppen des Spiels f&uuml;r den Client.
+     */
     public void stop(){
         if (runner != null)
             runner=null;
