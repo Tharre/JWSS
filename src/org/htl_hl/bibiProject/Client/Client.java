@@ -81,7 +81,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
             e.printStackTrace();
             System.exit(1);
         }
-        lblVermoegen = new JLabel("Vermögen: " + player.getMoney());
+        lblVermoegen = new JLabel("Verm&ouml;gen: " + player.getMoney());
         lblRang = new JLabel("Rang: ");
 
         addWindowListener(new WindowAdapter() {
@@ -193,7 +193,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
             e.printStackTrace();
             System.exit(1);
         }
-        lblVermoegen.setText("Vermögen: " + player.getMoney());
+        lblVermoegen.setText("Verm&ouml;gen: " + player.getMoney());
         lblRang.setText("Rang: ");
     }//update
     public void run(){
