@@ -103,10 +103,7 @@ public class JStart extends JFrame implements ActionListener{
         }
     }
 
-    /**
-     * Erzeugen eines JFrame-Fensters
-     * @param args nicht verwendet
-     */
+
     public static void main(String[] args){
         JStart s = new JStart();
         s.setVisible(true);
