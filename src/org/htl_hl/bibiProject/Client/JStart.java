@@ -13,8 +13,8 @@ import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 
 /**
- * <p>Title: Start</p>
- * <p>Description:</p>
+ * <p>Title: JStart</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse JStart.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
@@ -24,16 +24,28 @@ import java.net.UnknownHostException;
  * @version 0.1
  */
 public class JStart extends JFrame implements ActionListener{
-
+    /** name - Private Eigenschaft der Klasse JStart vom Typ JLabel.<br>
+     * Label für den Text "Name:".
+     */
     private JLabel name = new JLabel("Name:");
+    /** server - Private Eigenschaft der Klasse JStart vom Typ JLabel.<br>
+     * Label für den Text "Server:".
+     */
     private JLabel server = new JLabel("Server:");
+    /** tfServer - Private Eigenschaft der Klasse JStart vom Typ JTextField.<br>
+     * Eingabefeld für die Adresse des Servers.
+     */
     private JTextField tfServer = new JTextField();
+    /** tfName- Private Eigenschaft der Klasse JStart vom Typ JTextField.<br>
+     * Eingabefeld für den Spielernamen.
+     */
     private JTextField tfName = new JTextField();
+    /** btStart - Private Eigenschaft der Klasse JStart vom Typ JButton.<br>
+     * Button zum Starten des Clients. Gleichzeitig wird eine Verbindung mit dem ausgewählten Server erzeugt.
+     */
     private JButton btStart = new JButton("Start");
 
-    /**
-     * Erzeugen eines Startfensters auf Basis eines JFrames
-     */
+
     public JStart() {
         super("Start JWSS");
 
@@ -53,9 +65,9 @@ public class JStart extends JFrame implements ActionListener{
         c.add(btStart);
     }
 
-    /**
-     *Erzeugt einen neuen Client
-     * @param e
+    /** Methode zum Abarbeiten der Klick-Events von btStart.
+     * Ein neuer Client wird erzeugt.
+     * @param e ActionEvent - Klick-Event von btStart
      */
     public void actionPerformed(ActionEvent e){
         if (tfName.getText().equals("")) {
