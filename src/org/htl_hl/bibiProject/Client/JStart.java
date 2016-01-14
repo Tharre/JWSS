@@ -1,5 +1,6 @@
 package org.htl_hl.bibiProject.Client;
 
+import org.htl_hl.bibiProject.Common.Game;
 import org.htl_hl.bibiProject.Common.HttpUtil;
 import org.htl_hl.bibiProject.Common.Order;
 import org.htl_hl.bibiProject.Common.Player;
@@ -66,8 +67,10 @@ public class JStart extends JFrame implements ActionListener{
      */
     public void actionPerformed(ActionEvent e){
         try {
-            Player p = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=" + tfName.getText(), Player.class);
-            Client f = new Client(p);
+            Game g = HttpUtil.sendPost(tfIpaddr.getText(), "/games", "name=JGame", Game.class);
+            Player p = HttpUtil.sendPost(tfIpaddr.getText(), "/games/" + g.getId() + "/players/",
+                    "name=" + tfName.getText(), Player.class);
+            Client f = new Client(p, tfIpaddr.getText());
             f.setVisible(true);
             dispose();
         } catch (IOException e1) {

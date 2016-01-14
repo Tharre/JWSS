@@ -5,20 +5,14 @@ import java.util.List;
 
 public class ExchangeRate {
 
-    private final Item item;
     private double rate;
 
-    public ExchangeRate() {
-        this(new Item(), 0.0);
-    }
-
-    public ExchangeRate(Item item, double rate) {
-        this.item = item;
+    public ExchangeRate(double rate) {
         this.rate = rate;
     }
 
-    public Item getItem() {
-        return item;
+    public ExchangeRate() {
+        this(0.0);
     }
 
     public double getRate() {

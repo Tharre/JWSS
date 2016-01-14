@@ -32,8 +32,8 @@ public class HttpUtil {
         return mapper.readValue(con.getInputStream(), typeClass);
     }
 
-    public static <T> T sendGet(String ip, String res, String parameters, Class<T> typeClass) throws IOException {
-        String url = ip + "/api/" + res + "/" + parameters;
+    public static <T> T sendGet(String ip, String res, Class<T> typeClass) throws IOException {
+        String url = ip + "/api/" + res + "/";
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -45,17 +45,5 @@ public class HttpUtil {
             System.out.println("Error handling ... or something like that"); // TODO(Tharre): error handling
 
         return mapper.readValue(con.getInputStream(), typeClass);
-    }
-
-    public static void main(String []args) throws IOException {
-        Player p1 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JKartoffel", Player.class);
-        Player p2 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JHamster", Player.class);
-        Player p3 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JEmily", Player.class);
-        Player p4 = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=JGatto", Player.class);
-
-        System.out.println(p1);
-        System.out.println(p2);
-        System.out.println(p3);
-        System.out.println(p4);
     }
 }

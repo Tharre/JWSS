@@ -3,13 +3,13 @@ package org.htl_hl.bibiProject.Common;
 public class Stock {
 
     private final Item item;
-    private int quantity;
+    private long quantity;
 
     public Stock() {
         this(new Item(), 0);
     }
 
-    public Stock(Item item, int quantity) {
+    public Stock(Item item, long quantity) {
         this.item = item;
         this.quantity = quantity;
     }
@@ -18,11 +18,11 @@ public class Stock {
         return item;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 }

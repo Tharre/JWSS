@@ -1,7 +1,6 @@
 package org.htl_hl.bibiProject.Client;
 
-import org.htl_hl.bibiProject.Common.Player;
-import org.htl_hl.bibiProject.Common.Stock;
+import org.htl_hl.bibiProject.Common.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -36,6 +36,8 @@ public class Client extends JFrame implements ActionListener {
     private JUhr lblZeit = new JUhr();
 
     private Player player;
+    private Game game;
+    private String server;
 
     private List<JVerkauf> verkauf = new LinkedList<>();
     private List<JKaufen> kauf = new LinkedList<>();
@@ -53,11 +55,11 @@ public class Client extends JFrame implements ActionListener {
      * Erzeugen eines Clients auf Basis eines JFrames
      * @param player
      */
-    public Client(Player player) {
+    public Client(Player player, String server) {
         super("Client JWSS");
 
         this.player = player;
-        // TODO(Tharre): Spieleranzahl (fix), Rang (fix), Runde vom Server holen
+        this.server = server;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -65,10 +67,20 @@ public class Client extends JFrame implements ActionListener {
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
 
-        lblSpieler = new JLabel("Spieler in Sitzung: "); // TODO(Tharre): implement API endpoint
+        Round round = null;
+        try {
+            this.game = HttpUtil.sendGet(server, "games/0/", Game.class);
+            Player[] players = HttpUtil.sendGet(server, "games/" + game.getId() + "/players", Player[].class);
+            lblSpieler = new JLabel("Spieler in Sitzung: " + players.length);
+
+            round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
+            lblRunde = new JLabel("Runde: " + round.getId());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         lblVermoegen = new JLabel("Vermögen: " + player.getMoney());
-        lblRang = new JLabel("Rang: "); // TODO(Tharre): implement API endpoint
-        lblRunde = new JLabel("Runde: "); // TODO(Tharre): implement feature
+        lblRang = new JLabel("Rang: ");
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e1) {
@@ -87,7 +99,7 @@ public class Client extends JFrame implements ActionListener {
         gc1.fill = GridBagConstraints.BOTH;
         gc1.insets = new Insets(5, 5, 5, 5);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < player.getStocks().size(); i++) {
             if (i % 2 == 0) {
                 gc1.gridx = i;
                 gc1.gridy = 0;
@@ -107,7 +119,7 @@ public class Client extends JFrame implements ActionListener {
         gc2.fill = GridBagConstraints.BOTH;
         gc2.insets = new Insets(5, 5, 5, 5);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < round.getOrders().size(); i++) {
             gc2.gridx = 0;
             gc2.gridy = i;
             kauf.add(i, new JKaufen());
@@ -138,14 +150,22 @@ public class Client extends JFrame implements ActionListener {
             System.out.println();
         }//if
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) { // TODO(Tharre): anzahl orders
             if (e.getSource() == kauf.get(i).btKauf)
                 kauf.get(i).lblWare.setText("yes");
         }//for
 
-        for (int i = 0; i < 4; i++) {
-            if (e.getSource() == verkauf.get(i).btVerk)
-                verkauf.get(i).tfPreis.setText("yes");
+        for (int i = 0; i < player.getStocks().size(); i++) {
+            if (e.getSource() == verkauf.get(i).btVerk) {
+                String parameters = "itemId=2&playerId=0&isBuy=false&limit=1000&quantity=3";
+                try {
+                    Round round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
+                    Order o = HttpUtil.sendPost(server, "/games/" + game.getId() + "/rounds/" + round.getId() +
+                            "orders/", parameters, Order.class);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
         }//for
 
 
