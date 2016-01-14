@@ -13,31 +13,54 @@ import static org.htl_hl.bibiProject.Common.Item.loadItems;
 
 /**
  * <p>Title: Server</p>
- * <p>Description:</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Server.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
- * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
  * <br>
  * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
  * @version 0.1
  */
 public class Server extends JFrame implements Runnable{
-
+    /** pSpieler - Private Eigenschaft der Klasse Server vom Typ JPanel.<br>
+     */
     private JPanel pSpieler = new JPanel(new GridBagLayout());
+    /** tfWaren - Private Eigenschaft der Klasse Server vom Typ JTextArea.<br>
+     * TextArea in der alle Waren aufgelistet werden.
+     */
     private JTextArea tfWaren = new JTextArea();
-
-    private JStatistik statistik = new JStatistik();
+    /** scSpieler - Private Eigenschaft der Klasse Server vom Typ JScrollPane.<br>
+     * ScrollPane f&uuml;r Spieler.
+     */
     private JScrollPane scSpieler = new JScrollPane(pSpieler,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    /** scWaren - Private Eigenschaft der Klasse Server vom Typ JScrollPane.<br>
+     * ScrollPane f&uuml;r Waren.
+     */
     private JScrollPane scWaren = new JScrollPane(tfWaren);
+    /** game - Private Eigenschaft der Klasse Server vom Typ Game.<br>
+     * Referenz auf Game.
+     */
     private Game game;
+    /** server - Private Eigenschaft der Klasse Server vom Typ String.<br>
+     * Referenz auf Server.
+     */
     private String server;
-
+    /** item - Private Eigenschaft der Klasse Server vom Typ Item.<br>
+     * Referenz auf Item.
+     */
     private Item item;
+    /** runner - Private Eigenschaft der Klasse Server vom Typ Thread.<br>
+     */
     private Thread runner = new Thread(this);
-
+    /** spielerAr[] - Private Eigenschaft der Klasse Server vom Typ JSpieler.<br>
+     * JSpieler[] mit allen JPanels an verbundenen Spielern.
+     */
     private JSpieler spielerAr[];
+    /** waren[] - Private Eigenschaft der Klasse Server vom Typ String.<br>
+     * String[] mit allen Namen der Waren.
+     */
     private String waren[]= new String [81];
 
     public Server (String server) throws IOException {
@@ -65,7 +88,6 @@ public class Server extends JFrame implements Runnable{
 
         jtp.addTab("Waren", scWaren);
         jtp.addTab("Spieler", scSpieler);
-        jtp.addTab("Statistik", statistik);
 
         Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
         for(int w=1; w<waren.length; w++){
@@ -79,6 +101,9 @@ public class Server extends JFrame implements Runnable{
 
     }//Server
 
+    /** Methode zum Updaten der GUI.
+     * @throws IOException
+     */
     public void update() throws IOException {
         try{
             GridBagConstraints gc1 = new GridBagConstraints();
@@ -117,6 +142,8 @@ public class Server extends JFrame implements Runnable{
 
     }//main
 
+    /** Methode welche die update-Methode alle 5 Sekunden aufruft.
+     */
     public void run(){
         Thread ich=Thread.currentThread();
         while(ich == runner){
@@ -130,6 +157,8 @@ public class Server extends JFrame implements Runnable{
         }//while
     }//run
 
+    /** Methode zum Stoppen des Threads runner.
+     */
     public void stop(){
         if (runner != null)
             runner=null;

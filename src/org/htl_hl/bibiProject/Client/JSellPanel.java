@@ -9,24 +9,40 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
- * <p>Title: Verkauf</p>
- * <p>Description:</p>
+ * <p>Title: JSellPanel</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse JSellPanel.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
- * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
  * <br>
  * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
  * @version 0.1
  */
 public class JSellPanel extends JPanel implements ActionListener {
-
+    /** server - Private Eigenschaft der Klasse Client vom Typ Server.<br>
+     * Referenz auf Server.
+     */
     private String server;
+    /** game - Private Eigenschaft der Klasse Client vom Typ Game.<br>
+     * Referenz auf Game.
+     */
     private Game game;
+    /** player - Private Eigenschaft der Klasse Client vom Typ Player.<br>
+     * Referenz auf Player.
+     */
     private Player player;
+    /** stock - Private Eigenschaft der Klasse Client vom Typ Stock.<br>
+     * Referenz auf Stock.
+     */
     private Stock stock;
-
+    /** tfQuantity - Private Eigenschaft der Klasse Client vom Typ JTextField.<br>
+     * Eingabefeld f&uuml;r die Menge.
+     */
     private JTextField tfQuantity = new JTextField();
+    /** tfLimit - Private Eigenschaft der Klasse Client vom Typ JTextField.<br>
+     * Eingabefeld f&uuml;r den minimalen Preis.
+     */
     private JTextField tfLimit = new JTextField();
 
     /**
@@ -53,7 +69,9 @@ public class JSellPanel extends JPanel implements ActionListener {
 
         btSell.addActionListener(this);
     }
-
+    /** Methode zum Abarbeiten der Klick-Events.<br>
+     * @param e ActionEvent - Klick-Event des Button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (tfQuantity.getText().equals("") || tfLimit.getText().equals("")) {

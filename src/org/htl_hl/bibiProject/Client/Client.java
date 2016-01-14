@@ -12,44 +12,79 @@ import java.util.LinkedList;
 
 /**
  * <p>Title: Client</p>
- * <p>Description:</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Client.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
- * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
  * <br>
  * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
  * @version 0.1
  */
 public class Client extends JFrame implements ActionListener {
-
+    /** btReady - Private Eigenschaft der Klasse Client vom Typ JButton.<br>
+     * Bereit-Button.
+     */
     private JButton btReady = new JButton("Bereit");
-
+    /** lblPlayer - Private Eigenschaft der Klasse Client vom Typ JLabel.
+     */
     private JLabel lblPlayer = new JLabel();
+    /** lblWealth - Private Eigenschaft der Klasse Client vom Typ JLabel.
+     */
     private JLabel lblWealth = new JLabel();
+    /** lblRound - Private Eigenschaft der Klasse Client vom Typ JLabel.
+     */
     private JLabel lblRound = new JLabel();
+    /** lblCountdown - Private Eigenschaft der Klasse Client vom Typ JLabel.
+     */
     private JLabel lblCountdown = new JLabel();
-
+    /** timer - Private Eigenschaft der Klasse Client vom Typ Timer.<br>
+     * Runterz&auml;hlen der Rundenzeit.
+     */
     private Timer timer;
+    /** countdown - Private Eigenschaft der Klasse Client vom Typ int.<br>
+     *  Runterz&auml;hlen der Rundenzeit.
+     */
     private int countdown;
-
+    /** player - Private Eigenschaft der Klasse Client vom Typ Player.<br>
+     * Referenz auf Player.
+     */
     private Player player;
+    /** game - Private Eigenschaft der Klasse Client vom Typ Game.<br>
+     * Referenz auf Game.
+     */
     private Game game;
+    /** server - Private Eigenschaft der Klasse Client vom Typ String.<br>
+     * Referenz auf Server.
+     */
     private String server;
-
+    /** pVerkauf - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Panel f&uuml;r Verk&auml;ufe.
+     */
     private JPanel pVerkauf = new JPanel(new GridBagLayout());
+    /** pKauf - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Panel f&uuml;r K&auml;ufe.
+     */
     private JPanel pKauf = new JPanel(new GridBagLayout());
+    /** pSouth - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Hilfspanel.
+     */
     private JPanel pSouth = new JPanel(new GridLayout(1, 2));
+    /** pNorth - Private Eigenschaft der Klasse Client vom Typ JPanel.<br>
+     * Hilfspanel.
+     */
     private JPanel pNorth = new JPanel(new GridLayout(1, 4));
-
+    /** scVerkauf - Private Eigenschaft der Klasse Client vom Typ JScrollPane.<br>
+     * ScrollPane f&uuml; Verk&auml;ufe.
+     */
     private JScrollPane scVerkauf = new JScrollPane(pVerkauf);
+    /** scVKauf - Private Eigenschaft der Klasse Client vom Typ JScrollPane.<br>
+     * ScrollPane f&uuml; K&auml;ufe.
+     */
     private JScrollPane scKauf = new JScrollPane(pKauf, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-    /**
-     * Erzeugen eines Clients auf Basis eines JFrames
-     * @param player
-     */
+
     public Client(Player player, Game game, String server) {
         super("Client JWSS");
 
@@ -93,6 +128,8 @@ public class Client extends JFrame implements ActionListener {
         c.add(pSouth, BorderLayout.SOUTH);
     }
 
+    /** Methode zum Updaten der GUI.
+     */
     private void update() {
         try {
             game = HttpUtil.sendGet(server, "games/" + game.getId(), Game.class);
@@ -148,15 +185,17 @@ public class Client extends JFrame implements ActionListener {
         pVerkauf.revalidate();
     }
 
-    /**
-     * Bearbeitung der Events der Buttons
-     * @param e Das Actionevent der Buttons
+    /** Methode zum Abarbeiten der Klick-Events.<br>
+     * @param e ActionEvent - Klick-Event des Button
      */
     public void actionPerformed(ActionEvent e) {
         update();
         resyncTimer();
     }
 
+    /** Methode zum Synchronisieren und Erneuern des Timers.
+     *
+     */
     public void resyncTimer() {
         try {
             Round currRound = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
