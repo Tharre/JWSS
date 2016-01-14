@@ -53,11 +53,10 @@ public class Game {
     }
 
     private void setActiveRoundById(int activeRoundId) {
-        try {
-            this.activeRound = rounds.get(activeRoundId);
-        } catch (IndexOutOfBoundsException e) {
+        if (activeRoundId < 0 || activeRoundId > rounds.size())
             throw new IllegalArgumentException("RoundId out of bounds");
-        }
+        else
+            this.activeRound = rounds.get(activeRoundId);
     }
 
     private void exchange(List<Order> orders) {
