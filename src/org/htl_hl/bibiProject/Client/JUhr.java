@@ -53,7 +53,7 @@ public class JUhr extends JLabel implements Runnable{
             sek=dauer.get(Calendar.SECOND);
             ms=dauer.get(Calendar.MILLISECOND);
 
-            if (min <= 1) {
+            if (min <= 9) {
                 ausgabe.append("0"+min+":");
             } else {
                 ausgabe.append(min+":");
@@ -71,6 +71,11 @@ public class JUhr extends JLabel implements Runnable{
                 ausgabe.append(ms);
             }//else
             this.setText("Rundenzeit: "+(ausgabe.toString()));
+            if(ausgabe.toString().equals("00:59:000")){
+                System.out.println("endegelände");
+                break;
+            }
+
         }//while
     }//run
 }//class JUhr
