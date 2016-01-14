@@ -48,14 +48,22 @@ public class Server {
 	}
 
 	/**
-	 *
+	 * <p>Title: APIHandler</p>
+	 * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse APIHandler.</p>
+	 * <p>Copyright: Copyright (c) 2016</p>
+	 * <p>Company: HTL Hollabrunn</p>
+	 * <br><br>
+	 * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
+	 * <br>
+	 * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+	 * @version 0.1
 	 */
 	static class APIHandler implements HttpHandler {
-		/**
-		 *
-		 * @param t HttpExchange
-		 * @param httpCode
-		 * @param s
+		/** Methode zum Beantworten einer Anfrage an den Server.
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
+		 * @param httpCode int - HTTP Statuscode
+		 * @param s String - Antwort des Servers
          * @throws IOException
          */
 		static void sendString(HttpExchange t, int httpCode, String s) throws IOException {
@@ -65,10 +73,10 @@ public class Server {
 			os.close();
 		}
 
-		/**
-		 *
-		 * @param t
-		 * @param o
+		/** Methode zum Beantworten einer Anfrage mittels JSON.
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
+		 * @param o Object - JSON-Objekt welches versendet werden soll
          * @throws IOException
          */
 		static void sendJSON(HttpExchange t, Object o) throws IOException {
@@ -78,10 +86,9 @@ public class Server {
 			os.close();
 		}
 
-		/**
-		 *
-		 * @param query
-		 * @return
+		/** Hilfsmethode zum Aufteilen einer HTTP-Query.
+		 * @param query String - Query
+		 * @return queryPairs Die aufgeteilte Query
 		 * @throws UnsupportedEncodingException
          */
 		public static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
@@ -95,10 +102,10 @@ public class Server {
 			return queryPairs;
 		}
 
-		/**
-		 *
-		 * @param t HttpExchange
-		 * @return
+		/** Methode zum Auslesen der POST-Parameter.
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
+		 * @return query POST-Parameter
          * @throws IOException
          */
 		public Map<String, String> getPostParameters(HttpExchange t) throws IOException {
@@ -113,11 +120,11 @@ public class Server {
 			return splitQuery(query);
 		}
 
-		/**
-		 *
-		 * @param comps List<SimpleEntry<String, String>>
-		 * @param t HttpExchange
-         * @throws IOException
+		/** Methode zum Abarbeiten aller Anfragen bez&uuml; /items.
+		 * @param comps List<SimpleEntry<String, String>> - Aufgeteilter HTTP-Path
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
+         * @throws IOException -
          */
 		public void handleItems(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
 			if (comps.size() != 1) {
@@ -143,10 +150,10 @@ public class Server {
 			}
 		}
 
-		/**
-		 *
-		 * @param comps List<SimpleEntry<String, String>>
-		 * @param t HttpExchange
+		/** Methode zum Abarbeiten aller Anfragen bez&uuml; /orders.
+		 * @param comps List<SimpleEntry<String, String>> - Aufgeteilter HTTP-Path
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
          * @throws IOException
          */
 		public void handleOrders(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
@@ -220,10 +227,10 @@ public class Server {
 			}
 		}
 
-		/**
-		 *
-		 * @param comps List<SimpleEntry<String, String>>
-		 * @param t HttpExchange
+		/** Methode zum Abarbeiten aller Anfragen bez&uuml; /players.
+		 * @param comps List<SimpleEntry<String, String>> - Aufgeteilter HTTP-Path
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
          * @throws IOException
          */
 		public void handlePlayers(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
@@ -286,10 +293,10 @@ public class Server {
 			}
 		}
 
-		/**
-		 *
-		 * @param comps List<SimpleEntry<String, String>>
-		 * @param t HttpExchange
+		/** Methode zum Abarbeiten aller Anfragen bez&uuml; /games.
+		 * @param comps List<SimpleEntry<String, String>> - Aufgeteilter HTTP-Path
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
          * @throws IOException
          */
 		public void handleGames(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
@@ -339,10 +346,10 @@ public class Server {
 			}
 		}
 
-		/**
-		 *
-		 * @param comps List<SimpleEntry<String, String>>
-		 * @param t HttpExchange
+		/** Methode zum Abarbeiten aller Anfragen bez&uuml; /rounds.
+		 * @param comps List<SimpleEntry<String, String>> - Aufgeteilter HTTP-Path
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
          * @throws IOException
          */
 		private void handleRounds(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
@@ -381,10 +388,9 @@ public class Server {
 			}
 		}
 
-		/**
-		 *
-		 * @param s String
-         * @return
+		/** Methode zum Aufteilen eines HTTP-Paths.
+		 * @param s String - URL
+         * @return list Aufgeteilter HTTP-Path
          */
 		public static List<SimpleEntry<String, String>> parseURL(String s) {
 			String[] comps = s.split("/");
@@ -400,9 +406,9 @@ public class Server {
 			return list;
 		}
 
-		/**
-		 *
-		 * @param t HttpExchange
+		/** Methode zum Abarbeiten von Anfragen.
+		 * @param t HttpExchange - Enth&auml;lt die Verbindung zum Anfragenden -
+		 * <a href="https://docs.oracle.com/javase/7/docs/jre/api/net/httpserver/spec/com/sun/net/httpserver/HttpExchange.html">N&auml;hre Infos zu HttpExchange</a>
 		 * @throws IOException
          */
 		@Override

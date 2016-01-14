@@ -71,7 +71,7 @@ public class Item {
 	}
 
 	/** Methode zum Auslesen und Laden der Waren aus einer Datei.
-	 * @param file File Datei aus der die Waren geladen werden
+	 * @param file File - Datei aus der die Waren geladen werden
 	 * @return m Eine Map die die Ware mit der zugeh&ouml;rigen ID verbindet
 	 * @throws IOException
      */

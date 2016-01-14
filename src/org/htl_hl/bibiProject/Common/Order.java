@@ -136,14 +136,14 @@ public class Order {
     }
 
     /** Methode zum Setzen der verkauften/gekauften St&uuml;ckzahl.
-     * @param fulfilled long Anzal der verkauften/gekauften St&uuml;ck
+     * @param fulfilled long - Anzahl der verkauften/gekauften St&uuml;ck
      */
     public void setFulfilled(long fulfilled) {
         this.fulfilled = fulfilled;
     }
 
     /** Methode zum Auslesen der Orders aus einer Datei.
-     * @param file File Datei aus der die Orders gelesen werden.
+     * @param file File - Datei aus der die Orders gelesen werden.
      * @return m Eine Map die die Order mit der zugeh&ouml;rigen ID verkn&uuml;pft
      * @throws IOException
      */

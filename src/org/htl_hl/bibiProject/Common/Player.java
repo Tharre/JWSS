@@ -62,7 +62,7 @@ public class Player {
         return money;
     }
     /** Methode zum Abfragen einer Ware welche im Besitz des Spielers ist mittels der ID der Ware.
-     * @param itemId int eindeutige ID einer Ware
+     * @param itemId int - eindeutige ID einer Ware
      * @return stock Ware im Besitz des Spielers
      */
     public Stock getStockByItemId(int itemId) {
@@ -73,14 +73,14 @@ public class Player {
         return null;
     }
     /** Methode zum Bearbeiten der Waren im Besitz des Spielers.
-     * @param index int Index der zu bearbeitenden Ware in der Liste
-     * @param quantity int Neue St&uuml;ckzahl der zu bearbeitenden Ware
+     * @param index int - Index der zu bearbeitenden Ware in der Liste
+     * @param quantity int - Neue St&uuml;ckzahl der zu bearbeitenden Ware
      */
     public void updateStock(int index, int quantity) {
         stocks.get(index).setQuantity(quantity);
     }
     /** Methode zum Bearbeiten des Geldbetrages des Spielers.
-     * @param money double Aktueller Geldbetrag
+     * @param money double - Aktueller Geldbetrag
      */
     public void setMoney(double money) {
         this.money = money;

@@ -25,10 +25,10 @@ public class HttpUtil {
     private static final String USER_AGENT = "JWSS Client/1.0";
 
     /** Methode zum Eintragen von Daten am Server per HTTP-POST.
-     * @param ip String IP von Server
-     * @param res String Angeforderte Daten
-     * @param parameters String POST-Parameter
-     * @param typeClass Class<T> Hilfsvariable
+     * @param ip String - IP von Server
+     * @param res String - Angeforderte Daten
+     * @param parameters String - POST-Parameter
+     * @param typeClass Class<T> - Hilfsvariable
      * @return <T> Gibt angefordertes Objekt zur&uuml;ck
      * @throws IOException
      */
@@ -57,9 +57,9 @@ public class HttpUtil {
     }
 
     /** Methode zum Abrufen von Daten per HTTP-GET.
-     * @param ip String IP von Server
-     * @param res String Angeforderte Daten
-     * @param typeClass Class<T> Hilfsvariable
+     * @param ip String - IP von Server
+     * @param res String - Angeforderte Daten
+     * @param typeClass Class<T> - Hilfsvariable
      * @return <T> Gibt angefordertes Objekt zur&uuml;ck
      * @throws IOException
      */

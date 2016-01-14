@@ -36,14 +36,14 @@ public class ExchangeRate {
     }
 
     /** Methode zum Setzen der ExchangeRate (B&ouml;rsenkurs).
-     * @param rate double Neue ExchangeRate (B&ouml;rsenkurs)
+     * @param rate double - Neue ExchangeRate (B&ouml;rsenkurs)
      */
     public void setRate(double rate) {
         this.rate = rate;
     }
 
     /** Methode zum Berechnen der ExchangeRate (B&ouml;rsenkurs).
-     * @param orders List<Order> Liste der Orders mit der selben Ware
+     * @param orders List<Order> - Liste der Orders mit der selben Ware
      */
     public void recalculateRate(List<Order> orders) {
         List<Double> possibleRates = new LinkedList<>();

@@ -93,14 +93,14 @@ public class Game {
     }
 
     /** Methode zum Setzen der aktiven Runde.
-     * @param activeRound Round Runde die aktiv gesetzt werden soll
+     * @param activeRound Round - Runde die aktiv gesetzt werden soll
      */
     public void setActiveRound(Round activeRound) {
         this.activeRound = activeRound;
     }
 
     /** Methode zum Setzen der aktiven Runde mit Hilfe der Runden-ID.
-     * @param activeRoundId int ID der Runde die aktiv gesetzt werden soll
+     * @param activeRoundId int - ID der Runde die aktiv gesetzt werden soll
      */
     private void setActiveRoundById(int activeRoundId) {
         if (activeRoundId < 0 || activeRoundId > rounds.size())
@@ -111,7 +111,7 @@ public class Game {
 
     /** Methoden zum Abwickeln der Verk&auml;ufe.
      * Orders werden in Items getrennt; ExchangeRates werden berechnet; Verk&auml;ufe/K&auml;ufe werden augeteilt.
-     * @param orders List<Order> Liste an Orders
+     * @param orders List<Order> - Liste an Orders
      */
     private void exchange(List<Order> orders) {
         List<Item> items = new LinkedList<>();
@@ -207,7 +207,7 @@ public class Game {
     }
 
     /** Methode zum wechseln in die n&auml;chste Runde.
-     * @param endsAt Date Datum mit Uhrzeit an welcher die Runde endet
+     * @param endsAt Date - Datum mit Uhrzeit an welcher die Runde endet
      */
     private void nextRound(Date endsAt) {
         List<Order> orders = new LinkedList<>();

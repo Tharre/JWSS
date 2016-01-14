@@ -47,7 +47,7 @@ public class Stock {
 
     /** Methode zum Setzen der St&uuml;ckzahl der Ware im "Lager".
      * Die Methode setzt die gespeicherte St&uuml;ckzahl auf die St&uuml;ckzahl die sie in der Parameterliste bekommt.
-     * @param quantity long Neue St&uuml;ckzahl der Ware
+     * @param quantity long - Neue St&uuml;ckzahl der Ware
      */
     public void setQuantity(long quantity) {
         this.quantity = quantity;
