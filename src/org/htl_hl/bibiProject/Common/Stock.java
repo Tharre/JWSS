@@ -1,4 +1,3 @@
-import org.htl_hl.bibiProject.Common.Item;
 package org.htl_hl.bibiProject.Common;
 
 /** Objekt vom Typ Stock.
@@ -19,7 +18,7 @@ public class Stock {
         this(new Item(), 0);
     }
 
-    public Stock(Item item, int quantity) {
+    public Stock(Item item, long quantity) {
         this.item = item;
         this.quantity = quantity;
     }
@@ -46,4 +45,3 @@ public class Stock {
         this.quantity = quantity;
     }
 }
-
