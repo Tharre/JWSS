@@ -1,5 +1,7 @@
 package org.htl_hl.bibiProject.Common;
 
+import org.htl_hl.bibiProject.Client.Client;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -51,11 +53,10 @@ public class Game {
     }
 
     private void setActiveRoundById(int activeRoundId) {
-        try {
-            this.activeRound = rounds.get(activeRoundId);
-        } catch (IndexOutOfBoundsException e) {
+        if (activeRoundId < 0 || activeRoundId > rounds.size())
             throw new IllegalArgumentException("RoundId out of bounds");
-        }
+        else
+            this.activeRound = rounds.get(activeRoundId);
     }
 
     private void exchange(List<Order> orders) {
@@ -199,6 +200,7 @@ public class Game {
             }
 
             nextRound(new Date(roundEnd + ROUNDTIME));
+
         }
     }
 
