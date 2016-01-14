@@ -12,7 +12,7 @@ public class JSpieler extends JPanel {
     public JSpieler(String name, double money) {
         this.name=name;
         this.money=money;
-        setPreferredSize(new Dimension(120,90));
+        setPreferredSize(new Dimension(160,90));
         setToolTipText("Spielerdetails");
         setLayout(new GridLayout(2,1));
         lblName = new JLabel("Name: "+name);
