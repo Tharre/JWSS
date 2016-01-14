@@ -4,6 +4,9 @@ import org.htl_hl.bibiProject.Common.Item;
 import org.htl_hl.bibiProject.Common.Stock;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 import javax.swing.*;
 
 public class JStatistik extends JPanel {
@@ -11,14 +14,12 @@ public class JStatistik extends JPanel {
     int[] x = new int[20];
     int[] y = {40,100,60,300,30,49,40,100,60,300,30,49,40,100,60,300,30,49,300,400};
     int[] menge={20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,200};
-    private String[] waren = {};
+    private String waren[]= new String [81];
     private JComboBox c = new JComboBox();
-    private Item items;
-
-
 
     public JStatistik() {
         setToolTipText("Statistik");
+        getWaren();
         for (int i = 0; i < waren.length; i++)
             c.addItem(waren[i]);
         add(c);
@@ -51,6 +52,17 @@ public class JStatistik extends JPanel {
 
         g.setColor(Color.red);
         g.drawPolyline(x,y,x.length);
+
     }//paintComponent
+    public void getWaren() {
+        try{
+        Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
+        for(int w=1; w<waren.length; w++) {
+            waren[w] = m.get(w).getName();
+        }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }//class Statistik

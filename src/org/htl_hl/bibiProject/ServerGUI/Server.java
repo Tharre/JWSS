@@ -1,14 +1,15 @@
 package org.htl_hl.bibiProject.ServerGUI;
 
-import org.htl_hl.bibiProject.Common.Game;
-import org.htl_hl.bibiProject.Common.HttpUtil;
-import org.htl_hl.bibiProject.Common.Player;
-import org.htl_hl.bibiProject.Common.Stock;
+import org.htl_hl.bibiProject.Common.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import javax.swing.*;
+
+import static org.htl_hl.bibiProject.Common.Item.loadItems;
 
 /**
  * <p>Title: Server</p>
@@ -24,19 +25,22 @@ import javax.swing.*;
 public class Server extends JFrame implements Runnable{
 
     private JPanel pSpieler = new JPanel(new GridBagLayout());
-    private JPanel pWaren = new JPanel();
+    private JTextArea tfWaren = new JTextArea();
 
     private JStatistik statistik = new JStatistik();
     private JScrollPane scSpieler = new JScrollPane(pSpieler,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    private JScrollPane scWaren = new JScrollPane(tfWaren);
     private Game game;
     private String server;
 
+    private Item item;
     private Thread runner = new Thread(this);
 
     private JSpieler spielerAr[];
+    private String waren[]= new String [81];
 
-    public Server (String server){
+    public Server (String server) throws IOException {
         super("Client JWSS");
         this.server=server;
 
@@ -58,18 +62,24 @@ public class Server extends JFrame implements Runnable{
         JTabbedPane jtp = new JTabbedPane();
 
         getContentPane().add(jtp);
-        JPanel jp1 = new JPanel();
-        JPanel jp3 = new JPanel();
-        jtp.addTab("Waren", jp1);
+
+        jtp.addTab("Waren", scWaren);
         jtp.addTab("Spieler", scSpieler);
         jtp.addTab("Statistik", statistik);
+
+        Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
+        for(int w=1; w<waren.length; w++){
+            waren[w] = m.get(w).getName();
+            tfWaren.setEditable(false);
+            tfWaren.setText(tfWaren.getText() + waren[w] + "\n");
+        }
 
         update();
 
 
     }//Server
 
-    public void update(){
+    public void update() throws IOException {
         try{
             GridBagConstraints gc1 = new GridBagConstraints();
             gc1.fill = GridBagConstraints.BOTH;
@@ -96,10 +106,15 @@ public class Server extends JFrame implements Runnable{
         }
     }//update
 
-    public static void main(String[] args){
+    public static void main(String[] args)  {
         String ip = "http://127.0.0.1:8000";
+        try{
         Server f = new Server(ip);
-        f.setVisible(true);
+            f.setVisible(true);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
     }//main
 
     public void run(){
@@ -109,7 +124,9 @@ public class Server extends JFrame implements Runnable{
                 Thread.sleep(5000);
                 update();
                 System.out.println("Update ...");
-            }catch(InterruptedException e){}
+            }catch(InterruptedException e){} catch (IOException e) {
+                e.printStackTrace();
+            }
         }//while
     }//run
 
