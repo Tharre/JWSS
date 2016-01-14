@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/** Objekt vom Typ Game.
+ * In dieser Klasse befinden sich alle notwendigen Methoden und Klassen von Game.
+ */
 public class Game {
 
     private static final long ROUNDTIME = 5000;
@@ -28,30 +31,53 @@ public class Game {
         this.rounds = new LinkedList<>();
     }
 
+    /** Methode zum Abrufen der Game-ID.
+     * @return id Game-ID
+     */
     public int getId() {
         return id;
     }
 
+    /** Methode zum Abrufen des Game-Namen.
+     * @return name Game-Name
+     */
     public String getName() {
         return name;
     }
 
+    /** Methode zum Abrufen der Liste der Runden.
+     * @return rounds Liste der Runden
+     */
     public List<Round> getRounds() {
         return rounds;
     }
 
+    /** Methode zum Abrufen der Liste der Player.
+     * @return player Liste der Player
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
+    /** Methode zum Abrufen der aktiven Runde.
+     * @return activeRound Aktive Runde
+     */
     public Round getActiveRound() {
         return activeRound;
     }
 
+    /** Methode zum Setzen der aktiven Runde.
+     * @param activeRound Round Runde die aktiv gesetzt werden soll
+     * @return void
+     */
     public void setActiveRound(Round activeRound) {
         this.activeRound = activeRound;
     }
 
+    /** Methode zum Setzen der aktiven Runde mit Hilfe der Runden-ID.
+     * @param activeRoundId int ID der Runde die aktiv gesetzt werden soll
+     * @return void
+     */
     private void setActiveRoundById(int activeRoundId) {
         if (activeRoundId < 0 || activeRoundId > rounds.size())
             throw new IllegalArgumentException("RoundId out of bounds");
@@ -59,6 +85,11 @@ public class Game {
             this.activeRound = rounds.get(activeRoundId);
     }
 
+    /** Methoden zum Abwickeln der Verkäufe.
+     * Orders werden in Items getrennt; ExchangeRates werden berechnet; Verkäufe/Käufe werden augeteilt.
+     * @param orders List<Order> Liste an Orders
+     * @return void
+     */
     private void exchange(List<Order> orders) {
         List<Item> items = new LinkedList<>();
 
@@ -152,6 +183,10 @@ public class Game {
         }
     }
 
+    /** Methode zum wechseln in die nächste Runde.
+     * @param endsAt Date Datum mit Uhrzeit an welcher die Runde endet
+     * @return void
+     */
     private void nextRound(Date endsAt) {
         List<Order> orders = new LinkedList<>();
         if (activeRound != null) {
@@ -171,6 +206,9 @@ public class Game {
         setActiveRoundById(index);
     }
 
+    /** Methode zum Abschließen einer Runde.
+     * @return void
+     */
     public void updateRounds() {
         if (rounds.size() == 0)
             throw new IllegalStateException("Game hasn't been started yet");
@@ -204,6 +242,9 @@ public class Game {
         }
     }
 
+    /** Methode zum Starten einer Round.
+     * @return void
+     */
     public void start() {
         nextRound(new Date(System.currentTimeMillis() + ROUNDTIME));
     }
