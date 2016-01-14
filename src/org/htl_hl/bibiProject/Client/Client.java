@@ -89,6 +89,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
                 btBereit.setEnabled(false);
                 lblZeit.stop();
                 dispose();
+                stop();
             }//windowClosing
         });//WindowListener
 
