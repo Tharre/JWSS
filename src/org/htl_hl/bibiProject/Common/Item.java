@@ -70,6 +70,10 @@ public class Item {
 		return "Item: " + id + ", name: " + name + ", maxAmount: " + maxAmount;
 	}
 
+	public boolean equals(Object other) {
+		return other instanceof Item && ((Item) other).getId() == id;
+	}
+
 	/** Methode zum Auslesen und Laden der Waren aus einer Datei.
 	 * @param file File - Datei aus der die Waren geladen werden
 	 * @return m Eine Map die die Ware mit der zugeh&ouml;rigen ID verbindet

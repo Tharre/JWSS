@@ -157,7 +157,7 @@ public class Server {
          * @throws IOException
          */
 		public void handleOrders(List<SimpleEntry<String, String>> comps, HttpExchange t) throws IOException {
-			if (comps.size() != 3 || !comps.get(0).getKey().equals("games") || !comps.get(1).getKey().equals("rounds")){
+            if (comps.size() < 2 || !comps.get(0).getKey().equals("games")) {
 				sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
 				return;
 			}
@@ -169,21 +169,27 @@ public class Server {
 			}
 
 			Game game = games.get(gameId);
-
-			int roundId = Integer.parseInt(comps.get(1).getValue());
-			if (roundId < 0 || roundId > game.getRounds().size()) {
-				sendString(t, 400, "<h1>404 Not Found</h1>Round not found");
-				return;
-			}
-
 			game.updateRounds();
-			Round round = game.getRounds().get(roundId);
+            List<Order> orders;
 
 			List<Player> players = game.getPlayers();
-			List<Order> orders = round.getOrders();
 
 			switch (t.getRequestMethod().toUpperCase()) {
             case "GET":
+                if (comps.size() != 3 || !comps.get(1).getKey().equals("rounds")) {
+                    sendString(t, 400, "<h1>400 Bad Request</h1>API entry non-existent");
+                    return;
+                }
+
+                int roundId = Integer.parseInt(comps.get(1).getValue());
+                if (roundId < 0 || roundId > game.getRounds().size()) {
+                    sendString(t, 400, "<h1>404 Not Found</h1>Round not found");
+                    return;
+                }
+
+                Round round = game.getRounds().get(roundId);
+                orders = round.getOrders();
+
 				if (comps.get(2).getValue() == null) {
 					sendJSON(t, orders);
 					return;
@@ -198,11 +204,12 @@ public class Server {
 				sendJSON(t, orders.get(orderId));
 				return;
             case "POST":
-				if (comps.get(2).getValue() != null) {
+				if (comps.get(1).getValue() != null) {
 					sendString(t, 400, "<h1>400 Bad Request</h1>Superfluous argument");
 					return;
 				}
 
+                orders = game.getActiveRound().getOrders();
 				Map<String, String> m = getPostParameters(t);
 
 				if (m != null && m.containsKey("itemId") && m.containsKey("playerId") && m.containsKey("isBuy")
@@ -276,10 +283,11 @@ public class Server {
 				if (m != null && m.containsKey("name")) {
 					int index = players.size();
 					List<Stock> playerStocks = new LinkedList<>();
-					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
-					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
-					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
-					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size())), 500));
+					// TODO(Tharre): eliminate duplicates
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size()) + 1), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size()) + 1), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size()) + 1), 500));
+					playerStocks.add(new Stock(items.get((int) (Math.random()*items.size()) + 1), 500));
 					Player p = new Player(index, m.get("name"), playerStocks, 1000000.0);
 					players.add(p); // TODO(Tharre): check if "name" exists
 

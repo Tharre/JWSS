@@ -1,7 +1,5 @@
 package org.htl_hl.bibiProject.Common;
 
-import org.htl_hl.bibiProject.Client.Client;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -22,7 +20,7 @@ public class Game {
     /** ROUNDTIME - Private, Finale Eigenschaft der Klasse Game vom Typ long.<br>
      * Jede Round hat eine Rundenzeit.
      */
-    private static final long ROUNDTIME = 5000;
+    private static final long ROUNDTIME = 45000;
     /** id - Private Eigenschaft der Klasse Game vom Typ int.<br>
      * Da mehrere Games gleichzeitig laufen k&ouml;nnen hat jedes Game eine eindeutige ID.
      */
@@ -138,9 +136,6 @@ public class Game {
                     matchingOrders.add(order);
             }
 
-            if (matchingOrders.isEmpty())
-                return;
-
             System.out.println("Matching orders:");
             for (Order order : matchingOrders) {
                 System.out.println(order);
@@ -157,6 +152,10 @@ public class Game {
             }
 
             long turnover = Math.min(buyQuantity, sellQuantity);
+
+            if (turnover == 0)
+                continue;
+
             double fulfillmentRatio = Math.min(buyQuantity, sellQuantity) / turnover;
             long total = 0;
             List<Long> quantities = new LinkedList<>();

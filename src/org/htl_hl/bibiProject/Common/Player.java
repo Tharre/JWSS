@@ -91,4 +91,8 @@ public class Player {
     public String toString() {
         return "ID: " + id + ", name: " + name;
     }
+
+    public boolean equals(Object other) {
+        return other instanceof Player && ((Player) other).getId() == id;
+    }
 }
