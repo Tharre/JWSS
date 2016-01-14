@@ -40,7 +40,7 @@ public class Stock {
 
     /** Methode zum Setzen der Stückzahl der Ware im "Lager".
      * Die Methode setzt die gespeicherte Stückzahl auf die Stückzahl die sie in der Parameterliste bekommt.
-     * @param void
+     * @param quantity long Neue Stückzahl der Ware
      */
     public void setQuantity(long quantity) {
         this.quantity = quantity;

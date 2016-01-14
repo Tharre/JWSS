@@ -3,8 +3,13 @@ package org.htl_hl.bibiProject.Common;
 import java.util.LinkedList;
 import java.util.List;
 
+/** Objekt vom Typ ExchangeRate.
+ * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften einer ExchangeRate (Börsenkurs).
+ */
 public class ExchangeRate {
-
+    /** rate - Private Eigenschaft von ExchangeRate.
+     * Aktueller Börsenkurs.
+     */
     private double rate;
 
     public ExchangeRate(double rate) {
@@ -15,14 +20,24 @@ public class ExchangeRate {
         this(0.0);
     }
 
+    /** Methode zum Abrufen der aktuellen ExchangeRate (Börsenkurs).
+     * @return rate Aktuelle ExchangeRate (Börsenkurs)
+     */
     public double getRate() {
         return rate;
     }
 
+    /** Methode zum Setzen der ExchangeRate (Börsenkurs).
+     * @param rate double Neue ExchangeRate (Börsenkurs)
+     * @return void
+     */
     public void setRate(double rate) {
         this.rate = rate;
     }
 
+    /** Methode zum Berechnen der ExchangeRate (Börsenkurs).
+     * @param orders List<Order> Liste der Orders mit der selben Ware
+     */
     public void recalculateRate(List<Order> orders) {
         List<Double> possibleRates = new LinkedList<>();
         double highestTurnover = 0;
