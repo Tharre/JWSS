@@ -1,5 +1,8 @@
 package org.htl_hl.bibiProject.ServerGUI;
 
+import org.htl_hl.bibiProject.Common.Item;
+import org.htl_hl.bibiProject.Common.Stock;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -8,8 +11,9 @@ public class JStatistik extends JPanel {
     int[] x = new int[20];
     int[] y = {40,100,60,300,30,49,40,100,60,300,30,49,40,100,60,300,30,49,300,400};
     int[] menge={20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,100,20,200};
-    private String[] waren = { "Holz","Wasser","Schnee","Stein","Diamant" };
+    private String[] waren = {};
     private JComboBox c = new JComboBox();
+    private Item items;
 
 
 

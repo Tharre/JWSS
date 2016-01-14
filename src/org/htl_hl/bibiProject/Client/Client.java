@@ -230,9 +230,9 @@ public class Client extends JFrame implements ActionListener, Runnable {
             round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
             lblRunde.setText("Runde: " + round.getId());
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+        e.printStackTrace();
+        System.exit(1);
+    }
         lblVermoegen.setText("Vermögen: " + player.getMoney());
         lblRang.setText("Rang: ");
     }//update

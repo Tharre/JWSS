@@ -87,7 +87,6 @@ public class Item {
 
 	public static void main(String[] args) throws IOException {
 		Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
-
 		System.out.println(m.get(23));
 	}
 }
