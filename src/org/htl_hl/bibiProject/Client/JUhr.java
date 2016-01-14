@@ -3,8 +3,8 @@ package org.htl_hl.bibiProject.Client;
 import java.util.Calendar;
 import javax.swing.*;
 /**
- * <p>Title: Uhr</p>
- * <p>Description:</p>
+ * <p>Title: JUhr</p>
+ * <p>Description: In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse JUhr.</p>
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
@@ -14,15 +14,30 @@ import javax.swing.*;
  * @version 0.1
  */
 public class JUhr extends JLabel implements Runnable{
+    /** millisekundenStart, millisekundenBisher - Private Eigenschaften der Klasse JUhr vom Typ long. <br>
+     * millisekundenStart: Der Zeitpunkt in Millisekunden in dem die Uhr gestartet wurde. <br>
+     * millisekundenBisher: Die Zeit in Millisekunden die seit dem Start der Uhr vergangen ist.
+     */
     private long millisekundenStart, millisekundenBisher;
+    /** uhrAktiv - Private Eigenschaft der Klasse JUhr vom Typ boolean.<br>
+     * true = Uhr l&auml;uft gerade. <br>
+     * false = Uhr l&auml;uft gerade nicht.
+     */
     private boolean uhrAktiv = false;
+    /** dauer - Private Eigenschaft der Klasse JUhr vom Typ Calender.<br>
+     * Wird f&uuml;r die Ausgabe der Zeit in Minuten und Sekunden ben&ouml;tigt.
+     */
     private Calendar dauer;
+    /** min, sek, ms - Private Eigenschaften der Klasse JUhr vom Typ int.<br>
+     * Hilfsvariablen f&uuml;r das Speichern von Minuten, Sekunden und Millisekunden.
+     */
     private int min, sek, ms;
     public JUhr() {
         setText("Rundenzeit: ");
     }//JUhr
 
-
+    /** Methode zum Starten des Threads f&uuml;r die Uhr.
+     */
     public void start() {
         if (!uhrAktiv) {
             uhrAktiv = true;
@@ -32,10 +47,14 @@ public class JUhr extends JLabel implements Runnable{
         }//if
     }//start
 
+    /** Methode zum Stoppen des Threads f&uuml;r die Uhr.
+     */
     public void stop() {
         uhrAktiv = false;
     }//stop
 
+    /** Methode zum sek&uuml;ndlichen Aktualisieren der Rundenzeit.
+     */
     public void run() {
         StringBuffer ausgabe;
         while (uhrAktiv) {
