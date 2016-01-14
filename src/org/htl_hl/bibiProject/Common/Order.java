@@ -58,33 +58,6 @@ public class Order {
 
     }
 
-    /** Methode zum Durchführen des Kauf-/Verkaufprozesses.
-     * Diese Methode läuft jede Order in der Liste durch und aktualisiert beim Käufer und Verkäufer die Ware, Stückzahl der Ware und den Geldbetrag.
-     * @param orders List<Order> Liste von Orders
-     */
-    public static void exchange(List<Order> orders) {
-        for (Order order : orders) {
-            Player player = order.getPlayer();
-            int itemId = order.getId();
-            int quantity = order.getQuantity();
-            if (order.getIsBuy()) {
-                player.setMoney(player.getMoney() - order.getLimit());
-                if(order.getItem().getId()==itemId) {
-                    player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() + quantity);
-                }else {
-                    player.getStocks().add(new Stock(order.getItem(),quantity));
-                }
-
-            } else {
-                player.setMoney(player.getMoney() + order.getLimit());
-                player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() - quantity);
-            }
-        }
-
-        this.fulfilled = 0;
-
-    }
-
     /** Methode zum Abrufen der ID der Order.
      * @return id ID der Order
      */
@@ -159,9 +132,6 @@ public class Order {
     public void setFulfilled(long fulfilled) {
         this.fulfilled = fulfilled;
     }
-
-
-
 
     /** Methode zum Auslesen der Orders aus einer Datei.
      * @param file File Datei aus der die Orders gelesen werden.
