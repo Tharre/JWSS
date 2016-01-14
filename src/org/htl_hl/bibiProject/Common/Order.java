@@ -126,10 +126,11 @@ public class Order {
         return fulfilled;
     }
 
-    @JsonIgnore
+
     /** Methode zum Abfragen der St&uuml;ckzahl die nicht verkauft/gekauft werden konnten.
      * @return quantity-fulfilled Anzahl der St&uuml;ck die nicht verkauft/gekauft werden konnten
      */
+    @JsonIgnore
     public long getRemaining() {
         return quantity - fulfilled;
     }
