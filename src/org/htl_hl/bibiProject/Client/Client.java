@@ -24,7 +24,7 @@ import java.util.LinkedList;
  * @version 0.1
  */
 
-public class Client extends JFrame implements ActionListener {
+public class Client extends JFrame implements ActionListener, Runnable {
 
     private JButton btBereit = new JButton("Bereit");
 
@@ -34,6 +34,8 @@ public class Client extends JFrame implements ActionListener {
     private JLabel lblRunde;
 
     private JUhr lblZeit = new JUhr();
+
+    private Thread runner;
 
     private Player player;
     private Game game;
@@ -144,13 +146,15 @@ public class Client extends JFrame implements ActionListener {
      * @param e Das Actionevent der Buttons
      */
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource() == btBereit) {
             lblZeit.start();
             btBereit.setText("Spielername: " + player.getName());
             System.out.println();
+            runner.start();
         }//if
 
-        for (int i = 0; i < 4; i++) { // TODO(Tharre): anzahl orders
+        for (int i = 0; i <1; i++) { // TODO(Tharre): anzahl orders
             if (e.getSource() == kauf.get(i).btKauf)
                 kauf.get(i).lblWare.setText("yes");
         }//for
@@ -186,5 +190,20 @@ public class Client extends JFrame implements ActionListener {
         lblVermoegen.setText("Vermögen: " + player.getMoney());
         lblRang.setText("Rang: ");
     }//update
+    public void run(){
+        Round round = null;
+        Thread ich=Thread.currentThread();
+        while(ich == runner){
+            try{
+                Thread.sleep(round.getEndsAt().getTime()-System.currentTimeMillis());
+            }catch(InterruptedException e){}
+            update();
+        }//while
+    }//run
+
+    public void stop(){
+        if (runner != null)
+            runner=null;
+    }//stop
 
 }//class Client

@@ -41,7 +41,7 @@ public class JStart extends JFrame implements ActionListener{
         tfName.setPreferredSize(new Dimension(70,25));
         setLocationRelativeTo (null);
         Container c = getContentPane();
-        c.setLayout(new FlowLayout());
+        c.setLayout(new GridLayout(3,2));
 
         addWindowListener (new WindowAdapter(){
             public void windowClosing(WindowEvent e1){
@@ -62,7 +62,7 @@ public class JStart extends JFrame implements ActionListener{
     }//JStart
 
     /**
-     *
+     *Erzeugt einen neuen Client
      * @param e
      */
     public void actionPerformed(ActionEvent e){
