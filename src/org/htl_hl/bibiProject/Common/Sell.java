@@ -2,8 +2,8 @@ package org.htl_hl.bibiProject.Common;
 
 
 
-/**
- * Created by Daniel on 17.12.2015.
+/** Objekt vom Typ Sell.
+ *
  */
 public class Sell {
 

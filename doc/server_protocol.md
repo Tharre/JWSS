@@ -15,7 +15,7 @@
     GET /orders
 
 ## Add new order:
-(returns orderID)
+Input: itemId, playerId, isBuy, limit, quantity
 
     POST /orders
 
@@ -36,7 +36,7 @@
     GET /orders/<id>/item
 
 ## Register new player:
-(takes name; returns playerID)
+Input: name
 
 	POST /players
 
@@ -48,6 +48,11 @@
 
 	GET /players/<id>
 
-sendHttpRequest("/items")
+## Show current round:
 
-host + '/api' + url
+	GET /rounds
+	
+## Show specific round:
+
+	GET /rounds/<id>
+	

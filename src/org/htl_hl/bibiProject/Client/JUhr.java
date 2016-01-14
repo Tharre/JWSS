@@ -2,7 +2,17 @@ package org.htl_hl.bibiProject.Client;
 
 import java.util.Calendar;
 import javax.swing.*;
-
+/**
+ * <p>Title: Uhr</p>
+ * <p>Description:</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
+ */
 public class JUhr extends JLabel implements Runnable{
     private long millisekundenStart, millisekundenBisher;
     private boolean uhrAktiv = false;

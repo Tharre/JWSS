@@ -1,5 +1,6 @@
 package org.htl_hl.bibiProject.Common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -32,22 +33,29 @@ public class Order {
      * Jede Order hat einen maximal/mindest Preis zu dem ge-/verkauft wird.
      */
     private double limit;
+
     /** quantity - Private Eigenschaft der Klasse Order.
      * Jedes Item in der Order hat eine Stückzahl die angeboten/benötigt wird.
      */
-    private int quantity;
+    private long quantity;
+    /** fulfilled - Private Eigenschaft der Klasse Order.
+     * Da die Anzahl der zum Kauf und Verkauf angebotenen Stück gleich sein muss wird in dieser Variable gespeichert wieviele gekauft/verkauft werden konnten.
+     */
+    private long fulfilled;
+
 
     public Order() {
         this(0, new Item(), new Player(), false, 0.0, 0);
     }
 
-    public Order(int id, Item item, Player player, boolean isBuy, double limit, int quantity) {
+    public Order(int id, Item item, Player player, boolean isBuy, double limit, long quantity) {
         this.id = id;
         this.item = item;
         this.player = player;
         this.isBuy = isBuy;
         this.limit = limit;
         this.quantity = quantity;
+
     }
 
     /** Methode zum Durchführen des Kauf-/Verkaufprozesses.
@@ -72,6 +80,9 @@ public class Order {
                 player.getStockByItemId(itemId).setQuantity(player.getStockByItemId(itemId).getQuantity() - quantity);
             }
         }
+
+        this.fulfilled = 0;
+
     }
 
     /** Methode zum Abrufen der ID der Order.
@@ -111,10 +122,11 @@ public class Order {
         return limit;
     }
 
+
     /** Methode zum Abrufen der Stückzahl der zum Kauf/Verkauf angebotenen Ware.
      * @return quantity Stückzahl der zum Kauf/Verkauf angebotenen Ware
      */
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
@@ -124,6 +136,32 @@ public class Order {
     public String toString() {
         return "Order: " + id + ", itemID: " + item.getId() + ", isBuy: " + isBuy + ", limit: " + limit + ", quantity: " + quantity;
     }
+
+    /** Methode zum Abfragen der erfolgreich verkauften Stück der Order.
+     * @return fulfilled Anzahl der erfolgreich verkauften/gekauften Stück der Order
+     */
+    public long getFulfilled() {
+        return fulfilled;
+    }
+
+    @JsonIgnore
+    /** Methode zum Abfragen der Stückzahl die nicht verkauft/gekauft werden konnten.
+     * @return quantity-fulfilled Anzahl der Stück die nicht verkauft/gekauft werden konnten
+     */
+    public long getRemaining() {
+        return quantity - fulfilled;
+    }
+
+    /** Methode zum Setzen der verkauften/gekauften Stückzahl.
+     * @param fulfilled long Anzal der verkauften/gekauften Stück
+     * @return void
+     */
+    public void setFulfilled(long fulfilled) {
+        this.fulfilled = fulfilled;
+    }
+
+
+
 
     /** Methode zum Auslesen der Orders aus einer Datei.
      * @param file File Datei aus der die Orders gelesen werden.

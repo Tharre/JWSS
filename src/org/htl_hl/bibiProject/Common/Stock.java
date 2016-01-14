@@ -1,3 +1,4 @@
+import org.htl_hl.bibiProject.Common.Item;
 package org.htl_hl.bibiProject.Common;
 
 /** Objekt vom Typ Stock.
@@ -12,7 +13,7 @@ public class Stock {
     /** quantity - Private Eigenschaft von Stock.
      * Jeder Spieler hat eine bestimmte Stückzahl von der Ware - quantity stellt diese Stückzahl dar.
      */
-    private int quantity;
+    private long quantity;
 
     public Stock() {
         this(new Item(), 0);
@@ -33,7 +34,7 @@ public class Stock {
     /** Methode zum Abfragen der Stückzahl der Ware im "Lager".
      * @return quantity Stückzahl der Ware in diesem "Lager"
      */
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
@@ -41,7 +42,8 @@ public class Stock {
      * Die Methode setzt die gespeicherte Stückzahl auf die Stückzahl die sie in der Parameterliste bekommt.
      * @param void
      */
-    public void setQuantity(int quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 }
+

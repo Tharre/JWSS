@@ -3,7 +3,17 @@ package org.htl_hl.bibiProject.Client;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-
+/**
+ * <p>Title: Verkauf</p>
+ * <p>Description:</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
+ */
 public class JVerkauf extends JPanel {
 
     public JButton btVerk = new JButton("Verkaufen");
@@ -16,7 +26,9 @@ public class JVerkauf extends JPanel {
 
     private JTextField tfMenge= new JTextField("");
     	    JTextField tfPreis= new JTextField("");
-
+    /**
+     * Erzeugen eines Verkauffensters auf Basis eines JPanel
+     */
     public JVerkauf (){
         setToolTipText("Verkaufsfenster");
         setLayout(new GridLayout(5,2));
@@ -35,7 +47,7 @@ public class JVerkauf extends JPanel {
     public void setLblWare(String s){
         lblWare.setText("Name von Ware : "+s);
     }
-    public void setLblVMenge(int s){
+    public void setLblVMenge(long s){
         lblVMenge.setText("Vorhandene Menge : "+s);
     }
 }//class JVerkauf

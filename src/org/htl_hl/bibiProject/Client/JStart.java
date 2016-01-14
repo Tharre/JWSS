@@ -1,5 +1,6 @@
 package org.htl_hl.bibiProject.Client;
 
+import org.htl_hl.bibiProject.Common.Game;
 import org.htl_hl.bibiProject.Common.HttpUtil;
 import org.htl_hl.bibiProject.Common.Order;
 import org.htl_hl.bibiProject.Common.Player;
@@ -11,7 +12,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-
+/**
+ * <p>Title: Start</p>
+ * <p>Description:</p>
+ * <p>Copyright: Copyright (c) 2016</p>
+ * <p>Company: HTL Hollabrunn</p>
+ * <br><br>
+ * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * <br>
+ * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
+ * @version 0.1
+ */
 public class JStart extends JFrame implements ActionListener{
 
     private JLabel name= new JLabel("Name:");
@@ -19,7 +30,9 @@ public class JStart extends JFrame implements ActionListener{
     private JTextField tfIpaddr= new JTextField("");
     private JTextField tfName= new JTextField("");
     private JButton btStart = new JButton("Start");
-
+    /**
+     * Erzeugen eines Startfensters auf Basis eines JFrames
+     */
     public JStart(){
         super("Start JWSS");
 
@@ -48,10 +61,16 @@ public class JStart extends JFrame implements ActionListener{
         c.add(btStart);
     }//JStart
 
+    /**
+     *
+     * @param e
+     */
     public void actionPerformed(ActionEvent e){
         try {
-            Player p = HttpUtil.sendPost("127.0.0.1:8000", "players/", "name=" + tfName.getText(), Player.class);
-            Client f = new Client(p);
+            Game g = HttpUtil.sendPost(tfIpaddr.getText(), "/games", "name=JGame", Game.class);
+            Player p = HttpUtil.sendPost(tfIpaddr.getText(), "/games/" + g.getId() + "/players/",
+                    "name=" + tfName.getText(), Player.class);
+            Client f = new Client(p, tfIpaddr.getText());
             f.setVisible(true);
             dispose();
         } catch (IOException e1) {
@@ -59,6 +78,11 @@ public class JStart extends JFrame implements ActionListener{
             e1.printStackTrace();
         }
     }//actionPerformed
+
+    /**
+     * Erzeugen eines JFrame-Fensters
+     * @param args nicht verwendet
+     */
 
     public static void main(String[] args){
         JStart s = new JStart();
