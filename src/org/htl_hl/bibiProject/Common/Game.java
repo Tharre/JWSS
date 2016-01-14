@@ -11,13 +11,31 @@ import java.util.List;
  * In dieser Klasse befinden sich alle notwendigen Methoden und Klassen von Game.
  */
 public class Game {
-
+    /** ROUNDTIME - Private, Finale Eigenschaft der Klasse Game vom Typ long.
+     * Jede Round hat eine Rundenzeit.
+     */
     private static final long ROUNDTIME = 5000;
-
+    /** id - Private Eigenschaft der Klasse Game vom Typ int.
+     * Da mehrere Games gleichzeitig laufen können hat jedes Game eine eindeutige ID.
+     */
     private int id;
+    /** rounds - Private, Finale Eigenschaft der Klasse Game vom Typ List<Round>.
+     * Jedes Game besteht aus einer bestimmten Anzahl von Rounds.
+     * In dieser Liste sind die Rounds eingetragen.
+     */
     private final List<Round> rounds;
+    /** players - Private, Finale Eigenschaft der Klasse Game vom Typ List<Player>.
+     * An jedem Game nehmen n-Spieler teil.
+     * In dieser Liste sind die Player eingetragen.
+     */
     private final List<Player> players;
+    /** name - Private, Finale Eigenschaft der Klasse Game vom Typ String.
+     * Jedes Game hat einen Namen.
+     */
     private final String name;
+    /** activeRound - Private Eigenschaft der Klasse Game vom Typ Round.
+     * Jedes Game hat eine aktive Runde.
+     */
     private Round activeRound;
 
     public Game() {

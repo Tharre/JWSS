@@ -7,7 +7,7 @@ import java.util.List;
  * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften einer ExchangeRate (Börsenkurs).
  */
 public class ExchangeRate {
-    /** rate - Private Eigenschaft von ExchangeRate.
+    /** rate - Private Eigenschaft von ExchangeRate vom Typ double.
      * Aktueller Börsenkurs.
      */
     private double rate;

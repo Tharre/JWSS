@@ -11,10 +11,12 @@ import java.net.URL;
  * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften von HttpUtil.
  */
 public class HttpUtil {
-
+    /** USER-AGENT - Private, Finale Eigenschaft der Klasse HttpUtil vom Typ String.
+     * Wird HTTP benötigt (HTTP-USER_AGENT).
+     */
     private static final String USER_AGENT = "JWSS Client/1.0";
 
-    /** Methode zum Eintragen von am Server Daten per HTTP-POST.
+    /** Methode zum Eintragen von Daten am Server per HTTP-POST.
      * @param ip String IP von Server
      * @param res String Angeforderte Daten
      * @param parameters String POST-Parameter
@@ -27,11 +29,14 @@ public class HttpUtil {
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
 
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
 
         con.setDoOutput(true);
+        con.connect();
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(parameters);
         wr.flush();
@@ -55,6 +60,8 @@ public class HttpUtil {
         URL obj = new URL(url);
         ObjectMapper mapper = new ObjectMapper();
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
 
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", USER_AGENT);

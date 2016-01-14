@@ -5,16 +5,16 @@ import java.util.List;
  * In dieser Klasse befinden sich alle notwendigen Methoden für den einzelnen Spieler und dessen spezifische Eigenschaften.
  */
 public class Player {
-    /** id - private Eigenschaft von Player.
+    /** id - private Eigenschaft von Player vom Typ int.
      * Jeder Spieler hat eine eindeutige ID */
     private final int id;
-    /** name - private Eigenschaft von Player.
+    /** name - private Eigenschaft von Player vom Typ String.
      * Jeder Spieler hat einen Namen */
     private final String name;
-    /** stocks - private Eigenschaft von Player.
+    /** stocks - private Eigenschaft von Player vom Typ List<Stock>.
      * Jeder Spieler hat die gleiche Anzahl an Waren, in dieser Liste wird jede Ware die der Spieler besitzt gespeichert. */
     private final List<Stock> stocks;
-    /** money - private Eigenschaft von Player.
+    /** money - private Eigenschaft von Player vom Typ double.
      * Jeder Spieler hat einen gewissen Geldbetrag, welcher zu Beginn des Spiels bei jedem Spieler XXX Euro beträgt. */
     private double money;
 

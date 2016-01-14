@@ -13,32 +13,33 @@ import java.util.Map;
  * In dieser Klasse befinden sich alle notwendigen Methoden und Eigenschaften der Klasse Order.
  */
 public class Order {
-    /** id - Private Eigenschaft der Klasse Order.
+    /** id - Private Eigenschaft der Klasse Order vom Typ int.
      * Jede Order hat eine eindeutige ID.
      */
     private int id;
-    /** item - Private Eigenschaft der Klasse Order.
+    /** item - Private Eigenschaft der Klasse Order vom Typ Item.
      * Jede Order beinhaltet ein Item.
      */
     private Item item;
-    /** player - Private Eigenschaft der Klasse Order.
+    /** player - Private Eigenschaft der Klasse Order vom Typ Player.
      * Jede Order wird von einem Player aufgegeben.
      */
     private Player player;
-    /** isBuy - Private Eigenschaft der Klasse Order.
+    /** isBuy - Private Eigenschaft der Klasse Order vom Typ boolean.
+     * true = Verkauf ; false = Kauf.
      * Jede Order ist ein Kauf oder Verkauf.
      */
     private boolean isBuy;
-    /** limit - Private Eigenschaft der Klasse Order.
+    /** limit - Private Eigenschaft der Klasse Order vom Typ double.
      * Jede Order hat einen maximal/mindest Preis zu dem ge-/verkauft wird.
      */
     private double limit;
 
-    /** quantity - Private Eigenschaft der Klasse Order.
+    /** quantity - Private Eigenschaft der Klasse Order vom Typ long.
      * Jedes Item in der Order hat eine Stückzahl die angeboten/benötigt wird.
      */
     private long quantity;
-    /** fulfilled - Private Eigenschaft der Klasse Order.
+    /** fulfilled - Private Eigenschaft der Klasse Order vom Typ long.
      * Da die Anzahl der zum Kauf und Verkauf angebotenen Stück gleich sein muss wird in dieser Variable gespeichert wieviele gekauft/verkauft werden konnten.
      */
     private long fulfilled;

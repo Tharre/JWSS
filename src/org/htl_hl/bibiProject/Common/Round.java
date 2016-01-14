@@ -7,15 +7,15 @@ import java.util.List;
  * @version 0.1
  */
 public class Round {
-    /** id- Private Eigenschaft der Klasse Round.
+    /** id- Private Eigenschaft der Klasse Round vom Typ int.
      * Jede Runde hat eine eindeutige ID.
      */
     private int id;
-    /** orders - Private Eigenschaft der Klasse Round.
+    /** orders - Private Eigenschaft der Klasse Round vom Typ List<Order>.
      * Jede Runde hat eine Liste mit Orders.
      */
     private List<Order> orders;
-    /** endsAt - Private Eigenschaft der Klasse Round.
+    /** endsAt - Private Eigenschaft der Klasse Round vom Typ Date.
      * Jede Runde hat ein Datum mit Uhrzeit an dem die Runde endet.
      */
     private Date endsAt;
