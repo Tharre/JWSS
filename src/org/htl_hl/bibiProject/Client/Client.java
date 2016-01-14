@@ -146,6 +146,12 @@ public class Client extends JFrame implements ActionListener, Runnable {
      * @param e Das Actionevent der Buttons
      */
     public void actionPerformed(ActionEvent e) {
+        Round round = null;
+        try {
+            round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }//catch
 
         if (e.getSource() == btBereit) {
             lblZeit.start();
@@ -154,7 +160,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
             runner.start();
         }//if
 
-        for (int i = 0; i <1; i++) { // TODO(Tharre): anzahl orders
+        for (int i = 0; i <round.getOrders().size(); i++) { // TODO(Tharre): anzahl orders
             if (e.getSource() == kauf.get(i).btKauf)
                 kauf.get(i).lblWare.setText("yes");
         }//for
@@ -163,9 +169,8 @@ public class Client extends JFrame implements ActionListener, Runnable {
             if (e.getSource() == verkauf.get(i).btVerk) {
                 String parameters = "itemId=2&playerId=0&isBuy=false&limit=1000&quantity=3";
                 try {
-                    Round round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
                     Order o = HttpUtil.sendPost(server, "/games/" + game.getId() + "/rounds/" + round.getId() +
-                            "orders/", parameters, Order.class);
+                            "/orders/", parameters, Order.class);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
