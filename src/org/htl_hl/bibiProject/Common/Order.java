@@ -55,7 +55,7 @@ public class Order {
         this.isBuy = isBuy;
         this.limit = limit;
         this.quantity = quantity;
-
+        this.fulfilled = 0;
     }
 
     /** Methode zum Abrufen der ID der Order.
