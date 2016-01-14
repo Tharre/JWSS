@@ -313,7 +313,7 @@ public class Server {
 
 			for (int i = 0; i < comps.length; i+=2) {
 				if (i == comps.length-1)
-					list.add(new SimpleEntry<>(comps[i], null));
+					list.add(new SimpleEntry<>(comps[i], (String) null));
 				else
 					list.add(new SimpleEntry<>(comps[i], comps[i+1]));
 			}
