@@ -9,7 +9,7 @@ import java.awt.event.*;
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
- * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
  * <br>
  * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
  * @version 0.1

@@ -8,7 +8,7 @@ import javax.swing.*;
  * <p>Copyright: Copyright (c) 2016</p>
  * <p>Company: HTL Hollabrunn</p>
  * <br><br>
- * Ein Netzwerkbasiertes Börsensimulationsspiel
+ * Ein Netzwerkbasiertes B&ouml;rsensimulationsspiel
  * <br>
  * @author Michael Elpel, Daniel Gattringer, Daniel Krottendorfer, Thomas Gschwantner
  * @version 0.1
@@ -41,12 +41,11 @@ public class JUhr extends JLabel implements Runnable{
         while (uhrAktiv) {
             ausgabe=new StringBuffer();
             try {
-                Thread.sleep(10);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }//catch
-            millisekundenBisher = System.currentTimeMillis()
-                    - millisekundenStart;
+            millisekundenBisher = System.currentTimeMillis() - millisekundenStart;
             dauer = Calendar.getInstance();
             dauer.setTimeInMillis(millisekundenBisher);
             min=dauer.get(Calendar.MINUTE);
@@ -63,8 +62,9 @@ public class JUhr extends JLabel implements Runnable{
                 ausgabe.append(sek);
             }//else
             this.setText("Rundenzeit: "+(ausgabe.toString()));
-            if(ausgabe.toString().equals("00:59"))
-                break;
+            if(ausgabe.toString().equals("00:45")) {
+                this.stop();
+            }//if
         }//while
     }//run
 }//class JUhr
