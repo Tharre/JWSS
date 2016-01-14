@@ -10,8 +10,8 @@ public class JSpieler extends JPanel {
     public JSpieler() {
         setPreferredSize(new Dimension(120,90));
 
-        setToolTipText("Kauffenster");
-        setLayout(new GridLayout(4,1));
+        setToolTipText("Spielerdetails");
+        setLayout(new GridLayout(2,1));
         add(lblName);
         add(lblVermoegen);
     }//JSpieler
