@@ -74,7 +74,7 @@ public class Client extends JFrame implements ActionListener {
             lblSpieler = new JLabel("Spieler in Sitzung: " + players.length);
 
             round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
-            lblRunde = new JLabel("Runde: " + round.getId());
+           lblRunde = new JLabel("Runde: " + round.getId());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -168,7 +168,23 @@ public class Client extends JFrame implements ActionListener {
             }
         }//for
 
-
     }//actionPerformed
+
+    public void update(){
+        Round round = null;
+        try {
+            this.game = HttpUtil.sendGet(server, "games/0/", Game.class);
+            Player[] players = HttpUtil.sendGet(server, "games/" + game.getId() + "/players", Player[].class);
+            lblSpieler.setText("Spieler in Sitzung: " + players.length);
+
+            round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
+            lblRunde.setText("Runde: " + round.getId());
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        lblVermoegen.setText("Vermögen: " + player.getMoney());
+        lblRang.setText("Rang: ");
+    }//update
 
 }//class Client
