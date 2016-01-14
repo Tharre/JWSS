@@ -35,7 +35,7 @@ public class Client extends JFrame implements ActionListener, Runnable {
 
     private JUhr lblZeit = new JUhr();
 
-    private Thread runner;
+    private Thread runner = new Thread(this);
 
     private Player player;
     private Game game;
@@ -192,13 +192,20 @@ public class Client extends JFrame implements ActionListener, Runnable {
     }//update
     public void run(){
         Round round = null;
-        Thread ich=Thread.currentThread();
-        while(ich == runner){
-            try{
-                Thread.sleep(round.getEndsAt().getTime()-System.currentTimeMillis());
-            }catch(InterruptedException e){}
-            update();
-        }//while
+        try {
+            round = HttpUtil.sendGet(server, "games/" + game.getId() + "/rounds", Round.class);
+            Thread ich=Thread.currentThread();
+            while(ich == runner){
+                try{
+                    System.out.println("Sleeping for " + (round.getEndsAt().getTime()-System.currentTimeMillis()));
+                    Thread.sleep(round.getEndsAt().getTime()-System.currentTimeMillis());
+                    System.out.println("Update ...");
+                    update();
+                }catch(InterruptedException e){}
+            }//while
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//run
 
     public void stop(){
