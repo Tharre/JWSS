@@ -424,7 +424,7 @@ public class Server {
       // /api/items/23
       // /api/games/23/players
       URI sub = URI.create("/api").relativize(t.getRequestURI());
-
+//
       System.out.println(sub);
 
       List<SimpleEntry<String, String>> comps = parseURL(sub.getPath());
