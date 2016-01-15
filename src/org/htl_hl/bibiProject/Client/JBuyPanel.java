@@ -43,7 +43,7 @@ public class JBuyPanel extends JPanel implements ActionListener {
      * Eingabefeld f&uuml;r den maximalen/minimalen Preis.
      */
     private JTextField tfLimit = new JTextField();
-//
+
     public JBuyPanel(String server, Game game, Player player, Item item) {
         this.server = server;
         this.game = game;
