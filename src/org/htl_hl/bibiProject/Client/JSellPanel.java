@@ -53,7 +53,7 @@ public class JSellPanel extends JPanel implements ActionListener {
         this.game = game;
         this.player = player;
         this.stock = stock;
-
+//
         setToolTipText("Verkaufsfenster");
         setLayout(new GridLayout(5, 2));
         add(new JLabel("Name der Ware: "));

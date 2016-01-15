@@ -45,7 +45,7 @@ public class JStart extends JFrame implements ActionListener{
      */
     private JButton btStart = new JButton("Start");
 
-
+//
     public JStart() {
         super("Start JWSS");
 

@@ -84,7 +84,7 @@ public class Client extends JFrame implements ActionListener {
     private JScrollPane scKauf = new JScrollPane(pKauf, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-
+//
     public Client(Player player, Game game, String server) {
         super("Client JWSS");
 
