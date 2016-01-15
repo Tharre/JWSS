@@ -49,7 +49,7 @@ public class ExchangeRate {
         List<Double> possibleRates = new LinkedList<>();
         double highestTurnover = 0;
         double bestRate = 0;
-
+//
         // first fetch all possible exchange rates
         for (Order order : orders) {
             if (!order.getIsBuy()) // ignore sell orders

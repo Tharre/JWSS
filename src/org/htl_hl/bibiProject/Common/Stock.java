@@ -30,7 +30,7 @@ public class Stock {
         this.item = item;
         this.quantity = quantity;
     }
-
+//
     /** Methode zum Abfragen der Ware im "Lager".
      * @return item Ware in diesem "Lager"
      */

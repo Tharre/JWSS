@@ -55,7 +55,7 @@ public class HttpUtil {
 
         return mapper.readValue(con.getInputStream(), typeClass);
     }
-
+//
     /** Methode zum Abrufen von Daten per HTTP-GET.
      * @param ip String - IP von Server
      * @param res String - Angeforderte Daten

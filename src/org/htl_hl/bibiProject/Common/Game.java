@@ -124,7 +124,7 @@ public class Game {
             for (Order order : orders)
                 if (order.getItem().equals(item))
                     orderToItem.add(order);
-
+//
             // calculate exchange rates
             ExchangeRate rate = new ExchangeRate();
             rate.recalculateRate(orderToItem);
