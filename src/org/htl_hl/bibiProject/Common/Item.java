@@ -19,78 +19,78 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 
 public class Item {
-	/** id - Private Eigenschaft der Klasse Item vom Typ int.<br>
-	 * Jedes Item hat eine eindeutige ID.
-	 */
-	private final int id;
-	/** name - Private Eigenschaft der Klasse Item vom Typ String.<br>
-	 * Jedes Item hat einen eindeutigen Namen.
-	 */
-	private final String name;
-	/** maxAmount - Private Eigenschaft der Klasse vom Typ int.<br>
-	 * Jedes Item hat eine maximal verf&uuml;gbare St&uuml;ckzahl.
-	 */
-	private final int maxAmount;
+  /** id - Private Eigenschaft der Klasse Item vom Typ int.<br>
+   * Jedes Item hat eine eindeutige ID.
+   */
+  private final int id;
+  /** name - Private Eigenschaft der Klasse Item vom Typ String.<br>
+   * Jedes Item hat einen eindeutigen Namen.
+   */
+  private final String name;
+  /** maxAmount - Private Eigenschaft der Klasse vom Typ int.<br>
+   * Jedes Item hat eine maximal verf&uuml;gbare St&uuml;ckzahl.
+   */
+  private final int maxAmount;
 
-	public Item() {
-		this(0, "", 0);
-	};
+  public Item() {
+    this(0, "", 0);
+  };
 
-	public Item(int id, String name, int maxAmount) {
-		this.id = id;
-		this.name = name;
-		this.maxAmount = maxAmount;
-	}
+  public Item(int id, String name, int maxAmount) {
+    this.id = id;
+    this.name = name;
+    this.maxAmount = maxAmount;
+  }
 
-	/** Methode zum Abrufen der ID der Ware.
-	 * @return id Eindeutige ID der Ware
+  /** Methode zum Abrufen der ID der Ware.
+   * @return id Eindeutige ID der Ware
      */
-	public int getId() {
-		return id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	/** Methode zum Abrufen vom Namen der Ware.
-	 * @return name Name der Ware
+  /** Methode zum Abrufen vom Namen der Ware.
+   * @return name Name der Ware
      */
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	/** Methode zum Abrufen der maximal verf&uuml;gbaren St&uuml;ckzahl der Ware.
-	 * @return maxAmount Maximal verf&uuml;gbare St&uuml;ckzahl der Ware
+  /** Methode zum Abrufen der maximal verf&uuml;gbaren St&uuml;ckzahl der Ware.
+   * @return maxAmount Maximal verf&uuml;gbare St&uuml;ckzahl der Ware
      */
-	public int getMaxAmount() {
-		return maxAmount;
-	}
+  public int getMaxAmount() {
+    return maxAmount;
+  }
 
-	/** Methode zum Abrufen aller privaten Eigenschaften (id,name,maxAmount), welche als String zur&uuml;ckgegeben werden.
-	 * @return String
+  /** Methode zum Abrufen aller privaten Eigenschaften (id,name,maxAmount), welche als String zur&uuml;ckgegeben werden.
+   * @return String
      */
-	public String toString() {
-		return "Item: " + id + ", name: " + name + ", maxAmount: " + maxAmount;
-	}
+  public String toString() {
+    return "Item: " + id + ", name: " + name + ", maxAmount: " + maxAmount;
+  }
 
-	public boolean equals(Object other) {
-		return other instanceof Item && ((Item) other).getId() == id;
-	}
+  public boolean equals(Object other) {
+    return other instanceof Item && ((Item) other).getId() == id;
+  }
 
-	/** Methode zum Auslesen und Laden der Waren aus einer Datei.
-	 * @param file File - Datei aus der die Waren geladen werden
-	 * @return m Eine Map die die Ware mit der zugeh&ouml;rigen ID verbindet
-	 * @throws IOException
+  /** Methode zum Auslesen und Laden der Waren aus einer Datei.
+   * @param file File - Datei aus der die Waren geladen werden
+   * @return m Eine Map die die Ware mit der zugeh&ouml;rigen ID verbindet
+   * @throws IOException
      */
-	public static Map<Integer, Item> loadItems(File file) throws IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<Integer, Item> m = new HashMap<>();
+  public static Map<Integer, Item> loadItems(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    Map<Integer, Item> m = new HashMap<>();
 
-		for (Item item : mapper.readValue(file, Item[].class))
-			m.put(item.getId(), item);
+    for (Item item : mapper.readValue(file, Item[].class))
+      m.put(item.getId(), item);
 
-		return m;
-	}
+    return m;
+  }
 
-	public static void main(String[] args) throws IOException {
-		Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
-		System.out.println(m.get(23));
-	}
+  public static void main(String[] args) throws IOException {
+    Map<Integer, Item> m = Item.loadItems(new File("res/Items.json"));
+    System.out.println(m.get(23));
+  }
 }
