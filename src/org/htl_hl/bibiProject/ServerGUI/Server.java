@@ -141,7 +141,7 @@ public class Server extends JFrame implements Runnable{
         }
 
     }//main
-
+//
     /** Methode welche die update-Methode alle 5 Sekunden aufruft.
      */
     public void run(){

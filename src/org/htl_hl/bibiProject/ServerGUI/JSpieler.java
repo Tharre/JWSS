@@ -28,7 +28,7 @@ public class JSpieler extends JPanel {
      * Name des Spielers.
      */
     private String name;
-
+//
     public JSpieler(String name, double money) {
         this.name=name;
         this.money=money;
